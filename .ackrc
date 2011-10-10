@@ -1,0 +1,11 @@
+--sort-files
+
+--ignore-dir=doc,node_modules
+--type-add=ruby=rake,haml
+--type-add=vim=vimrc
+--type-add=js=json
+--type-set=css=sass
+
+--type-set=FEATURE=feature
+--type-set=MARKDOWN=md,mkd,markdown
+--type-set=RDOC=rdoc

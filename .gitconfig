@@ -1,0 +1,28 @@
+[user]
+	name = Pan Thomakos
+	email = pan.thomakos@gmail.com
+[alias]
+	unstage = reset HEAD --
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	mote = remote -v
+	last = log -1 HEAD
+	ba = branch -a
+	s = status -sb
+	splat = log --oneline --decorate
+	yank = pull --rebase
+	l = log --graph --abbrev-commit --date=relative
+	r = !git --no-pager l -20
+	ra = !git r --all
+[core]
+	editor = vim
+	whitespace = trailing-space
+[color]
+	ui = true
+[push]
+	default = tracking
+[format]
+	pretty = format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset

@@ -10,6 +10,7 @@ alias db:test:load="RAILS_ENV=test bin/rake db:test:load"
 
 export PATH=/usr/local/bin:$PATH
 export EDITOR=vim
+export VISUAL=vim
 
 # EC2
 export EC2_HOME=~/.ec2
