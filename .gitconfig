@@ -20,6 +20,7 @@
 [core]
 	editor = vim
 	whitespace = trailing-space
+	excludesfile = /Users/panayiotisthomakos/.global.gitignore
 [color]
 	ui = true
 [push]

@@ -20,7 +20,7 @@ export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 # RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 source ~/.zsh/git-prompt/zshrc.sh
 export PROMPT='%{$bold_color$fg[blue]%}$(~/.rvm/bin/rvm-prompt) %{$bold_color$fg[red]%}%~:$(git_super_status) %{$bold_clor$fg[blue]%}%#%{$reset_color%} '
