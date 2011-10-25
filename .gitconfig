@@ -3,7 +3,6 @@
 	email = pan.thomakos@gmail.com
 [alias]
 	unstage = reset HEAD --
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	co = checkout
 	br = branch
 	ci = commit
@@ -14,9 +13,10 @@
 	s = status -sb
 	splat = log --oneline --decorate
 	yank = pull --rebase
-	l = log --graph --abbrev-commit --date=relative
+	l = log --graph --abbrev-commit --date=relative --pretty=format:\"%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\"
 	r = !git --no-pager l -20
 	ra = !git r --all
+	di = diff
 [core]
 	editor = vim
 	whitespace = trailing-space
@@ -25,5 +25,3 @@
 	ui = true
 [push]
 	default = tracking
-[format]
-	pretty = format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset

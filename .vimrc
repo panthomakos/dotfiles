@@ -1,6 +1,7 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
 

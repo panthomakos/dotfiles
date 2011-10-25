@@ -8,6 +8,10 @@ alias git=hub
 alias redis.start="redis-server /usr/local/etc/redis.conf"
 alias db:test:load="RAILS_ENV=test bin/rake db:test:load"
 
+alias sr="screen -r"
+alias ss="screen -S"
+alias sl="screen -ls"
+
 export PATH=/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
