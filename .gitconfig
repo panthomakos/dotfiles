@@ -17,6 +17,7 @@
 	r = !git --no-pager l -20
 	ra = !git r --all
 	di = diff
+	dc = diff --cached
 [core]
 	editor = vim
 	whitespace = trailing-space
