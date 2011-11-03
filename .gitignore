@@ -1,6 +1,8 @@
 .netrwhist
 .DS_Store
 .ssh
+.boom
+.boom.conf
 .CFUserTextEncoding
 .Xauthority
 .bash_history
@@ -32,6 +34,7 @@
 .tuneclone.data
 .viminfo
 .Trash
+.zcompdump
 A*
 B*
 C*

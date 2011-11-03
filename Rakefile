@@ -16,5 +16,8 @@ task :install do
 
   # Unbind the Command+H keybinding so that we can use it for switching view panes.
   system 'defaults write org.vim.MacVim NSUserKeyEquivalents -dict-add "Hide MacVim" "@\$H"'
+
+  # Install boom
+  system 'gem install boom'
 end
 task :default => :install
