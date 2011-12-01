@@ -18,6 +18,7 @@
 	ra = !git r --all
 	di = diff
 	dc = diff --cached
+	cp = cherry-pick
 [core]
 	editor = vim
 	whitespace = trailing-space

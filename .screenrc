@@ -1,1 +1,2 @@
 defscrollback 10000
+bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"

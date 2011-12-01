@@ -8,10 +8,13 @@ alias git=hub
 alias redis.start="redis-server /usr/local/etc/redis.conf"
 alias db:test:load="RAILS_ENV=test bin/rake db:test:load"
 alias guard.start="guard start >&log/guard.log &"
+alias psf="ps -ef | grep "
+alias clear="echo 'Use <C-l> instead'"
+alias h="history"
 
 alias specs="find spec/**/*_spec.rb"
 alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bin/rspec -c"
-alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bin/rspec -X -c"
+alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bin/rspec -c"
 
 alias sr="screen -r"
 alias ss="screen -S"
