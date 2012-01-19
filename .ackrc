@@ -1,6 +1,6 @@
 --sort-files
 
---ignore-dir=doc,node_modules,log,.yardoc,tmp
+--ignore-dir=doc,node_modules,log,.yardoc,tmp,public/assets,.jhw-cache
 --type-add=ruby=rake,haml
 --type-add=vim=vimrc
 --type-add=js=json
