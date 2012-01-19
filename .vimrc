@@ -5,6 +5,9 @@ set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
 
+" Use proper clipboard
+set clipboard=unnamed
+
 " Make backspace work properly
 set backspace=2
 
@@ -74,7 +77,7 @@ end
 nmap <leader>vi :tabedit $MYVIMRC<CR>
 
 " Wildignore RBC and doc files
-set wildignore+=*.rbc,doc/*
+set wildignore+=*.rbc,doc/*,spec/cassettes/*
 
 " Set spelling region to English
 set spelllang=en
@@ -134,6 +137,8 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
     exec ":!bundle exec cucumber " . a:filename
+  elseif match(a:filename, '\.coffee$') != -1
+    exec ":!jasmine-headless-webkit --no-full-run " . a:filename
   else
     exec ":!~/Scripts/test " . a:filename
   end
@@ -152,7 +157,7 @@ function! RunTestFile(...)
   endif
 
   " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|Spec.coffee\)$') != -1
   if in_test_file
     call SetTestFile()
   elseif !exists("t:grb_test_file")
