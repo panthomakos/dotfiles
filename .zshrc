@@ -33,28 +33,22 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+rvm use
 
 autoload -Uz compinit
 compinit
 
 autoload -U colors
 colors
-
 setopt PROMPT_SUBST
 
-fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
-update_current_git_vars
+local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
 
-typeset -ga preexec_functions
-typeset -ga precmd_functions
-typeset -ga chpwd_functions
+PROMPT='
+%~
+${smiley}  %{$reset_color%}'
 
-preexec_functions+='preexec_update_git_vars'
-precmd_functions+='precmd_update_git_vars'
-chpwd_functions+='chpwd_update_git_vars'
-
-export PROMPT='%{$bold_color$fg[blue]%}$(~/.rvm/bin/rvm-prompt) %{$bold_color$fg[red]%}%~:$(prompt_git_info) %{$bold_clor$fg[blue]%}%#%{$reset_color%} '
+RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/.git-cwd-info.rb)%{$reset_color%}'
 
 # Use vi command line mode.
 set -o vi
