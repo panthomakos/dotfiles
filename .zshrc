@@ -35,9 +35,7 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 rvm use
 
-autoload -Uz compinit
-compinit
-
+# Prompt
 autoload -U colors
 colors
 setopt PROMPT_SUBST
@@ -50,5 +48,12 @@ ${smiley}  %{$reset_color%}'
 
 RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/.git-cwd-info.rb)%{$reset_color%}'
 
-# Use vi command line mode.
+# Vi Command Line Mode
 set -o vi
+
+# Autocompletion
+setopt complete_aliases
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+fpath=(~/.zsh/.completion $fpath)
+autoload -Uz compinit
+compinit
