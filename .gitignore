@@ -1,6 +1,7 @@
 .netrwhist
 .DS_Store
 .ssh
+.s3cfg
 .boom
 .boom.conf
 .CFUserTextEncoding
