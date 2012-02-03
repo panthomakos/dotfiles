@@ -7,9 +7,6 @@
 [submodule ".vim/bundle/unimpaired"]
 	path = .vim/bundle/unimpaired
 	url = http://github.com/tpope/vim-unimpaired
-[submodule ".vim/bundle/colors-solarized"]
-	path = .vim/bundle/colors-solarized
-	url = http://github.com/altercation/vim-colors-solarized
 [submodule ".vim/bundle/haml"]
 	path = .vim/bundle/haml
 	url = http://github.com/tpope/vim-haml

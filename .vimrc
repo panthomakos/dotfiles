@@ -45,12 +45,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 set hlsearch
 map <Leader>k :let @/ = ""<CR>
 
-" Edit files in the current window, split or a new tab
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
-
 " Number lines
 set number
 
@@ -67,17 +61,13 @@ set formatprg=par
 " Set spelling on and off using <leader>s
 nmap <silent> <leader>sp :set spell!<CR>
 
-" Automatically source vimrc and gvimrc files
+" Automatically source vimrc
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
-  autocmd bufwritepost .gvimrc source $MYGVIMRC
 end
 
-" Quickly edit vimrc and gvimrc
+" Quickly edit vimrc
 nmap <leader>vi :tabedit $MYVIMRC<CR>
-
-" Wildignore RBC and doc files
-set wildignore+=*.rbc,doc/*,spec/cassettes/*
 
 " Set spelling region to English
 set spelllang=en
@@ -97,6 +87,12 @@ set t_Co=256
 syntax enable
 set background=dark
 color grb256
+
+" set t_Co=256
+" syntax enable
+" set background=dark
+" let g:solarized_termcolors=256
+" color solarized
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -121,11 +117,6 @@ map fl 20l
 
 " CommandT
 map <leader>f :CommandTFlush<CR>\|:CommandT<CR>
-map <leader>gv :CommandTFlush<CR>\|:CommandT app/views<CR>
-map <leader>gc :CommandTFlush<CR>\|:CommandT app/controllers<CR>
-map <leader>gm :CommandTFlush<CR>\|:CommandT app/models<CR>
-map <leader>gl :CommandTFlush<CR>\|:CommandT lib<CR>
-map <leader>gs :CommandTFlush<CR>\|:CommandT specs<CR>
 let g:CommandTCancelMap=['<ESC>']
 let g:CommandTCursorLeftMap=['<Left>']
 let g:CommandTBackspaceMap=['<C-h>']
