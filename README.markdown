@@ -10,7 +10,6 @@ Basic configuration scripts including the vim setup I use for development.
 ## Included Vim Plugins
 
 * fugitive - http://github.com/tpope/vim-fugitive
-* Ack - http://github.com/mileszs/ack.vim
 * Command-T - http://github.com/wincent/Command-T
 * commentary - http://github.com/topope/vim-commentary
 * unimpaired - http://github.com/tpope/vim-unimpaired
