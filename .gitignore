@@ -28,6 +28,7 @@
 .pry_history
 .psql_history
 .rails-plugin-sources
+*.rbc
 .rdebug_hist
 .rdebugrc
 .recently-used.xbel

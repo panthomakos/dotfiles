@@ -66,6 +66,9 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 end
 
+" Wildignore RBC and doc files
+set wildignore+=*.rbc,doc/*,spec/cassettes/*
+
 " Quickly edit vimrc
 nmap <leader>vi :tabedit $MYVIMRC<CR>
 
