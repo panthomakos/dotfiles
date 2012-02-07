@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/commentary"]
 	path = .vim/bundle/commentary
 	url = git://github.com/tpope/vim-commentary.git
+[submodule "/Users/panayiotisthomakos/.vim/bundle/markdown"]
+	path = /Users/panayiotisthomakos/.vim/bundle/markdown
+	url = https://github.com/tpope/vim-markdown
