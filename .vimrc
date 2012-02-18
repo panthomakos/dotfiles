@@ -98,7 +98,7 @@ color grb256
 " color solarized
 
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <leader>syn :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -134,7 +134,7 @@ function! RunTests(filename)
   elseif match(a:filename, '\.coffee$') != -1
     exec ":!jasmine-headless-webkit --no-full-run " . a:filename
   else
-    exec ":!~/Scripts/test " . a:filename
+    exec ":!~/bin/test " . a:filename
   end
 endfunction
 

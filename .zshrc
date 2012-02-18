@@ -1,6 +1,7 @@
 alias mem.start="memcached -d -P /var/run/memcached.pid"
 alias mem.stop='kill `cat ~/run/memcached.pid`'
-alias bam='cd ~/strava/active'
+alias bam='cd ~/Projects'
+alias bam.strava='cd ~/Projects/strava/active'
 alias vi='vim'
 alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
 alias ls="ls -G"
@@ -34,6 +35,7 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 rvm use
+export PATH=$PATH:$HOME/.rvm/bin
 
 # Prompt
 autoload -U colors
@@ -46,7 +48,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/.git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
 
 # Vi Command Line Mode
 set -o vi
