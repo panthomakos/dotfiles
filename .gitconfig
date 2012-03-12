@@ -23,6 +23,7 @@
 	editor = vim
 	whitespace = trailing-space
 	excludesfile = /Users/panayiotisthomakos/.global.gitignore
+	quotepath = false
 [color]
 	ui = true
 [push]

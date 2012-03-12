@@ -20,6 +20,7 @@ Dropbox/
 .fit.done
 .fontconfig/
 .gdb_history
+.gem/
 .infinity_test
 .irb-history
 .irb_history
@@ -38,6 +39,7 @@ Pictures/
 Projects/
 .pry_history
 .psql_history
+Public/
 .rails-plugin-sources
 *.rbc
 .rbx/

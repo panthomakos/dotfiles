@@ -1,1 +1,4 @@
 doc/tags
+.rvmrc
+*.swp
+*.swo

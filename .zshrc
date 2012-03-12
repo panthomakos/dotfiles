@@ -25,13 +25,6 @@ export PATH=/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
 
-# EC2
-export EC2_HOME=~/.ec2
-export PATH=$PATH:$EC2_HOME/bin
-export EC2_PRIVATE_KEY=`ls $EC2_HOME/pk-*.pem`
-export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
-
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 rvm use

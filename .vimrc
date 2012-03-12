@@ -173,6 +173,14 @@ map <leader>s :split<ESC><C-w><C-w>
 " Visually select the text that was last edited/pasted (compare to gv)
 nmap gV `[v`]
 
+" Goto File Horizontal and Vertical Splits
+map gfv <C-w>L
+map gfs <C-w>f
+
+" Use sane regular expressions
+nnoremap / /\v
+vnoremap / /\v
+
 " Highlight lines that are longer than 80 characters
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
 au BufWinEnter,VimEnter,WinEnter * let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
