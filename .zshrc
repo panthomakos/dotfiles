@@ -7,7 +7,7 @@ alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/jav
 alias ls="ls -G"
 alias git=hub
 alias redis.start="redis-server /usr/local/etc/redis.conf"
-alias db:test:load="RAILS_ENV=test bin/rake db:test:load"
+alias db:test:load="RAILS_ENV=test bin/rake db:schema:load"
 alias guard.start="guard start >&log/guard.log &"
 alias psf="ps -ef | grep "
 alias clear="echo 'Use <C-l> instead'"
@@ -27,7 +27,6 @@ export VISUAL=vim
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-rvm use
 export PATH=$PATH:$HOME/.rvm/bin
 
 # Prompt

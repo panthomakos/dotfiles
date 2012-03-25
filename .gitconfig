@@ -19,6 +19,7 @@
 	di = diff
 	dc = diff --cached
 	cp = cherry-pick
+	vim = !vim .git/index
 [core]
 	editor = vim
 	whitespace = trailing-space

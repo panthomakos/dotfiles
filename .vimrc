@@ -16,6 +16,15 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2
 
+" Preview Window Height
+set previewheight=15
+au BufEnter ?* call PreviewHeightWorkAround()
+function! PreviewHeightWorkAround()
+    if &previewwindow
+        exec 'setlocal winheight='.&previewheight
+    endif
+endfunc
+
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
@@ -176,10 +185,6 @@ nmap gV `[v`]
 " Goto File Horizontal and Vertical Splits
 map gfv <C-w>L
 map gfs <C-w>f
-
-" Use sane regular expressions
-nnoremap / /\v
-vnoremap / /\v
 
 " Highlight lines that are longer than 80 characters
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9

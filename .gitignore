@@ -7,6 +7,7 @@ Applications/
 .bash_profile.macports-saved_2010-08-02_at_11:09:27
 .bundler/
 .csv
+.cups/
 .dbshell
 Desktop/
 Documents/
@@ -34,6 +35,7 @@ Music/
 .mysql_history
 .netrwhist
 .npm/
+*.pid
 Pictures/
 .pow
 Projects/
@@ -55,6 +57,7 @@ Public/
 *.swp
 .Trash
 .tuneclone.data
+.vim/spell/
 .vimgolf/
 .viminfo
 .Xauthority
