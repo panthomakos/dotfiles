@@ -6,10 +6,7 @@ task :install do
   system "rvm use system"
   # Might require some re-configuration to add -lstatic-ruby to the LIBS=
   # in the Makefile.
-  system "cd ~/.vim/bundle/command-t && rake make"
-
-  # Make the textobj plugin.
-  system "cd ~/.vim/bundle/textobj-user && git submodule init && git submodule update && make"
+  system "cd ~/.vim/bundle/command-t && /usr/bin/rake make"
 
   # Install markdown.
   system "brew install markdown"
