@@ -78,7 +78,7 @@ if has("autocmd")
 end
 
 " Wildignore RBC and doc files
-set wildignore+=*.rbc,doc/*,spec/cassettes/*
+set wildignore+=*.rbc,doc/*,spec/cassettes/*,tags
 
 " Quickly edit vimrc
 nmap <leader>vi :tabedit $MYVIMRC<CR>
