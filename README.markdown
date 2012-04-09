@@ -15,7 +15,6 @@ Basic configuration scripts including the vim setup I use for development.
 * haml - http://github.com/tpope/vim-haml
 * syntastic - http://github.com/scrooloose/syntastic
 * surround - http://github.com/tpope/vim-surround
-* rails - http://github.com/tpope/vim-rails
 * tabular - https://github.com/godlygeek/tabular
 * commentary - git://github.com/tpope/vim-commentary.git
 * markdown - https://github.com/tpope/vim-markdown
