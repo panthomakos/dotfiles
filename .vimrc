@@ -25,7 +25,7 @@ function! PreviewHeightWorkAround()
     endif
 endfunc
 
-nnoremap <leader>p :!ronn --html %<CR>
+map <leader>m :!ronn --html %<CR>
 
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
@@ -52,22 +52,23 @@ set list
 " Edit files in the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" Highlight Search
-set hlsearch
-map <Leader>k :let @/ = ""<CR>
+""""""""""
+" Settings
+""""""""""
+set hlsearch " Highlight searches.
+set number " Number lines.
+set cursorline " Highlight the current line.
+set ignorecase " Make searches case insensitive.
+set smartcase " Make searches case-sensitive if they contain upper-case.
+set formatprg=par " Use par as the format program.
 
-" Number lines
-set number
-
-" Highlight the current line
-set cursorline
-
-" Make searches case-sensitive only if they contain upper-case characters
-set ignorecase
-set smartcase
-
-" Use par as the format program
-set formatprg=par
+""""""""""""""""""""""""""
+" Convenience Key Mappings
+""""""""""""""""""""""""""
+" Insert a hash rocket.
+imap <c-l> <space>=><space>
+" Clear the search buffer.
+nnoremap <cr> :nohlsearch<cr>
 
 " Set spelling on and off using <leader>s
 nmap <silent> <leader>sp :set spell!<CR>
@@ -102,12 +103,6 @@ syntax enable
 set background=dark
 color grb256
 
-" set t_Co=256
-" syntax enable
-" set background=dark
-" let g:solarized_termcolors=256
-" color solarized
-
 " Show syntax highlighting groups for word under cursor
 nmap <leader>syn :call <SID>SynStack()<CR>
 function! <SID>SynStack()
@@ -123,14 +118,9 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Faster movement
-map fj 20j
-map fk 20k
-map fh 20h
-map fl 20l
-
 " CommandT
-map <leader>f :CommandTFlush<CR>\|:CommandT<CR>
+map <leader>f :CommandT<CR>
+map <leader>cf :CommandTFlush<CR>\|:CommandT<CR>
 let g:CommandTCancelMap=['<ESC>']
 let g:CommandTCursorLeftMap=['<Left>']
 let g:CommandTBackspaceMap=['<C-h>']
