@@ -16,7 +16,8 @@ function! AlternateForCurrentFile()
   let in_controllers = match(current_file, '\<controllers\>') != -1
   let in_models = match(current_file, '\<models\>') != -1
   let in_views = match(current_file, '\<views\>') != -1
-  let in_app = in_controllers || in_models || in_views
+  let in_workers = match(current_file, '\<workers\>') != -1
+  let in_app = in_controllers || in_models || in_views || in_workers
 
   if going_to_spec
     if in_app

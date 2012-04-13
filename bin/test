@@ -20,9 +20,7 @@ fi
 command='rspec --color'
 
 
-if [ -f bin/rspec ]; then
-  command="bin/$command"
-else
+if [ -f Gemfile ]; then
   command="bundle exec $command"
 fi
 
