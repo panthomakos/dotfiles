@@ -22,6 +22,7 @@ Dropbox/
 .fontconfig/
 .gdb_history
 .gem/
+Gemfile.lock
 .infinity_test
 .irb-history
 .irb_history

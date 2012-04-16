@@ -25,7 +25,7 @@ function! PreviewHeightWorkAround()
     endif
 endfunc
 
-map <leader>m :!ronn --html %<CR>
+command! Markdown :!ronn --html %
 
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red

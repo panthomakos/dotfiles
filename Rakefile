@@ -17,10 +17,10 @@ task :install do
   # Use the default RVM
   system 'rvm use default'
 
-  # Install boom
-  system 'gem install boom'
+  # Install bundler
+  system 'gem install bundler'
 
-  # Install ronn (markdown previews in html and mann pages)
-  system 'gem install ronn'
+  # Install bundle
+  system 'bundle'
 end
 task :default => :install
