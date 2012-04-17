@@ -1,6 +1,10 @@
 desc "Install dotfiles and vim"
 task :install do
+  # Updated submodules.
   system "git submodule update --init"
+
+  # Make ZSH the default.
+  system "chsh -s /bin/zsh"
 
   # Install RVM
   system "curl -L get.rvm.io | bash -s stable"
