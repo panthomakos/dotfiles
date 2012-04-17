@@ -11,6 +11,9 @@ task :install do
   # Install markdown.
   system "brew install markdown"
 
+  # Install hub
+  system "brew install hub"
+
   # Unbind the Command+H keybinding so that we can use it for switching view panes.
   system 'defaults write org.vim.MacVim NSUserKeyEquivalents -dict-add "Hide MacVim" "@\$H"'
 
