@@ -5,6 +5,9 @@ task :install do
   # Install RVM
   system "curl -L get.rvm.io | bash -s stable"
 
+  # Enable RVM
+  system "source ~/.rvm/scripts/rvm"
+
   # Install 1.9.3
   system "rvm install 1.9.3"
 
@@ -25,7 +28,7 @@ task :install do
   system 'defaults write org.vim.MacVim NSUserKeyEquivalents -dict-add "Hide MacVim" "@\$H"'
 
   # Use the default RVM
-  system 'rvm use default'
+  system 'rvm use --default 1.9.3'
 
   # Install bundler
   system 'gem install bundler'
