@@ -16,6 +16,7 @@ alias b="bundle"
 alias be="bundle exec"
 alias k="bundle exec rake"
 alias known="vim ~/.ssh/known_hosts"
+alias powenv="rvm env > .powenv"
 
 alias specs="find spec/**/*_spec.rb"
 alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bundle exec rspec -c"

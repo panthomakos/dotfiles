@@ -1,5 +1,6 @@
 doc/tags
 .powder
+.powenv
 .rvmrc
 *.swp
 *.swo
