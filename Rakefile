@@ -1,10 +1,16 @@
 desc "Install dotfiles and vim"
 task :install do
+  vim = 'https://raw.github.com/Homebrew/homebrew-dupes/master/vim.rb'
+
   # Updated submodules.
   system "git submodule update --init"
 
   # Make ZSH the default.
   system "chsh -s /bin/zsh"
+
+  # Install mercurial and vim
+  system "brew install mercurial"
+  system "brew install #{vim}"
 
   # Install RVM
   system "curl -L get.rvm.io | bash -s stable"
