@@ -8,9 +8,10 @@ task :install do
   # Make ZSH the default.
   system "chsh -s /bin/zsh"
 
-  # Install mercurial and vim
+  # Install mercurial, vim and ctags
   system "brew install mercurial"
   system "brew install #{vim}"
+  system "brew install ctags-exuberant"
 
   # Install RVM
   system "curl -L get.rvm.io | bash -s stable"
