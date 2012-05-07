@@ -21,11 +21,13 @@ function! SetTestFile()
   let t:rails=(match(getline(1,'$'), 'require\s\+.spec_helper.') != -1)
 
   " Determine the command required to run the test file.
-  if match(t:filename, '\.rb$') != -1
+  if match(t:filename, '_spec\.rb$') != -1
     let t:command='rspec --color'
     if t:rails
       let t:command=t:command.' --drb'
     end
+  elseif match(t:filename, '_test\.rb$') != -1
+    let t:command='ruby'
   elseif match(t:filename, '\.coffee$') != -1
     let t:command='jasmine-headless-webkit --no-full-fun'
   elseif match(t:filename, '\.feature$') != -1
@@ -41,7 +43,7 @@ function! SetTestFile()
 endfunction
 
 function! RunTestFile(...)
-  if match(expand('%'), '\(.feature\|_spec.rb\|Spec.coffee\)$') != -1
+  if match(expand('%'), '\(.feature\|_spec.rb\|_test.rb\|Spec.coffee\)$') != -1
     call SetTestFile()
   end
 
