@@ -10,9 +10,6 @@
 [submodule ".vim/bundle/haml"]
 	path = .vim/bundle/haml
 	url = http://github.com/tpope/vim-haml
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = http://github.com/scrooloose/syntastic
 [submodule ".vim/bundle/surround"]
 	path = .vim/bundle/surround
 	url = http://github.com/tpope/vim-surround
