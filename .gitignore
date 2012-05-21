@@ -56,6 +56,7 @@ Public/
 .shef_history
 .ssh
 *.swp
+.tectonicus
 .Trash
 .tuneclone.data
 .vim/spell/
