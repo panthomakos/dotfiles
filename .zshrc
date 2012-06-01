@@ -16,7 +16,6 @@ alias b="bundle"
 alias be="bundle exec"
 alias k="bundle exec rake"
 alias known="vim ~/.ssh/known_hosts"
-alias powenv="rvm env > .powenv"
 
 alias specs="find spec/**/*_spec.rb"
 alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bundle exec rspec -c"
@@ -30,9 +29,13 @@ export PATH=/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
 
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-export PATH=$PATH:$HOME/.rvm/bin
+# RBENV
+eval "$(rbenv init -)"
+function rbenv_prompt_info() {
+  local ruby_version
+  ruby_version=$(rbenv version 2> /dev/null) || return
+  echo "$ruby_version" | sed 's/[ \t].*$//'
+}
 
 # Prompt
 autoload -U colors
@@ -45,7 +48,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(rbenv_prompt_info)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
 
 # Vi Command Line Mode
 set -o vi

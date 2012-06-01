@@ -46,6 +46,7 @@ Projects/
 Public/
 .rails-plugin-sources
 *.rbc
+.rbenv/
 .rbx/
 .rdebug_hist
 .rdebugrc
