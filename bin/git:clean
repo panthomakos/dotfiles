@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {}
+
+parser = OptionParser.new{ |opts|
+  opts.banner = 'Usage: git:clean <prefix> [options]'
+
+  opts.on('-t', '--test', 'Output the branches without cleaning them.') do |t|
+    options[:test] = true
+  end
+
+  opts.on('--prune', '--[no-]prune', 'Prune remote repository first.') do |p|
+    options[:prune] = p
+  end
+
+  options[:repository] = 'origin'
+  opts.on \
+    '-r',
+    '--remote [REMOTE]',
+    'Specify a remote repository (default origin).' do |remote|
+    options[:repository] = remote
+  end
+}
+
+parser.parse!
+
+if ARGV.empty?
+  puts "You must specify a prefix"
+  puts parser
+  exit(-1)
+end
+
+prefix = ARGV.first
+
+if options[:prune]
+  puts "Pruning #{options[:repository]}..."
+  system "git remote prune #{options[:repository]}"
+end
+
+remote = "remotes/#{options[:repository]}"
+
+branches = `git branch -a --merged`
+  .split("\n")
+  .map(&:strip)
+  .select{ |u| u.start_with?("#{remote}/#{prefix}") }
+  .map{ |branch| branch.gsub("#{remote}/", '') }
+
+if options[:test]
+  puts "Branches that would be deleted in a full run:"
+  puts branches.map{ |b| "    #{b}" }
+else
+  puts "Removing branches..."
+  branches.each do |branch|
+    system "git push #{options[:repository]} :#{branch}"
+  end
+end
