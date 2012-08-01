@@ -32,7 +32,7 @@ set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
 set formatprg=par " Use par as the format program.
 " Wildignore RBC and doc files
-set wildignore+=*.rbc,doc/*,spec/cassettes/*,tags
+set wildignore+=*.rbc,doc/*,spec/cassettes/*,tags,junit/*
 " Set spelling region to English
 set spelllang=en
 
