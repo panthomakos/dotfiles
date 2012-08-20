@@ -6,6 +6,8 @@ alias vi='vim'
 alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
 alias ls="ls -G"
 alias git=hub
+alias g=git
+alias gs="git s"
 alias redis.start="redis-server /usr/local/etc/redis.conf"
 alias db:test:load="RAILS_ENV=test bundle exec rake db:schema:load"
 alias guard.start="guard start >&log/guard.log &"
