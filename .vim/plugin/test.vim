@@ -1,4 +1,3 @@
-
 " Testing
 function! RunTests()
   " Bail if the test file has not been set.

@@ -4,11 +4,15 @@ function ToggleOverLength()
     highlight clear OverLength
     let b:overlength = 0
   else
-    highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-    match OverLength /\%81v.\+/
-    let b:overlength = 1
+    call EnableOverLength()
   end
 endfunction
 
+function EnableOverLength()
+  highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+  match OverLength /\%81v.\+/
+  let b:overlength = 1
+endfunction
+
 map <leader>co :call ToggleOverLength()<cr>
-call ToggleOverLength()
+au BufWinEnter * call EnableOverLength()
