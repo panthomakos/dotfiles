@@ -22,6 +22,14 @@ parser = OptionParser.new{ |opts|
     'Specify a remote repository (default origin).' do |remote|
     options[:repository] = remote
   end
+
+  options[:local] = false
+  opts.on \
+    '-l',
+    '--local',
+    'Clean local repositories (default false).' do |local|
+    options[:local] = true
+  end
 }
 
 parser.parse!
@@ -34,25 +42,70 @@ end
 
 prefix = ARGV.first
 
-if options[:prune]
+class BranchList
+  def initialize(list, prefix)
+    @list = list
+      .split("\n")
+      .map(&:strip)
+      .select{ |u| u.start_with?(prefix) }
+  end
+
+  def test
+    puts "Branches that would be deleted in a full run:"
+    puts @list.map{ |b| "    #{b}" }
+  end
+
+  def remove
+    puts "Removing branches..."
+  end
+end
+
+class LocalBranchList < BranchList
+  def initialize(prefix)
+    super(`git branch --merged`, prefix)
+  end
+
+  def remove
+    super
+    @list.each{ |branch| system "git branch -d #{branch}" }
+  end
+end
+
+class RemoteBranchList < BranchList
+  def initialize(repository, prefix)
+    @repository = repository
+
+    super(`git branch -a --merged`, "#{repository_prefix}#{prefix}")
+
+    @list = @list
+      .map{ |branch| branch.gsub(repository_prefix, '') }
+  end
+
+  def remove
+    super
+    @list.each{ |branch| system "git push #{@repository} :#{branch}" }
+  end
+
+  private
+
+  def repository_prefix
+    "remotes/#{@repository}/"
+  end
+end
+
+if options[:prune] && !options[:local]
   puts "Pruning #{options[:repository]}..."
   system "git remote prune #{options[:repository]}"
 end
 
-remote = "remotes/#{options[:repository]}"
-
-branches = `git branch -a --merged`
-  .split("\n")
-  .map(&:strip)
-  .select{ |u| u.start_with?("#{remote}/#{prefix}") }
-  .map{ |branch| branch.gsub("#{remote}/", '') }
+if options[:local]
+  branches = LocalBranchList.new(prefix)
+else
+  branches = RemoteBranchList.new(options[:repository], prefix)
+end
 
 if options[:test]
-  puts "Branches that would be deleted in a full run:"
-  puts branches.map{ |b| "    #{b}" }
+  branches.test
 else
-  puts "Removing branches..."
-  branches.each do |branch|
-    system "git push #{options[:repository]} :#{branch}"
-  end
+  branches.remove
 end
