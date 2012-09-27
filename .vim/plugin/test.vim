@@ -22,9 +22,6 @@ function! SetTestFile()
   " Determine the command required to run the test file.
   if match(t:filename, '_spec\.rb$') != -1
     let t:command='rspec --color'
-    if t:rails
-      let t:command=t:command.' --drb'
-    end
   elseif match(t:filename, '_test\.rb$') != -1
     let t:command='ruby'
   elseif match(t:filename, '\.coffee$') != -1
@@ -33,12 +30,22 @@ function! SetTestFile()
     let t:command='cucumber'
   end
 
-  " Check if we are using bundler.
-  if filereadable('Gemfile')
-    let t:command='bundle exec '.t:command
+  " Determine if Zeus is active and running.
+  let t:zeus=system("ps -ef | grep 'zeus slave' | grep -v 'grep' | wc -l")
+  let t:zeus=substitute(t:zeus, '^\s*\(.\{-}\)\s*$', '\1', '')
+  let t:zeus=(filereadable('zeus.json') && t:zeus != 0)
+
+  if t:zeus && t:rails
+    let t:command='zeus '.t:command
   end
 
-  let t:command='RAILS_ENV=test '.t:command
+  if !t:zeus
+    if filereadable('Gemfile')
+      let t:command='bundle exec '.t:command
+    end
+
+    let t:command='RAILS_ENV=test '.t:command
+  end
 endfunction
 
 function! RunTestFile(...)
