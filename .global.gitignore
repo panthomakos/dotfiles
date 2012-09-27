@@ -5,3 +5,4 @@ doc/tags
 *.swp
 *.swo
 tags
+zeus.json
