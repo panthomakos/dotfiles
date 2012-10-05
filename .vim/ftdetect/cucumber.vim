@@ -1,2 +1,1 @@
-" Cucumber
-autocmd BufNewFile,BufReadPost *.feature,*.story set filetype=cucumber
+au BufNewFile,BufRead *.feature,*.story set ft=cucumber
