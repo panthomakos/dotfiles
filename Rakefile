@@ -32,6 +32,10 @@ task :install do
   # Install hub
   system "brew install hub"
 
+  # Install tmux
+  system 'brew install tmux'
+  system 'brew install reattach-to-user-namespace'
+
   # Unbind the Command+H keybinding so that we can use it for switching view panes.
   system 'defaults write org.vim.MacVim NSUserKeyEquivalents -dict-add "Hide MacVim" "@\$H"'
 

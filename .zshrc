@@ -20,6 +20,7 @@ alias k="bundle exec rake"
 alias known="vim ~/.ssh/known_hosts"
 alias git:clean="ruby ~/bin/git:clean"
 alias ctags="`brew --prefix`/bin/ctags"
+alias fingerprint="ssh-keygen -lf"
 
 alias specs="find spec/**/*_spec.rb"
 alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bundle exec rspec -c"
@@ -40,6 +41,9 @@ function rbenv_prompt_info() {
   ruby_version=$(rbenv version 2> /dev/null) || return
   echo "$ruby_version" | sed 's/[ \t].*$//'
 }
+
+# Copy TMUX Buffers to Clipboard
+ruby ~/bin/tmux-copy.rb
 
 # Prompt
 autoload -U colors
