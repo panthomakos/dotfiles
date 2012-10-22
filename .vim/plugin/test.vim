@@ -37,14 +37,14 @@ function! SetTestFile()
 
   if t:zeus && t:rails
     let t:command='zeus '.t:command
-  end
-
-  if !t:zeus
+  else
     if filereadable('Gemfile')
       let t:command='bundle exec '.t:command
     end
 
-    let t:command='RAILS_ENV=test '.t:command
+    if t:rails
+      let t:command='RAILS_ENV=test '.t:command
+    end
   end
 endfunction
 
