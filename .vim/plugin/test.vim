@@ -31,9 +31,7 @@ function! SetTestFile()
   end
 
   " Determine if Zeus is active and running.
-  let t:zeus=system("ps -ef | grep 'zeus slave' | grep -v 'grep' | wc -l")
-  let t:zeus=substitute(t:zeus, '^\s*\(.\{-}\)\s*$', '\1', '')
-  let t:zeus=(filereadable('zeus.json') && t:zeus != 0)
+  let t:zeus=!empty(glob('.zeus.sock'))
 
   if t:zeus && t:rails
     let t:command='zeus '.t:command

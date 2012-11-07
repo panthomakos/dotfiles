@@ -19,8 +19,8 @@ task :install do
   # Enable RBENV
   system "rbenv init"
 
-  # Install 1.9.3
-  system "rbenv install 1.9.3-p194"
+  # Install 1.9.3 (Performance Improved Version)
+  system "curl https://raw.github.com/gist/2600122/rbenv.sh | sh"
 
   # Might require some re-configuration to add -lstatic-ruby to the LIBS=
   # in the Makefile.
@@ -40,7 +40,7 @@ task :install do
   system 'defaults write org.vim.MacVim NSUserKeyEquivalents -dict-add "Hide MacVim" "@\$H"'
 
   # Set the default RBENV
-  system "rbenv global 1.9.3-p194"
+  system "rbenv global 1.9.3-p194-perf"
 
   # Install bundler
   system 'gem install bundler'
