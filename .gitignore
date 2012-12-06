@@ -37,6 +37,7 @@ Music/
 .mysql_history
 .netrwhist
 .npm/
+.passenger/
 *.pid
 Pictures/
 .pow
