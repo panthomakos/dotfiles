@@ -1,5 +1,5 @@
-alias mem.start="memcached -d -P /var/run/memcached.pid"
-alias mem.stop='kill `cat ~/run/memcached.pid`'
+alias mem.start="memcached -d -P ~/memcached.pid"
+alias mem.stop='kill `cat ~/memcached.pid`'
 alias bam='cd ~/Projects'
 alias bam.strava='cd ~/Projects/strava/active'
 alias vi='vim'
@@ -41,6 +41,9 @@ function rbenv_prompt_info() {
   ruby_version=$(rbenv version 2> /dev/null) || return
   echo "$ruby_version" | sed 's/[ \t].*$//'
 }
+
+# Tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # Copy TMUX Buffers to Clipboard
 ruby ~/bin/tmux-copy.rb
