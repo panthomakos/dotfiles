@@ -9,7 +9,7 @@ then
   tmux new-session -s strava -n Work -d
 
   tmux send-keys -t strava:Work 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Work C-l
+  tmux send-keys -t strava:Work 'clear' C-m
   tmux send-keys -t strava:Work 'vim' C-m
 
   tmux new-window -t strava -n Zeus
@@ -17,23 +17,23 @@ then
   tmux split-window -t strava:Zeus.1 -h
 
   tmux send-keys -t strava:Zeus.1 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Zeus.1 C-l
+  tmux send-keys -t strava:Zeus.1 'clear' C-m
   tmux send-keys -t strava:Zeus.1 'zeus start' C-m
 
   tmux send-keys -t strava:Zeus.2 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Zeus.2 C-l
+  tmux send-keys -t strava:Zeus.2 'clear' C-m
 
   tmux send-keys -t strava:Zeus.3 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Zeus.3 C-l
+  tmux send-keys -t strava:Zeus.3 'clear' C-m
 
   tmux new-window -t strava -n Hudson
   tmux split-window -t strava:Hudson -h
 
   tmux send-keys -t strava:Hudson.1 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Hudson.1 C-l
+  tmux send-keys -t strava:Hudson.1 'clear' C-m
 
   tmux send-keys -t strava:Hudson.2 'cd ~/Projects/strava/active' C-m
-  tmux send-keys -t strava:Hudson.2 C-l
+  tmux send-keys -t strava:Hudson.2 'clear' C-m
 fi
 
 tmux attach -t strava
