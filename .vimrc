@@ -5,6 +5,20 @@ set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
 
+" Help break the habit of using arrow keys.
+noremap  <up> <nop>
+inoremap <up> <nop>
+vnoremap <up> <nop>
+noremap  <down> <nop>
+inoremap <down> <nop>
+vnoremap <down> <nop>
+noremap  <left> <nop>
+inoremap <left> <nop>
+vnoremap <left> <nop>
+noremap  <right> <nop>
+inoremap <right> <nop>
+vnoremap <right> <nop>
+
 """"""""""
 " Settings
 """"""""""
