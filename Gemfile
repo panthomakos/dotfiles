@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'boom' # Terminal copy/paste utility.
 gem 'lunchy' # Wrapper for launchctl.
