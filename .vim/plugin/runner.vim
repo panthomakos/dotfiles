@@ -1,5 +1,5 @@
 function! RunLine(line)
-  " Relace any existing output comments on the current line.
+  " Replace any existing output comments on the current line.
   let newline=substitute(getline(a:line), '\(\s\+# =>\s*.*\)\=$', '', 'v')
   call setline(a:line, newline)
 
@@ -16,7 +16,7 @@ function! RunLine(line)
 
   let results=[]
   for result in range(0,len(lines)-1)
-    " Only capture hashrocket lines or lines following the hashrocket.
+    " Only capture hash-rocket lines or lines following the hash-rocket.
     if match(lines[result], '^=>') != -1 || len(results) > 0
       " Ignore empty lines.
       if match(lines[result], '^\s*$') == -1
