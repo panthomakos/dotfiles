@@ -1,30 +1,30 @@
-function! RunLine() range
-  let commands=[]
-
-  for line in range(a:firstline, a:lastline)
-    let command = getline(line)
-    if (match(command, '^\s*$') == -1)
-      let command = substitute(command, '"', '\\"', 'g')
-      let command = "-e \"".command."\""
-      call add(commands, command)
-    end
-  endfor
-
-  let joined = join(commands, " ")
-
-  let execution="pry --no-color ".joined." -e 'exit'"
+function! RunLine(line)
+  let command=substitute(getline(a:line), '"', '\\"', 'g')
+  let command="pry --no-color -e \"".command."\" -e 'exit'"
 
   " Execute the command and output the result.
-  let output=substitute(system(execution), "[0G", "", "g")
+  let output=substitute(system(command), "[0G", "", "g")
   let output = substitute(output, "[\]\|[[:cntrl:]]", '\r', "g")
-  let lines=split(output, '\r')
-  for line in range(0,len(lines)-1)
-    let lines[line]="  ".lines[line]
-  endfor
-  exec append(a:lastline, lines)
 
-  " Go back to the original line number.
-  exec ":".a:lastline
+  let results=split(output, '\r')
+  let addition=a:line
+
+  for result in range(0,len(results)-1)
+    if match(results[result], '^=>') != -1 || addition > a:line
+      let newline=substitute(getline(a:line), '\(\s\+# => .*\)\=$', ' # '.results[result], 'v')
+      call setline(addition, newline)
+      let addition=addition+1
+    end
+  endfor
 endfunction
 
-map <leader>r :call RunLine()<cr>
+function! RunLines() range
+  for line in range(a:firstline, a:lastline)
+    if (match(getline(line), '^\s*$') == -1)
+      call RunLine(line)
+    end
+  endfor
+endfunction
+
+map <leader>r :call RunLines()<cr>
+map <leader>R :exec 0.','.line('$') 'call RunLines()'<cr>
