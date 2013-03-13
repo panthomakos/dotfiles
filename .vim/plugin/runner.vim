@@ -1,24 +1,48 @@
 function! RunLine(line)
+  " Relace any existing output comments on the current line.
+  let newline=substitute(getline(a:line), '\(\s\+# =>\s*.*\)\=$', '', 'v')
+  call setline(a:line, newline)
+
+  " Parse the line and generate a pry command.
   let command=substitute(getline(a:line), '"', '\\"', 'g')
   let command="pry --no-color -e \"".command."\" -e 'exit'"
 
-  " Execute the command and output the result.
+  " Substitute odd characters in the output.
   let output=substitute(system(command), "[0G", "", "g")
-  let output = substitute(output, "[\]\|[[:cntrl:]]", '\r', "g")
+  let output=substitute(output, "[[:cntrl:]]", '\r', "g")
 
-  let results=split(output, '\r')
-  let addition=a:line
+  " Split the output up by line.
+  let lines=split(output, '\r')
 
+  let results=[]
+  for result in range(0,len(lines)-1)
+    " Only capture hashrocket lines or lines following the hashrocket.
+    if match(lines[result], '^=>') != -1 || len(results) > 0
+      " Ignore empty lines.
+      if match(lines[result], '^\s*$') == -1
+        call add(results, lines[result])
+      end
+    end
+  endfor
+
+  " Remove any result lines after the current line.
+  while match(getline(a:line + 1), '^\s*#\s.*') != -1
+    exec (a:line+1).'delete'
+  endwhile
+
+  " Loop through the results and append them to the file.
   for result in range(0,len(results)-1)
-    if match(results[result], '^=>') != -1 || addition > a:line
-      let newline=substitute(getline(a:line), '\(\s\+# => .*\)\=$', ' # '.results[result], 'v')
-      call setline(addition, newline)
-      let addition=addition+1
+    if result == 0 " Append the first result to the current line.
+      let newline=substitute(getline(a:line), '$', ' # '.results[result], 'v')
+      call setline(a:line, newline)
+    else " Add every additional result line after the current line.
+      call append(a:line+result-1, '# '.results[result])
     end
   endfor
 endfunction
 
 function! RunLines() range
+  " Loop through the range and execute each line.
   for line in range(a:firstline, a:lastline)
     if (match(getline(line), '^\s*$') == -1)
       call RunLine(line)
