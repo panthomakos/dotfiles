@@ -1,6 +1,6 @@
 desc "Install dotfiles and vim"
 task :install do
-  ruby = '1.9.3-p327'
+  ruby = '1.9.3-p392'
 
   brews = %w(git mercurial curl libxml2 rbenv ruby-build ctags ctags-exuberant
     tmux markdown hub reattach-to-user-namespace vim)
