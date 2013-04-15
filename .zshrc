@@ -51,6 +51,11 @@ autoload -U colors
 colors
 setopt PROMPT_SUBST
 
+# Command Line Edit
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
 local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
 
 PROMPT='
