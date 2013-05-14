@@ -56,6 +56,10 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
+# History Searching in VI Mode
+bindkey -M vicmd 'j' down-line-or-search
+bindkey -M vicmd 'k' up-line-or-search
+
 local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_color%})"
 
 PROMPT='

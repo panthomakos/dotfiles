@@ -1,4 +1,4 @@
-# Pan Thomakos' DotFiles
+# my.files
 
 Basic configuration scripts including the vim setup I use for development.
 
@@ -7,14 +7,14 @@ Basic configuration scripts including the vim setup I use for development.
     git clone git@github.com:panthomakos/dotfiles ~/
     rake
 
-## Included Vim Plugins
+## Included Vim Plugins (aka @tpope is awesome)
 
-* fugitive - http://github.com/tpope/vim-fugitive.git
+* abolish - http://github.com/tpope/vim-abolish
 * command-t - http://github.com/wincent/Command-T
-* unimpaired - http://github.com/tpope/vim-unimpaired
+* commentary - git://github.com/tpope/vim-commentary
+* fugitive - http://github.com/tpope/vim-fugitive
 * haml - http://github.com/tpope/vim-haml
-* syntastic - http://github.com/scrooloose/syntastic
+* markdown - https://github.com/tpope/vim-markdown
 * surround - http://github.com/tpope/vim-surround
 * tabular - https://github.com/godlygeek/tabular
-* commentary - git://github.com/tpope/vim-commentary.git
-* markdown - https://github.com/tpope/vim-markdown
+* unimpaired - http://github.com/tpope/vim-unimpaired
