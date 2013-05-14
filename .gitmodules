@@ -22,3 +22,6 @@
 [submodule "/Users/panayiotisthomakos/.vim/bundle/markdown"]
 	path = .vim/bundle/markdown
 	url = https://github.com/tpope/vim-markdown
+[submodule "/Users/pan/.vim/bundle/abolish"]
+	path = /Users/pan/.vim/bundle/abolish
+	url = git://github.com/tpope/vim-abolish
