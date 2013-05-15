@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/fugitive"]
 	path = .vim/bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
-[submodule ".vim/bundle/command-t"]
-	path = .vim/bundle/command-t
-	url = http://github.com/wincent/Command-T
 [submodule ".vim/bundle/unimpaired"]
 	path = .vim/bundle/unimpaired
 	url = http://github.com/tpope/vim-unimpaired
@@ -25,3 +22,6 @@
 [submodule "/Users/pan/.vim/bundle/abolish"]
 	path = /Users/pan/.vim/bundle/abolish
 	url = git://github.com/tpope/vim-abolish
+[submodule "/Users/pan/.vim/bundle/ctrlp"]
+	path = /Users/pan/.vim/bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git

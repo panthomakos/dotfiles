@@ -10,8 +10,8 @@ Basic configuration scripts including the vim setup I use for development.
 ## Included Vim Plugins (aka @tpope is awesome)
 
 * abolish - http://github.com/tpope/vim-abolish
-* command-t - http://github.com/wincent/Command-T
 * commentary - git://github.com/tpope/vim-commentary
+* CtrlP - http://github.com/kien/ctrlp.vim
 * fugitive - http://github.com/tpope/vim-fugitive
 * haml - http://github.com/tpope/vim-haml
 * markdown - https://github.com/tpope/vim-markdown

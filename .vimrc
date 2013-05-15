@@ -45,11 +45,10 @@ set cursorline " Highlight the current line.
 set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
 set formatprg=par " Use par as the format program.
-" Wildignore RBC and doc files
-set wildignore+=*.rbc,doc/*,spec/cassettes/*,tags,junit/*
+" Wildignore - files we don't want to find/search.
+set wildignore+=*.rbc,*/doc/*,*/spec/cassettes/*,tags,*/junit/*
 " Set spelling region to English
 set spelllang=en
-
 
 command! Markdown :!ronn --html %
 
@@ -86,10 +85,10 @@ nmap gV `[v`]
 " Goto File Horizontal and Vertical Splits
 map gfv <C-w>L
 map gfs <C-w>f
-" Access CommandT.
-map <leader>f :CommandT<CR>
-" Reload CommandT index.
-map <leader>cf :CommandTFlush<CR>\|:CommandT<CR>
+" Access CtrlP
+map <leader>f :CtrlP<CR>
+" Reload CtlrP Cache.
+map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
 " Enable filetype detection.
 filetype plugin indent on
@@ -99,9 +98,3 @@ set t_Co=256
 syntax enable
 set background=dark
 color grb256
-
-" CommandT Settings
-let g:CommandTCancelMap=['<ESC>']
-let g:CommandTCursorLeftMap=['<Left>']
-let g:CommandTBackspaceMap=['<C-h>']
-
