@@ -9,15 +9,18 @@ task :install do
   system "git submodule update --init"
 
   # Make ZSH the default.
-  system "chsh -s /bin/zsh"
+  system "chsh -s /bin/zsh" unless ENV['SHELL'] == '/bin/zsh'
 
+  system "brew update"
   system "brew install #{brews.join(' ')}"
 
   # Enable RBENV
   system "rbenv init"
 
   # Install Ruby
-  system "rbenv install #{ruby}"
+  if `rbenv versions | grep #{ruby}`.empty?
+    system "rbenv install #{ruby}"
+  end
   system "rbenv global #{ruby}"
 
   # Install bundler

@@ -90,6 +90,9 @@ map <leader>f :CtrlP<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
+" Only list version controlled files in CtrlP.
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+
 " Enable filetype detection.
 filetype plugin indent on
 
