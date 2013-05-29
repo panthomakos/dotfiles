@@ -1,8 +1,8 @@
 alias mem.start="memcached -d -P /var/run/memcached.pid"
 alias mem.stop='kill `cat ~/run/memcached.pid`'
 alias bam='cd ~/Projects'
-alias bam.strava='cd ~/Projects/strava/active'
-alias mux.strava='~/bin/mux-strava'
+alias bam.strava='cd ~/Projects/strava'
+alias mux='~/bin/mux'
 alias vi='vim'
 alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
 alias ls="ls -G"

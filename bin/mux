@@ -1,0 +1,13 @@
+tmux has-session -t mux
+
+if [ $? != 0 ]
+then
+  mysql.server status || mysql.server start
+  ps -ef | grep redis | grep -v grep || redis-server /usr/local/etc/redis.conf
+  kill `cat ~/memcached.pid` ; memcached -d -P ~/memcached.pid
+
+  tmux new-session -s mux -n Main -d
+  tmux split-window -t mux:Main -h
+fi
+
+tmux attach -t mux
