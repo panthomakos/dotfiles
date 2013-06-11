@@ -90,6 +90,8 @@ map <leader>f :CtrlP<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
+" Use Regular Expression mode in CtrlP.
+let g:ctrlp_regexp = 1
 " Only list version controlled files in CtrlP.
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
