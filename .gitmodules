@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule ".vim/bundle/marked"]
+	path = .vim/bundle/marked
+	url = https://github.com/itspriddle/vim-marked
