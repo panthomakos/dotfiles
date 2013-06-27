@@ -31,7 +31,7 @@ alias sr="screen -r"
 alias ss="screen -S"
 alias sl="screen -ls"
 
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/share/npm/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
 
