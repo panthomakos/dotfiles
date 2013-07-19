@@ -7,7 +7,6 @@ then
   kill `cat ~/memcached.pid` ; memcached -d -P ~/memcached.pid
 
   tmux new-session -s mux -n Main -d
-  tmux split-window -t mux:Main -h
 fi
 
 tmux attach -t mux
