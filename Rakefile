@@ -5,6 +5,8 @@ task :install do
   brews = %w(git mercurial curl libxml2 rbenv ruby-build ctags ctags-exuberant
     tmux markdown hub reattach-to-user-namespace vim)
 
+  # 'https://raw.github.com/Homebrew/homebrew-dupes/master/openssh.rb --with-brewed-openssl'
+
   # Updated submodules.
   system "git submodule update --init"
 
