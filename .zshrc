@@ -4,12 +4,15 @@ alias bam='cd ~/Projects'
 alias bam.strava='cd ~/Projects/strava'
 alias mux='~/bin/mux'
 alias vi='vim'
+alias v='vim'
 alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
 alias ls="ls -G"
 alias git=hub
 alias redis.start="redis-server /usr/local/etc/redis.conf"
 alias db:test:load="RAILS_ENV=test bundle exec rake db:schema:load"
 alias guard.start="guard start >&log/guard.log &"
+alias zk.start="zkServer start"
+alias zk.stop="zkServer stop"
 alias pg="pg_ctl -D /usr/local/var/postgres"
 alias pg.start="pg -l /usr/local/var/postgres/server.log start"
 alias pg.stop="pg stop -s -m fast"
