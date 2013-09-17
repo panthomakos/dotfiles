@@ -58,6 +58,7 @@ setopt PROMPT_SUBST
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # History Searching in VI Mode
 bindkey -M vicmd 'j' down-line-or-search
