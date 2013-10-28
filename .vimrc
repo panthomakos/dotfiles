@@ -75,9 +75,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Open current buffer in Marked Application.
-map <leader>m :MarkedOpen<CR>
-
 " routes.rb and Gemfile
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
