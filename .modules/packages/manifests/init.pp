@@ -11,4 +11,11 @@ class packages inherits user {
       ensure => installed,
       provider => brew,
   }
+
+  package {
+    'Viscosity':
+      provider => appdmg,
+      ensure => installed,
+      source => 'http://www.thesparklabs.com/downloads/Viscosity.dmg',
+  }
 }

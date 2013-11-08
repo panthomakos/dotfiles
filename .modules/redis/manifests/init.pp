@@ -1,4 +1,4 @@
-class redis {
+class redis inherits user {
   package {
     'redis':
       ensure => installed,
