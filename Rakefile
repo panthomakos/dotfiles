@@ -1,35 +1,14 @@
 desc "Install dotfiles and vim"
 task :install do
-  ruby = '1.9.3-p429'
-
-  brews = %w(git mercurial curl libxml2 rbenv ruby-build ctags ctags-exuberant
-    tmux markdown hub reattach-to-user-namespace vim)
-
-  # 'https://raw.github.com/Homebrew/homebrew-dupes/master/openssh.rb --with-brewed-openssl'
-
-  # Updated submodules.
   system "git submodule update --init"
-
-  # Make ZSH the default.
   system "chsh -s /bin/zsh" unless ENV['SHELL'] == '/bin/zsh'
-
-  system "brew update"
-  system "brew install #{brews.join(' ')}"
-
-  # Enable RBENV
-  system "rbenv init"
-
-  # Install Ruby
-  if `rbenv versions | grep #{ruby}`.empty?
-    system "rbenv install #{ruby}"
-  end
-  system "rbenv global #{ruby}"
-
-  # Install bundler
-  system 'gem install bundler'
-  system 'rbenv rehash'
-
-  # Install bundle
+  system 'sudo gem install bundler'
   system 'bundle'
+  system 'cd .puppet ; librarian-puppet install ; cd ~'
 end
-task :default => :install
+task :default => [:install, :puppet]
+
+desc 'Run puppet to ensure the system is up to date'
+task :puppet do
+  system 'puppet apply site.pp'
+end

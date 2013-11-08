@@ -45,6 +45,7 @@ Projects/
 .pry_history
 .psql_history
 Public/
+.puppet/*/
 .rails-plugin-sources
 *.rbc
 .rbenv/
