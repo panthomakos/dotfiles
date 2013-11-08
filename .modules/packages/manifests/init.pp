@@ -18,4 +18,11 @@ class packages inherits user {
       ensure => installed,
       source => 'http://www.thesparklabs.com/downloads/Viscosity.dmg',
   }
+
+  package {
+    'Chrome':
+      provider => appdmg,
+      ensure => installed,
+      source => 'https://dl.google.com/chrome/mac/stable/GoogleChrome.dmg',
+  }
 }
