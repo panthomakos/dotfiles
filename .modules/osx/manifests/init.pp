@@ -1,8 +1,26 @@
 class osx inherits user {
-  define osx_default($domain, $key, $value, $type){
-    exec {
-      "defaults write ${domain} '${key}' -${type} '${value}'":
-      onlyif => "test `defaults read ${domain} ${key}` -ne ${value}",
+  define osx_default($domain, $key, $value, $type, $expect = $value){
+    $command = "defaults write ${domain} '${key}' -${type} ${value}"
+
+    if ($expect == $value) {
+      exec {
+        $command:
+        onlyif => "test `defaults read ${domain} ${key}` -ne ${value}",
+      }
+    } else {
+      $file = "/tmp/osx.test.${domain}.${key}"
+
+      file {
+        $file:
+          source => $expect,
+          ensure => present,
+      }
+
+      exec {
+        $command:
+        onlyif => "test `diff <(defaults read ${domain} ${key}) <(cat {$file} > /dev/null ; echo $?` -ne 0",
+        require => File[$file],
+      }
     }
   }
 
@@ -49,5 +67,14 @@ class osx inherits user {
       value => '()',
       type => 'array',
       notify => Exec['killall Dock'],
+  }
+
+  osx_default {
+    'set google chrome shortcuts':
+      domain => 'com.google.Chrome',
+      key => 'NSUserKeyEquivalents',
+      value => '"Open File..." "@" "Open Location..." "@o" "Select Next Tab" "@l" "Select Previous Tab" "@h"',
+      expect => 'puppet:///modules/osx/chrome.keys',
+      type => 'dict',
   }
 }
