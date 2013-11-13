@@ -10,5 +10,5 @@ task :default => [:install, :puppet]
 desc 'Run puppet to ensure the system is up to date'
 task :puppet do
   system 'cd .puppet ; librarian-puppet install ; cd ~'
-  system 'sudo puppet apply site.pp --modulepath=/Users/pan/.puppet/modules'
+  system 'sudo puppet apply site.pp --modulepath=/Users/pan/.puppet/modules:/Users/pan/.modules'
 end

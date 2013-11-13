@@ -4,55 +4,7 @@ FORGE
     bjoernalbers/homebrew (0.2.0)
     puppetlabs/stdlib (4.1.0)
 
-PATH
-  remote: /Users/pan/.modules/gems
-  specs:
-    gems (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/osx
-  specs:
-    osx (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/packages
-  specs:
-    packages (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/plist
-  specs:
-    plist (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/rbenv
-  specs:
-    rbenv (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/redis
-  specs:
-    redis (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/ruby
-  specs:
-    ruby (0.0.1)
-
-PATH
-  remote: /Users/pan/.modules/user
-  specs:
-    user (0.0.1)
-
 DEPENDENCIES
   bjoernalbers/homebrew (>= 0)
-  gems (>= 0)
-  osx (>= 0)
-  packages (>= 0)
-  plist (>= 0)
   puppetlabs/stdlib (>= 0)
-  rbenv (>= 0)
-  redis (>= 0)
-  ruby (>= 0)
-  user (>= 0)
 

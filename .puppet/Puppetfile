@@ -2,12 +2,3 @@ forge "http://forge.puppetlabs.com"
 
 mod 'bjoernalbers/homebrew'
 mod 'puppetlabs/stdlib'
-
-mod 'gems', :path => '/Users/pan/.modules/gems'
-mod 'osx', :path => '/Users/pan/.modules/osx'
-mod 'packages', :path => '/Users/pan/.modules/packages'
-mod 'plist', :path => '/Users/pan/.modules/plist'
-mod 'rbenv', :path => '/Users/pan/.modules/rbenv'
-mod 'redis', :path => '/Users/pan/.modules/redis'
-mod 'ruby', :path => '/Users/pan/.modules/ruby'
-mod 'user', :path => '/Users/pan/.modules/user'
