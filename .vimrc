@@ -1,3 +1,4 @@
+" Use pathogen to manage all of my bundled plugins.
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -5,7 +6,7 @@ set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
 
-" Help break the habit of using arrow keys.
+" The arrow keys suck. Don't let them do anything.
 noremap  <up> <nop>
 inoremap <up> <nop>
 vnoremap <up> <nop>
@@ -22,35 +23,64 @@ vnoremap <right> <nop>
 """"""""""
 " Settings
 """"""""""
-" Use proper clipboard
+
+" Use the system clipboard.
 set clipboard=unnamed
-" Make backspace work properly.
+
+" The default vim backspace options are a little lacking. This makes backspace
+" work over the following in insert mode:
+"
+"   * line breaks (eol)
+"   * automatically inserted indentation (indent)
+"   * the start of insert mode (start)
 set backspace=2
-" Configure status line.
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-set laststatus=2
-" Automatic window sizing.
+
+" Status Line Display
+set statusline =
+" Path to the file (relative to the current directory). Also use %< to
+" truncate off the front of the path/file when the line is too long.
+set statusline +=%<%f
+set statusline +=\ %h " A space, followed by the help buffer flag.
+set statusline +=%m " Modifiable flag.
+set statusline +=%r " Read Only flag.
+set statusline +=%{fugitive#statusline()} " Git status line.
+set statusline +=%= " Separation between left and right status lines.
+" <line>,<column><virtual column>
+" This is left justified with a minimum width of 14.
+set statusline +=%-14.(%l,%c%V%)
+set statusline +=\ %P " A space, followed by the percentage through the file.
+
+set laststatus=2 " The last window will always have a status line.
+
+" In split mode, make the current window big, but leave others for context.
 set winwidth=84
+" This is an oddity of vim. We have to set winheight bigger than we want to
+" set winminheight. If we set winheight to be huge, before winminheight, then
+" winminheight set will fail.
 set winheight=5
 set winminheight=5
 set winheight=999
-" Tabs
-set ts=2 sts=2 sw=2 expandtab
-" Show tabs and trailing spaces
-set listchars=tab:>-,trail:-
-set list
+
+" <Tab> Configuration
+set tabstop=2 " Display <Tab> as two spaces in visual mode.
+set softtabstop=2 " Insert <Tab> as two spaces when editing.
+set shiftwidth=2 " Insert <Tab> as two spaces when auto-indenting.
+set expandtab " In insert mode, use the appropriate number of spaes for <Tab>.
+
+set listchars=tab:>-,trail:- " Set listchars for tabs and trailing spaces.
+set list " Display listchars.
+
 set hlsearch " Highlight searches.
 set number " Number lines.
 set cursorline " Highlight the current line.
 set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
 set formatprg=par " Use par as the format program.
-" Wildignore - files we don't want to find/search.
-set wildignore+=*.rbc,*/doc/*,*/spec/cassettes/*,tags,*/junit/*
-" Set spelling region to English
-set spelllang=en
 
-command! Markdown :!ronn --html %
+" Wildignore - files we don't want to find/search using CtrlP.
+set wildignore+=*.rbc,*/doc/*,*/spec/cassettes/*,tags,*/junit/*
+
+set spelllang=en " Set spelling region to English.
 
 """"""""""""""""""""""""""
 " Convenience Key Mappings

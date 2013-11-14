@@ -1,11 +1,6 @@
-# my.files
+# .my.files
 
 Basic configuration scripts including the vim setup I use for development.
-
-## Installation
-
-    git clone git@github.com:panthomakos/dotfiles ~/
-    rake
 
 ## Included Vim Plugins (aka @tpope is awesome)
 
@@ -18,3 +13,12 @@ Basic configuration scripts including the vim setup I use for development.
 * surround - http://github.com/tpope/vim-surround
 * tabular - https://github.com/godlygeek/tabular
 * unimpaired - http://github.com/tpope/vim-unimpaired
+
+## System Installation
+
+I use puppet to automatically configure my system and keep it in a consistent
+state. You should only use this command if you want to replicate my entire
+system configuration on your own machine.
+
+    git clone git@github.com:panthomakos/dotfiles ~/
+    rake
