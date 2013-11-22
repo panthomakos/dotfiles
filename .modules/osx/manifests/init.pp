@@ -73,7 +73,7 @@ class osx inherits user {
     'set google chrome shortcuts':
       domain => 'com.google.Chrome',
       key => 'NSUserKeyEquivalents',
-      value => '"Open File..." "@" "Open Location..." "@o" "Select Next Tab" "@l" "Select Previous Tab" "@h"',
+      value => '"Open File..." "@$o" "Open Location..." "@o" "Select Next Tab" "@l" "Select Previous Tab" "@h"',
       expect => 'puppet:///modules/osx/chrome.keys',
       type => 'dict',
   }
