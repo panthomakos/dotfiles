@@ -1,6 +1,7 @@
 class packages inherits user {
   $packages = [
     'git', 'mercurial', 'curl',
+    'ec2-api-tools',
     'libxml2', 'ctags',
     'tmux', 'markdown', 'hub',
     'reattach-to-user-namespace',
