@@ -38,6 +38,10 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
 
+# I use ~/.env to store my secret environment variables, like my EC2 keys. If it
+# exists, source it.
+[[ -f '.env' ]] && source .env
+
 # RBENV
 eval "$(rbenv init -)"
 function rbenv_prompt_info() {

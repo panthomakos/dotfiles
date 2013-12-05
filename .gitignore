@@ -18,6 +18,7 @@ Dropbox/
 .dropbox/
 .DS_Store
 .dvdcss
+.env
 .eyrc
 .eyrc.strava
 .fit.done
