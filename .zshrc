@@ -40,7 +40,7 @@ export VISUAL=vim
 
 # I use ~/.env to store my secret environment variables, like my EC2 keys. If it
 # exists, source it.
-[[ -f '.env' ]] && source .env
+[[ -f .env ]] && source .env
 
 # RBENV
 eval "$(rbenv init -)"
