@@ -37,9 +37,12 @@ alias sl="screen -ls"
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
+# If java_home is available, set the environment variable.
+[[ -f /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
+# Credential file for the Ruby AWS SDK.
+export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
-# I use ~/.env to store my secret environment variables, like my EC2 keys. If it
-# exists, source it.
+# I use ~/.env to store my secret environment variables. If it exists, source it.
 [[ -f .env ]] && source .env
 
 # RBENV
@@ -85,3 +88,8 @@ zstyle ':completion:*' completer _expand _complete _ignored _correct _approximat
 fpath=(~/.zsh/.completion $fpath)
 autoload -Uz compinit
 compinit
+
+# If AWS command line tools are enabled, source the CLI completer.
+if [[ -f /usr/local/bin/aws_zsh_completer.sh ]]; then
+  source /usr/local/bin/aws_zsh_completer.sh
+fi

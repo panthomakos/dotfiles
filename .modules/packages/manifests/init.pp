@@ -1,9 +1,9 @@
 class packages inherits user {
   $packages = [
     'git', 'mercurial', 'curl',
-    'ec2-api-tools',
     'libxml2', 'ctags',
     'tmux', 'markdown', 'hub',
+    'python',
     'reattach-to-user-namespace',
     'vim', 'mysql', 'zookeeper']
 
@@ -11,6 +11,12 @@ class packages inherits user {
     $packages:
       ensure => installed,
       provider => brew,
+  }
+
+  package {
+    'awscli':
+      ensure => installed,
+      provider => pip,
   }
 
   package {
