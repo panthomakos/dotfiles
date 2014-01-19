@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /etc/puppet/data
+:hierarchy:
+  - "%{::osfamily}"
+  - common

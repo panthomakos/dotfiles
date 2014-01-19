@@ -1,0 +1,8 @@
+[Unit]
+Description=Disable trackpad while typing.
+
+[Service]
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/syndaemon -d -i 1 -p %t/syndaemon.pid
+PIDFile=%t/syndaemon.pid

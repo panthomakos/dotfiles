@@ -2,9 +2,11 @@ FORGE
   remote: http://forge.puppetlabs.com
   specs:
     bjoernalbers/homebrew (0.2.0)
+    puppetlabs/inifile (1.0.1)
     puppetlabs/stdlib (4.1.0)
 
 DEPENDENCIES
   bjoernalbers/homebrew (>= 0)
+  puppetlabs/inifile (>= 0)
   puppetlabs/stdlib (>= 0)
 

@@ -1,0 +1,53 @@
+user::user: pan
+user::home: /home/pan
+user::groups:
+  - video
+  - audio
+  - users
+
+packages::packages:
+  - abs
+  - alsa-oss
+  - alsa-utils
+  - base-devel
+  - bc
+  - bluez
+  - bluez-utils
+  - curl
+  - evince
+  - expac
+  - gnupg
+  - gvim
+  - icedtea-web-java7
+  - irssi
+  - keepassx
+  - linux-headers
+  - lxde
+  - mutt
+  - net-tools
+  - openssh
+  - openssl
+  - openvpn
+  - polkit
+  - pulseaudio
+  - pulseaudio-alsa
+  - rxvt-unicode
+  - screen
+  - tar
+  - tmux
+  - w3m
+  - xautolock
+  - xclip
+  - xf86-input-synaptics
+  - xf86-video-fbdev
+  - xmonad
+  - xmonad-contrib
+  - xorg-server-xvfb
+  - xorg-xinit
+  - xv
+
+yaourt::packages:
+  - dropbox-experimental
+  - goobook-git
+  - google-chrome
+  - urlscan-git

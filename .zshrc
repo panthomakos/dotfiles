@@ -1,51 +1,24 @@
-alias mem.start="memcached -d -P /var/run/memcached.pid"
-alias mem.stop='kill `cat ~/run/memcached.pid`'
-alias bam='cd ~/Projects'
-alias bam.strava='cd ~/Projects/strava'
-alias mux='~/bin/mux'
-alias vi='vim'
-alias v='vim'
-alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
-alias ls="ls -G"
-alias git=hub
-alias redis.start="redis-server /usr/local/etc/redis.conf"
-alias db:test:load="RAILS_ENV=test bundle exec rake db:schema:load"
-alias guard.start="guard start >&log/guard.log &"
-alias zk.start="zkServer start"
-alias zk.stop="zkServer stop"
-alias pg="pg_ctl -D /usr/local/var/postgres"
-alias pg.start="pg -l /usr/local/var/postgres/server.log start"
-alias pg.stop="pg stop -s -m fast"
-alias psf="ps -ef | grep "
-alias h="history"
-alias b="bundle"
-alias be="bundle exec"
-alias k="be rake"
-alias known="vim ~/.ssh/known_hosts"
-alias git:clean="ruby ~/bin/git:clean"
-alias ctags="`brew --prefix`/bin/ctags"
-alias fingerprint="ssh-keygen -lf"
-
-alias specs="find spec/**/*_spec.rb"
-alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bundle exec rspec -c"
-alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bundle exec rspec -c"
-
-alias sr="screen -r"
-alias ss="screen -S"
-alias sl="screen -ls"
+source $HOME/.zsh/gpg
+source $HOME/.zsh/aliases
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+export BROWSER=google-chrome-stable
 export EDITOR=vim
 export VISUAL=vim
+# Tell Java that XMonad is non-reparenting. This fixes some issues with
+# maximizing java windows.
+export _JAVA_AWT_WM_NONREPARENTING=1
 # If java_home is available, set the environment variable.
 [[ -f /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 # Credential file for the Ruby AWS SDK.
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
+export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
 
 # I use ~/.env to store my secret environment variables. If it exists, source it.
 [[ -f .env ]] && source .env
 
 # RBENV
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 function rbenv_prompt_info() {
   local ruby_version
@@ -53,8 +26,10 @@ function rbenv_prompt_info() {
   echo "$ruby_version" | sed 's/[ \t].*$//'
 }
 
-# Copy TMUX Buffers to Clipboard
-ruby ~/bin/tmux-copy.rb
+# Copy TMUX Buffers to Clipboard on Mac
+if [[ "$(uname)" == "Darwin" ]]; then
+  ruby ~/bin/tmux-copy.rb
+fi
 
 # Prompt
 autoload -U colors

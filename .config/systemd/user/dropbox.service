@@ -1,0 +1,9 @@
+[Unit]
+Description=Dropbox
+
+[Service]
+ExecStart=/home/pan/.dropbox-dist/dropbox
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=default.target

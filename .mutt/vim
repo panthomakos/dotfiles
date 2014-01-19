@@ -1,0 +1,9 @@
+set spell
+set spelllang=en
+set ruler
+
+set filetype=mail
+
+setlocal fo+=aw
+
+filetype plugin indent on

@@ -1,0 +1,11 @@
+[Unit]
+Description=GPG Agent Daemon
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/gpg-agent --use-standard-socket --write-env-file %h/.gpg-agent-info --daemon
+ExecStartPost=/bin/sh -c "xargs systemctl --user set-environment < %h/.gpg-agent-info"
+Restart=on-abort
+
+[Install]
+WantedBy=default.target

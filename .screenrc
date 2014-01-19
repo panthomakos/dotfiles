@@ -1,2 +1,5 @@
+term "screen-256color"
+encoding UTF-8
+altscreen on
+vbell off
 defscrollback 10000
-bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"

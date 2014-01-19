@@ -25,7 +25,7 @@ vnoremap <right> <nop>
 """"""""""
 
 " Use the system clipboard.
-set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
 
 " The default vim backspace options are a little lacking. This makes backspace
 " work over the following in insert mode:

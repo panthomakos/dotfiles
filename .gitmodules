@@ -25,3 +25,9 @@
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule ".rbenv"]
+	path = .rbenv
+	url = git://github.com/sstephenson/rbenv.git
+[submodule "ruby-build"]
+	path = ruby-build
+	url = git://github.com/sstephenson/ruby-build.git

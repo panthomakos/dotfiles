@@ -1,0 +1,61 @@
+
+!-< Xft >---------------
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hinstyle:   hintslight
+
+
+URxvt*font:     xft:inconsolata:medium:antialias=true:hinting:false:pixelsize=13
+
+!fixes scrolling performance issues under large buffers
+!however buffered:false seems to cause flickering
+URxvt*buffered:false
+!URxvt*buffered:true
+
+!urxvt.fading          : 0
+urxvt.jumpScroll       : false
+urxvt.scrollBar        : false
+urxvt.internalBorder   : 1
+urxvt*externalBorder   : 0
+urxvt.cursorBlink      : true
+urxvt.cursorColor      : #dd9900
+URxvt.depth            : 24
+URxvt*background       : #000000
+URxvt*foreground       : #FFFFFF
+urxvt*pastableTabs     : true
+urxvt*jumpScroll       : true
+urxvt*urgentOnBell     : true
+urxvt*scrollTtyOutput  : False
+urxvt*scrollWithBuffer : False
+URxvt*saveLines        : 12000
+
+URxvt.urgentOnBell: true
+
+urxvt*scrollTtyKeypress : True
+
+!black
+*color0:         rgb:19/19/19
+*color8:         rgb:25/25/25
+!red
+*color1:         rgb:d0/3b/3b
+*color9:         rgb:d0/3b/3b
+!green
+*color2:         rgb:5b/76/2f
+*color10:        rgb:89/b8/3f
+!brown/yellow
+*color3:         rgb:cc/cc/43
+*color11:        rgb:ef/ef/60
+!blue
+*color4:         rgb:32/4c/80
+*color12:        rgb:4b/6f/c0
+!magenta
+*color5:         rgb:70/6c/9a
+*color13:        rgb:82/6a/b1
+!cyan
+*color6:         rgb:92/b1/9e
+*color14:        rgb:a1/cd/cd
+!white
+*color7:         rgb:ff/ff/ff
+*color15:        rgb:dd/dd/dd

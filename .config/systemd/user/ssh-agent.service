@@ -1,0 +1,10 @@
+[Unit]
+Description=SSH-Agent Daemon
+IgnoreOnIsolate=true
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/ssh-agent -a %h/.config/ssh-agent.socket
+
+[Install]
+WantedBy=default.target
