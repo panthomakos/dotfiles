@@ -25,6 +25,7 @@ packages::packages:
   - lxde
   - mutt
   - net-tools
+  - newsbeuter
   - openssh
   - openssl
   - openvpn
@@ -32,6 +33,7 @@ packages::packages:
   - pulseaudio
   - pulseaudio-alsa
   - rxvt-unicode
+  - sane
   - screen
   - tar
   - tmux

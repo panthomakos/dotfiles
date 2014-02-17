@@ -73,6 +73,8 @@ Music/
 !.mutt/cache/headers/.gitkeep
 .mysql_history
 .netrwhist
+.newsbeuter/history.cmdline
+.newsbeuter/history.search
 .npm/
 .passenger/
 *.pid
