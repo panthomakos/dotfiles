@@ -102,26 +102,6 @@ statusbar = {
   default = {
     # the "default statusbar" to be displayed at the bottom of the window.
     # contains all the normal items.
-    window = {
-      disabled = "no";
-
-      # window, root
-      type = "window";
-      # top, bottom
-      placement = "bottom";
-      # number
-      position = "1";
-      # active, inactive, always
-      visible = "active";
-
-      # list of items in statusbar in the display order
-      items = {
-        barstart = { priority = "100"; };
-        time = { };
-        user = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
 
     # statusbar to use in inactive split windows
     window_inact = {
@@ -174,6 +154,18 @@ statusbar = {
         barend = { priority = "100"; alignment = "right"; };
       };
     };
+    window = {
+      items = {
+        barstart = { priority = "100"; };
+        time = { };
+        user = { };
+        window = { };
+        window_empty = { };
+        lag = { priority = "-1"; };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
@@ -196,8 +188,7 @@ settings = {
 };
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = { name = "hilight"; sticky = "yes"; };
-  3 = {
+  2 = {
     items = (
       {
         type = "CHANNEL";
@@ -208,7 +199,4 @@ windows = {
     );
   };
 };
-mainwindows = {
-  2 = { first_line = "1"; lines = "7"; };
-  3 = { first_line = "8"; lines = "60"; };
-};
+mainwindows = { 2 = { first_line = "8"; lines = "60"; }; };
