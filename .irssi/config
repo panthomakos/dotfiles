@@ -147,13 +147,6 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
-    awl_0 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_0 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
     window = {
       items = {
         barstart = { priority = "100"; };
@@ -163,6 +156,13 @@ statusbar = {
         window_empty = { };
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
         barend = { priority = "100"; alignment = "right"; };
       };
     };
@@ -184,6 +184,7 @@ settings = {
     nicklist_automode = "screen";
     awl_viewer = "no";
     awl_block = "-14";
+    openurl_app_http = "google-chrome-stable $1 >/dev/null";
   };
 };
 windows = {
