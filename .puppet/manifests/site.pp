@@ -1,7 +1,7 @@
 node default {
   include ruby, packages
 
-  include yaourt
+  include yaourt, cabal
   include bitlbee, redis
 
   # TODO [add cron task to run puppet]
