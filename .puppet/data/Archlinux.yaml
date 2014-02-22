@@ -53,6 +53,3 @@ yaourt::packages:
   - goobook-git
   - google-chrome
   - urlscan-git
-
-cabal::packages:
-  - pandoc
