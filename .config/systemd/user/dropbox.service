@@ -2,7 +2,7 @@
 Description=Dropbox
 
 [Service]
-ExecStart=/home/pan/.dropbox-dist/dropbox
+ExecStart=/home/pan/.dropbox-dist/dropbox /newerversion
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]

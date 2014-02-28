@@ -11,6 +11,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # If java_home is available, set the environment variable.
 [[ -f /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 # Credential file for the Ruby AWS SDK.
+# AWSAccessKeyId= & AWSSecretKey=
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
 export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
 
