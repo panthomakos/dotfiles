@@ -25,7 +25,6 @@ packages::packages:
   - lxde
   - mutt
   - net-tools
-  - newsbeuter
   - openssh
   - openssl
   - openvpn

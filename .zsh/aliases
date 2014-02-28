@@ -27,9 +27,6 @@ alias fingerprint="ssh-keygen -lf"
 # Open IRSSI in a screen session.
 alias irc="screen irssi"
 
-# Read RSS News
-alias news="newsbeuter -u ~/Dropbox/newsbeuter/urls"
-
 # Lock the screen and suspend.
 alias i3exit="i3lock && systemctl suspend"
 
