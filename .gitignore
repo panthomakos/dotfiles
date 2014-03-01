@@ -57,6 +57,7 @@ Gemfile.lock
 .infinity_test
 .irb-history
 .irb_history
+.irssi/away.log
 .java/
 .keepassx/
 .lesshst
