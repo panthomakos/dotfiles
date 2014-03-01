@@ -13,14 +13,18 @@ packages::packages:
   - bc
   - bluez
   - bluez-utils
+  - cups
   - curl
   - evince
   - expac
   - gnupg
+  - gsfonts
+  - gutenprint
   - gvim
   - icedtea-web-java7
   - irssi
   - keepassx
+  - libcups
   - linux-headers
   - lxde
   - mutt
@@ -35,6 +39,7 @@ packages::packages:
   - sane
   - screen
   - tar
+  - tcpdump
   - tmux
   - w3m
   - xautolock
