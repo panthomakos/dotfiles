@@ -50,7 +50,6 @@ packages::packages:
   - xmonad-contrib
   - xorg-server-xvfb
   - xorg-xinit
-  - xv
 
 yaourt::packages:
   - dropbox-experimental
