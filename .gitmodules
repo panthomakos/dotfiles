@@ -31,3 +31,6 @@
 [submodule "ruby-build"]
 	path = ruby-build
 	url = git://github.com/sstephenson/ruby-build.git
+[submodule "todo"]
+	path = todo
+	url = https://github.com/ginatrapani/todo.txt-cli

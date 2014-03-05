@@ -3,6 +3,9 @@
 # Puppet aliases.
 source ~/.puppet/puppy
 
+# Todo Manager
+alias t="$HOME/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
+
 # Encrypt a file for myself.
 alias gpge="gpg -e -r 'Pan Thomakos'"
 # Decrypt a file.
