@@ -4,6 +4,7 @@ Description=Dropbox
 [Service]
 ExecStart=/home/pan/.dropbox-dist/dropbox /newerversion
 ExecReload=/bin/kill -HUP $MAINPID
+Environment=DISPLAY=%i
 
 [Install]
 WantedBy=default.target
