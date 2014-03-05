@@ -29,7 +29,7 @@ alias luksd="sudo cryptsetup luksDump"
 alias fingerprint="ssh-keygen -lf"
 
 # Open IRSSI in a screen session.
-alias irc="screen irssi"
+alias irc="irssi --config=$HOME/Dropbox/config/irssi.config"
 
 # Lock the screen and suspend.
 alias i3exit="i3lock && systemctl suspend"
