@@ -53,6 +53,7 @@ packages::packages:
   - xv
 
 yaourt::packages:
+  - aws-cli
   - dropbox-experimental
   - goobook-git
   - google-chrome
