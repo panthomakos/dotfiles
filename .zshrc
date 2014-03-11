@@ -2,7 +2,7 @@ source $HOME/.zsh/gpg
 source $HOME/.zsh/aliases
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
-export BROWSER=google-chrome-stable
+export BROWSER=chromium
 export EDITOR=vim
 export VISUAL=vim
 # Tell Java that XMonad is non-reparenting. This fixes some issues with
