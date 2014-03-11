@@ -34,3 +34,6 @@
 [submodule "todo"]
 	path = todo
 	url = https://github.com/ginatrapani/todo.txt-cli
+[submodule ".vim/bundle/repeat"]
+	path = .vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
