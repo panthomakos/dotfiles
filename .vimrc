@@ -98,12 +98,22 @@ nnoremap <space> :nohlsearch<CR>
 " Toggle spell-check.
 nmap <silent> <leader>sp :set spell!<CR>
 " Quickly edit vimrc.
-nmap <leader>vi :tabedit $MYVIMRC<CR>
+nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+" Source vimrc.
+nnoremap <leader>sv :source $MYVIMRC<CR>
 " Move in viewports
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" Upcase the current word in normal mode.
+nnoremap <leader>u viwU
+
+" Easily exit insert mode.
+inoremap jk <esc>
+" Break the habbit of using <esc>
+inoremap <esc> <nop>
 
 " routes.rb and Gemfile
 map <leader>gr :topleft :split config/routes.rb<cr>
