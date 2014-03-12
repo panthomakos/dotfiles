@@ -20,7 +20,8 @@
 	dc = diff --cached
 	cp = cherry-pick
 	vim = !vim .git/index
-  sl = log --pretty=\"format:%h %G? %aN %s\"
+	sl = log --pretty=\"format:%h %G? %aN %s\"
+	up = "!git remote update -p; git merge --ff-only @{u}"
 [core]
 	editor = vim
 	whitespace = trailing-space
