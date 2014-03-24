@@ -100,7 +100,8 @@ Public/
 .rvm
 .s3cfg
 .shef_history
-.ssh
+.ssh/
+!.ssh/config
 *.swp
 .tectonicus
 .Trash
