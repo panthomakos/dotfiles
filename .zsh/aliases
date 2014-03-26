@@ -59,27 +59,13 @@ alias known="vim ~/.ssh/known_hosts"
 # Alias to cleanup remote git branches.
 alias git:clean="ruby ~/bin/git:clean"
 
-# Alias for java on MacOSX.
-if [[ "$(uname)" == "Darwin" ]]; then
-  alias java=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Commands/java
-fi
-
-# Alias git to hub if hub is installed.
-if (( $+commands[hub] )); then
-  alias git=hub
-fi
-
 # Memcache server start and stop.
 alias mem.start="memcached -d -P /var/run/memcached.pid"
 alias mem.stop='kill `cat ~/run/memcached.pid`'
 
 # Redis server start and stop.
-if [[ "$(uname)" == "Darwin" ]]; then
-  alias redis.start="redis-server /usr/local/etc/redis.conf"
-else
-  alias redis.start="systemctl --user start redis.service"
-  alias redis.stop="systemctl --user stop redis.service"
-fi
+alias redis.start="systemctl --user start redis.service"
+alias redis.stop="systemctl --user stop redis.service"
 
 # MySql server start and stop.
 alias mysql.start="sudo systemctl start mysqld.service"

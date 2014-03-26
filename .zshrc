@@ -27,11 +27,6 @@ function rbenv_prompt_info() {
   echo "$ruby_version" | sed 's/[ \t].*$//'
 }
 
-# Copy TMUX Buffers to Clipboard on Mac
-if [[ "$(uname)" == "Darwin" ]]; then
-  ruby ~/bin/tmux-copy.rb
-fi
-
 # Prompt
 autoload -U colors
 colors
