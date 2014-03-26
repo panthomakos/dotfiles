@@ -55,6 +55,7 @@ packages::packages:
 
 yaourt::packages:
   - aws-cli
+  - btsync
   - dropbox-experimental
   - goobook-git
   - urlscan-git

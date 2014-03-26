@@ -103,6 +103,9 @@ Public/
 .ssh/
 !.ssh/config
 *.swp
+sync
+sync.log
+.sync
 .tectonicus
 .Trash
 .tuneclone.data
