@@ -5,7 +5,7 @@ source ~/.puppet/puppy
 
 # Todo Manager
 export TODOTXT_DEFAULT_ACTION='ls'
-alias t="$HOME/todo/todo.sh -d $HOME/sync/todo/todo.cfg"
+alias t="$HOME/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
 
 # Encrypt a file for myself.
 alias gpge="gpg -e -r 'Pan Thomakos'"
