@@ -28,6 +28,7 @@ packages::packages:
   - libcups
   - linux-headers
   - lxde
+  - msmtp
   - mutt
   - net-tools
   - openssh

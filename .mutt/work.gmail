@@ -9,7 +9,7 @@ set imap_user = $my_work_email
 set imap_pass = $my_work_password
 
 # SMTP Configuration
-set smtp_url = smtps://$imap_user:$imap_pass@smtp.gmail.com:465
+set sendmail = "/usr/bin/msmtp -a work"
 
 # The folder prefix (based on the IMAP account).
 set folder = $my_work_folder

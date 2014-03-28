@@ -6,7 +6,7 @@
 #     set my_personal_email = email@gmail.com
 #     set my_personal_password = password
 #     set my_personal_folder = imaps://email@imap.gmail.com
-source "gpg --no-tty --use-agent -dq $HOME/.gmail.gpg |"
+source "gpg --no-tty --use-agent -dq $HOME/.gpg/mutt.gpg |"
 
 source $HOME/.mutt/colors
 source $HOME/.mutt/personal.gmail
