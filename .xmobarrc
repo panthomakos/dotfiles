@@ -9,7 +9,7 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
              , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
              , Run Swap [] 10
              , Run Memory ["-t","Mem: <usedratio>%"] 10
-             , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+             , Run Date "%a %Y %m %d %H:%M:%S" "date" 10
              , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
              , Run Com "/home/pan/.xmonad/volume.sh" [] "vol" 10
              , Run StdinReader
