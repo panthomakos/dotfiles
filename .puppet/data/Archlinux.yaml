@@ -6,6 +6,7 @@ user::groups:
   - users
 
 packages::packages:
+  - abook
   - abs
   - alsa-oss
   - alsa-utils

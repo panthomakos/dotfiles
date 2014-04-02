@@ -58,6 +58,11 @@ set tilde
 # Don't go to the next message.
 unset resolve
 
+# Contact Management
+set query_command="abook --datafile ~/Dropbox/addressbook --mutt-query '%s'"
+macro index,pager a "<pipe-message>abook --datafile ~/Dropbox/addressbook --add-email-quiet<return>" "Add Email"
+bind editor <Tab> complete-query
+
 # Composing Options
 # Set VIM as the default editor.
 set editor = "vim -S $HOME/.mutt/vim"
@@ -73,13 +78,6 @@ set include
 set forward_quote
 # Fix weird line breaks.
 set text_flowed = yes
-
-# Integrate with goobook for contacts.
-# NOTE: The `query_command` is set in the work or personal source file.
-macro index,pager a \
-  "<pipe-message>goobook add<return>" \
-  "Add sender from Google Contacts"
-bind editor <Tab> complete-query
 
 # Account Switching Macros
 macro index gp "<sync-mailbox><enter-command>source ~/.mutt/personal.gmail<enter><change-folder>!<enter>"

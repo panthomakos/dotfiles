@@ -20,6 +20,3 @@ set spoolfile = +INBOX
 mailboxes = +INBOX
 # Store drafts in Gmail.
 set postponed = +[Gmail]/Drafts
-
-# User work goobook for queries.
-set query_command="goobook -c ~/.goobook/rc.work query '%s'"

@@ -3,6 +3,9 @@
 # Puppet aliases.
 source ~/.puppet/puppy
 
+# AddressBook
+alias ab="abook --datafile $HOME/Dropbox/addressbook"
+
 # Todo Manager
 export TODOTXT_DEFAULT_ACTION='ls'
 alias t="$HOME/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
