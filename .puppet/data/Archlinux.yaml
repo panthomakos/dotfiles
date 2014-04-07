@@ -19,6 +19,7 @@ packages::packages:
   - curl
   - evince
   - expac
+  - dnsutils
   - gnupg
   - gsfonts
   - gutenprint

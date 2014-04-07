@@ -3,4 +3,5 @@ node default {
 
   include yaourt
   include bitlbee, redis, firewall
+  include time
 }
