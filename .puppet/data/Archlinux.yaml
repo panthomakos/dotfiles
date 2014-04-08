@@ -33,6 +33,7 @@ packages::packages:
   - msmtp
   - mutt
   - net-tools
+  - nmap
   - openssh
   - openssl
   - openvpn
