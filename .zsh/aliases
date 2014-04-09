@@ -27,6 +27,8 @@ alias lukso="sudo cryptsetup luksOpen"
 alias luksc="sudo cryptsetup luksClose"
 # Dump cryptographic info for a LUKS encrypted device.
 alias luksd="sudo cryptsetup luksDump"
+# Change a LUKS key. (luksk /dev/sdX -S <slot>)
+alias luksk="sudo cryptsetup luksChangeKey"
 
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
