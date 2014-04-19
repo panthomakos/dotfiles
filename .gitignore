@@ -60,6 +60,7 @@ Gemfile.lock
 .irssi/away.log
 .java/
 .keepassx/
+.keybase/
 .lesshst
 Library/
 .local/

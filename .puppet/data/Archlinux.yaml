@@ -60,6 +60,8 @@ packages::packages:
 yaourt::packages:
   - aws-cli
   - btsync
+  - chromium-libpdf
+  - chromium-pepper-flash
   - dropbox-experimental
   - goobook-git
   - urlscan-git
