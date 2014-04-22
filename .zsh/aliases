@@ -85,10 +85,9 @@ alias pg="pg_ctl -D /usr/local/var/postgres"
 alias pg.start="pg -l /usr/local/var/postgres/server.log start"
 alias pg.stop="pg stop -s -m fast"
 
-# If using brew, alias ctags.
-if (( $+commands[brew] )); then
-  alias ctags="`brew --prefix`/bin/ctags"
-fi
+alias print.start="sudo systemctl start cups"
+alias print.stop="sudo systemctl stop cups"
+alias print.manage="chromium localhost:631"
 
 # Convenience aliases for running Ruby specs.
 alias specs="find spec/**/*_spec.rb"
