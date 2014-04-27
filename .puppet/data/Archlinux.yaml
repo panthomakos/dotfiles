@@ -54,6 +54,7 @@ packages::packages:
   - xmonad
   - xmonad-contrib
   - xorg-server-xvfb
+  - xorg-xbacklight
   - xorg-xinit
   - xv
 

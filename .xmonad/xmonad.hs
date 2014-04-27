@@ -20,6 +20,8 @@ myKeys c = mkKeymap c $
 	, ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 5%+ unmute")
 	, ("<XF86AudioLowerVolume>", spawn "amixer -D pulse set Master 5%- unmute")
 	, ("<XF86AudioMute>", spawn "amixer -D pulse set Master toggle")
+  , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 20")
+  , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 20")
 	, ("M-g", spawn "chromium")
 	, ("M-q", spawn "i3exit")
 	, ("M-p", shellPrompt defaultXPConfig)
