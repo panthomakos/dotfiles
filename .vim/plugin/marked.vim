@@ -1,8 +1,10 @@
-" Open current buffer in Marked Application.
-function! MarkedOpen()
+" Render current Buffer in Markdown and open in Chromium
+function! MarkdownOpen()
   let l:filename = expand("%:p")
-  silent exe "!open -a Marked.app '".l:filename."'"
+  silent exe "!markdown ".l:filename." > markdown.tmp"
+  silent exe "!chromium markdown.tmp"
+  silent exe "!rm markdown.tmp"
   redraw!
 endfunction
 
-map <leader>m :call MarkedOpen()<CR>
+map <leader>m :call MarkdownOpen()<CR>

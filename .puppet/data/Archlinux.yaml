@@ -30,6 +30,7 @@ packages::packages:
   - libcups
   - linux-headers
   - lxde
+  - markdown
   - msmtp
   - mutt
   - net-tools
