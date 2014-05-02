@@ -9,11 +9,4 @@ class services {
       ensure => running,
       require => Package['btsync'],
   }
-
-  service {
-    "dropbox@${user::user}":
-      enable => true,
-      ensure => running,
-      require => Package['dropbox'],
-  }
 }
