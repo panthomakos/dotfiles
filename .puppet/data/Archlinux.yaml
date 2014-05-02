@@ -64,6 +64,6 @@ yaourt::packages:
   - btsync
   - chromium-libpdf
   - chromium-pepper-flash
-  - dropbox-experimental
+  - dropbox
   - goobook-git
   - urlscan-git

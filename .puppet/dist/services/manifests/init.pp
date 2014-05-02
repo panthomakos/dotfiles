@@ -14,6 +14,6 @@ class services {
     "dropbox@${user::user}":
       enable => true,
       ensure => running,
-      require => Package['dropbox-experimental'],
+      require => Package['dropbox'],
   }
 }
