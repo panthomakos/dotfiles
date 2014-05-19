@@ -62,6 +62,7 @@ packages::packages:
 yaourt::packages:
   - aws-cli
   - btsync
+  - canto
   - chromium-libpdf
   - chromium-pepper-flash
   - dropbox

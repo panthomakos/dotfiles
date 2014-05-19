@@ -104,3 +104,6 @@ alias vpn="sudo openvpn $HOME/.vpn/config.ovpn"
 
 # KGS Go Server.
 alias kgs='aoss javaws http://files.gokgs.com/javaBin/cgoban.jnlp'
+
+# Canto RSS Reader.
+alias news='canto -D ~/Dropbox/canto'
