@@ -1,7 +1,0 @@
-[Unit]
-Description=Memcached Server
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/memcached
-ExecStop=/bin/kill -15 $MAINPID
