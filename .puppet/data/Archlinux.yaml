@@ -31,6 +31,7 @@ packages::packages:
   - linux-headers
   - lxde
   - markdown
+  - memcached
   - msmtp
   - mutt
   - net-tools
