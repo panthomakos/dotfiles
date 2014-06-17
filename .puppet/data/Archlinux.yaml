@@ -69,4 +69,5 @@ yaourt::packages:
   - chromium-pepper-flash
   - dropbox
   - goobook-git
+  - jq
   - urlscan-git
