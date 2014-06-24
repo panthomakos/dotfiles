@@ -10,6 +10,7 @@ packages::packages:
   - abs
   - alsa-oss
   - alsa-utils
+  - avahi
   - base-devel
   - bc
   - bluez
@@ -20,6 +21,7 @@ packages::packages:
   - evince
   - expac
   - dnsutils
+  - ghostscript
   - gnupg
   - gsfonts
   - gutenprint
@@ -42,11 +44,14 @@ packages::packages:
   - polkit
   - pulseaudio
   - pulseaudio-alsa
+  - pygtk # Used by avahi-discover.
+  - python-dbus # Used by avahi-discover.
   - rxvt-unicode
   - sane
   - screen
   - tar
   - tcpdump
+  - texlive-most # Used for pandoc PDF conversions.
   - tmux
   - tree
   - w3m

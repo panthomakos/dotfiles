@@ -18,6 +18,9 @@ export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
 # I use ~/.env to store my secret environment variables. If it exists, source it.
 [[ -f .env ]] && source .env
 
+# CABAL
+export PATH=$PATH:$HOME/.cabal/bin
+
 # RBENV
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
