@@ -34,6 +34,9 @@ fi
 
 bundle
 
+# Configure Dropbox symlink.
+ln -s $HOME/Dropbox/config/ssh.config $HOME/.ssh/config
+
 # Ensure puppet is symlinked.
 if [[ !( -d /etc/puppet ) ]]; then
   sudo ln -s $HOME/.puppet /etc/puppet
