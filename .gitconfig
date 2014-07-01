@@ -23,6 +23,7 @@
 	sl = log --pretty=\"format:%h %G? %aN %s\"
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	logs = log --show-signature
+	review = push origin HEAD:refs/for/master
 [core]
 	editor = vim
 	whitespace = trailing-space
