@@ -47,6 +47,7 @@ packages::packages:
   - pygtk # Used by avahi-discover.
   - python-dbus # Used by avahi-discover.
   - rxvt-unicode
+  - s3cmd # For syncing S3 buckets locally.
   - sane
   - screen
   - tar
