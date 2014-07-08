@@ -51,6 +51,7 @@ packages::packages:
   - tar
   - tcpdump
   - tmux
+  - traceroute
   - tree
   - vlc                   # Video player.
   - w3m
