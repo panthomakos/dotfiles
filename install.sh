@@ -45,4 +45,4 @@ fi
 cd /etc/puppet
   librarian-puppet install
   source $HOME/.puppet/puppy
-  puppy
+  puppy:site
