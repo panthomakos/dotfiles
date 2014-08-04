@@ -74,6 +74,7 @@ Music/
 .mutt/cache/headers/*
 !.mutt/cache/headers/.gitkeep
 .mysql_history
+.netrc
 .netrwhist
 .npm/
 .passenger/
