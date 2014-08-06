@@ -50,11 +50,14 @@ packages::packages:
   - s3cmd # For syncing S3 buckets locally.
   - sane
   - screen
+  - syncthing
   - tar
   - tcpdump
   - texlive-most # Used for pandoc PDF conversions.
   - tmux
   - tree
+  - vagrant
+  - virtualbox
   - w3m
   - xautolock
   - xclip
@@ -69,7 +72,6 @@ packages::packages:
 
 yaourt::packages:
   - aws-cli
-  - btsync
   - canto
   - chromium-libpdf
   - chromium-pepper-flash

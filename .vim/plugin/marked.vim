@@ -2,7 +2,7 @@
 function! MarkdownOpen()
   let l:filename = expand("%:p")
   let l:directory = expand("%:h")
-  let l:output = l:directory."/markdown.tmp"
+  let l:output = l:directory."/markdown.html"
   silent exe "!markdown ".l:filename." > ".l:output
   silent exe "!chromium ".l:output
   silent exe "!rm ".l:output
