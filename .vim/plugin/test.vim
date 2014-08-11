@@ -8,8 +8,15 @@ function! RunTests()
   " Write the current file, then run the test file.
   :w
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  if t:vagrant == 1
+    :silent exec ':!echo "Connecting to vagrant..."'
+  end
   :silent exec ':!echo '.t:command." ".t:filename
-  :exec ':!'.t:command." ".t:filename
+  if t:vagrant == 1
+    :exec ':!vagrant ssh -c "cd /vagrant && '.t:command.' '.t:filename.'"'
+  else
+    :exec ':!'.t:command." ".t:filename
+  end
 endfunction
 
 function! SetTestFile()
@@ -31,9 +38,21 @@ function! SetTestFile()
   end
 
   " Determine if Zeus is active and running.
-  let t:zeus=!empty(glob('.zeus.sock'))
+  let t:zeus=0
 
-  if t:zeus && t:rails
+  " We only care if zeus is running when the test requires Rails.
+  if t:rails
+    if t:vagrant && t:rails
+      let output=system("vagrant ssh -c 'test -n \"$ZEUSSOCK\" && test -S $ZEUSSOCK'")
+      if !v:shell_error
+        let t:zeus=1
+      end
+    elseif t:rails
+      let t:zeus=!empty(glob('.zeus.sock'))
+    end
+  end
+
+  if t:zeus
     let t:command='zeus '.t:command
   else
     if filereadable('Gemfile')
@@ -46,7 +65,22 @@ function! SetTestFile()
   end
 endfunction
 
+function! CheckVagrant(...)
+  let t:vagrant=0
+  " Check if this is a vagrant enabled directory.
+  let t:dot_vagrant=!empty(glob('.vagrant'))
+
+  if t:dot_vagrant
+    let output=system('ps -ef | grep vagrant@ | grep -v grep')
+    if t:dot_vagrant && !v:shell_error
+      let t:vagrant=1
+    end
+  end
+endfunction
+
 function! RunTestFile(...)
+  call CheckVagrant()
+
   if match(expand('%'), '\(.feature\|_spec.rb\|_test.rb\|Spec.coffee\)$') != -1
     call SetTestFile()
   end
