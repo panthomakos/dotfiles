@@ -3,10 +3,14 @@ class services {
   include packages
   include yaourt
 
-  service {
-    "btsync@${user::user}":
-      enable => true,
-      ensure => running,
-      require => Package['btsync'],
+  Service {
+    enable => true,
+    ensure => running,
   }
+
+  service { "syncthing@${user::user}": require => Package['syncthing'], }
+
+  service { 'rpcbind': require => Package['nfs-utils'], } ->
+
+  service { 'nfs-server': }
 }

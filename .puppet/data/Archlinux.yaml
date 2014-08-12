@@ -6,12 +6,10 @@ user::groups:
   - users
 
 packages::packages:
-  - abook
   - abs
   - alsa-oss
   - alsa-utils
   - avahi
-  - base-devel
   - bc
   - bluez
   - bluez-utils
@@ -31,12 +29,12 @@ packages::packages:
   - keepassx
   - libcups
   - linux-headers
-  - lxde
   - markdown
   - memcached
   - msmtp
   - mutt
   - net-tools
+  - nfs-utils
   - nmap
   - openssh
   - openssl
@@ -53,11 +51,8 @@ packages::packages:
   - syncthing
   - tar
   - tcpdump
-  - texlive-most # Used for pandoc PDF conversions.
   - tmux
   - tree
-  - vagrant
-  - virtualbox
   - w3m
   - xautolock
   - xclip
@@ -69,6 +64,11 @@ packages::packages:
   - xorg-xbacklight
   - xorg-xinit
   - xv
+
+packages::bundles:
+  - base-devel
+  - lxde
+  - texlive-most # Used for pandoc PDF conversions.
 
 yaourt::packages:
   - aws-cli

@@ -6,4 +6,5 @@ node default {
   include time
 
   include services
+  include vagrant
 }
