@@ -39,10 +39,6 @@ alias irc="irssi --config=$HOME/Dropbox/config/irssi.config"
 # Lock the screen and suspend.
 alias i3exit="i3lock && systemctl suspend"
 
-# Jump into project directories quickly.
-alias bam='cd ~/Projects'
-alias bam.strava='cd ~/Projects/strava'
-
 # Convenience methods for vim.
 alias vi='vim'
 alias v='vim'

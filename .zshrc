@@ -15,6 +15,17 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
 export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
 
+# Ruby GC Tuning
+export RUBY_HEAP_MIN_SLOTS=2000000
+export RUBY_HEAP_FREE_MIN=200000
+export RUBY_GC_MALLOC_LIMIT=100000000
+
+# Fast directory switching function for Projects.
+function bam() {
+  local dest=$(ruby ${HOME}/bin/bam.rb $1)
+  cd $dest
+}
+
 # I use ~/.env to store my secret environment variables. If it exists, source it.
 [[ -f .env ]] && source .env
 
