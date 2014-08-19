@@ -43,6 +43,8 @@ packages::packages:
   - pulseaudio-alsa
   - pygtk                 # Used by avahi-discover.
   - python-dbus           # Used by avahi-discover.
+  - python2-distribute    # Used by snakefire.
+  - python2-pyenchant     # Used by snakefire.
   - rxvt-unicode          # Simple terminal when using X.
   - s3cmd                 # For syncing S3 buckets locally.
   - sane
@@ -79,4 +81,5 @@ yaourt::packages:
   - dropbox
   - goobook-git
   - jq
+  - snakefire             # Campfire chat GUI.
   - urlscan-git
