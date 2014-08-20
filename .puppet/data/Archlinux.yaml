@@ -74,7 +74,6 @@ packages::bundles:
   - texlive-most # Used for pandoc PDF conversions.
 
 yaourt::packages:
-  - aws-cli
   - canto
   - chromium-libpdf
   - chromium-pepper-flash
