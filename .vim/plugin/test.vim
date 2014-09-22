@@ -78,7 +78,7 @@ function! CheckVagrant(...)
   end
 endfunction
 
-function! RunTestFile(...)
+function! RunRubyTestFile(...)
   call CheckVagrant()
 
   if match(expand('%'), '\(.feature\|_spec.rb\|_test.rb\|Spec.coffee\)$') != -1
@@ -88,4 +88,4 @@ function! RunTestFile(...)
   call RunTests()
 endfunction
 
-map <leader>t :call RunTestFile()<cr>
+autocmd FileType ruby map <buffer> <leader>t :call RunRubyTestFile()<cr>

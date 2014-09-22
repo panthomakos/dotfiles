@@ -13,18 +13,24 @@ packages::packages:
   - bc
   - bluez
   - bluez-utils
+  - cgoban                # GO GUI Client
   - chromium              # Browser.
+  - coreutils
   - cups                  # Printer management.
   - curl
   - evince
   - expac
   - dnsutils
+  - doxygen               # C Development: documentation generation.
+  - gdb                   # C Development: debugger.
   - ghostscript
+  - glibc                 # C Development: GNU C Library.
   - gnupg
   - gsfonts
+  - gsl                   # C Development: GNU Scientific Library.
   - gutenprint
   - gvim
-  - icedtea-web-java7
+  - icedtea-web
   - irssi
   - keepassx
   - libcups
@@ -43,8 +49,6 @@ packages::packages:
   - pulseaudio-alsa
   - pygtk                 # Used by avahi-discover.
   - python-dbus           # Used by avahi-discover.
-  - python2-distribute    # Used by snakefire.
-  - python2-pyenchant     # Used by snakefire.
   - rxvt-unicode          # Simple terminal when using X.
   - s3cmd                 # For syncing S3 buckets locally.
   - sane
@@ -55,6 +59,7 @@ packages::packages:
   - tmux
   - traceroute
   - tree
+  - valgrind              # C Development: test for memory usage errors.
   - vlc                   # Video player.
   - w3m
   - xautolock
@@ -71,14 +76,14 @@ packages::packages:
 packages::bundles:
   - base-devel
   - lxde
-  - texlive-most # Used for pandoc PDF conversions.
+  - texlive-most          # Used for pandoc PDF conversions.
 
 yaourt::packages:
   - canto
-  - chromium-libpdf
+  - cgoban3               # Go GUI for KGS
   - chromium-pepper-flash
   - dropbox
   - goobook-git
   - jq
-  - snakefire             # Campfire chat GUI.
+  - nixnote               # Evernote client for linux.
   - urlscan-git
