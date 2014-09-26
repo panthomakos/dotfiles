@@ -25,5 +25,5 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
+nmap <silent> <leader>L :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>E :call ToggleList("Quickfix List", 'c')<CR>

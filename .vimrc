@@ -85,7 +85,7 @@ set spelllang=en " Set spelling region to English.
 " Leader
 let mapleader=','
 " Switch between two files
-nnoremap <leader><leader> <c-^>
+nnoremap <leader>; <c-^>
 " Edit files in the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Insert a hash rocket.
