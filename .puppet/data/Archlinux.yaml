@@ -79,7 +79,6 @@ packages::bundles:
   - texlive-most          # Used for pandoc PDF conversions.
 
 yaourt::packages:
-  - canto
   - cgoban3               # Go GUI for KGS
   - gogui                 # Go GUI for GTP clients
   - chromium-pepper-flash
