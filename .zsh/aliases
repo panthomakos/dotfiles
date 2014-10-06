@@ -49,6 +49,10 @@ alias ls="ls -G --color=auto"
 # Colorful grep.
 alias grep="grep --color=auto"
 
+# Systemctl
+alias s=systemctl
+alias ss=sudo systemctl
+
 # Convenience shell aliases.
 alias psf="ps -ef | grep "
 alias h="history"
@@ -61,8 +65,8 @@ alias known="vim ~/.ssh/known_hosts"
 alias git:clean="ruby ~/bin/git:clean"
 
 # Memcache server start and stop.
-alias mem.start="memcached -d -P /var/run/memcached.pid"
-alias mem.stop='kill `cat ~/run/memcached.pid`'
+alias mem.start="sudo systemctl start memcached"
+alias mem.stop="sudo systemctl stop memcached"
 
 # Redis server start and stop.
 alias redis.start="systemctl --user start redis.service"
@@ -92,7 +96,6 @@ alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bundle exec rspec -c"
 
 # Screen convenience commands.
 alias sr="screen -r"
-alias ss="screen -S"
 alias sl="screen -ls"
 
 # Quickly connect to the default VPN.
