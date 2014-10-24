@@ -26,6 +26,7 @@ packages::packages:
   - ghostscript
   - glibc                 # C Development: GNU C Library.
   - gnupg
+  - gnuplot               # GNU command line plotting utility
   - gsfonts
   - gsl                   # C Development: GNU Scientific Library.
   - gutenprint
