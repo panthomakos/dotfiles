@@ -62,10 +62,10 @@ set winminheight=5
 set winheight=999
 
 " Default <Tab> Configuration
-setglobal tabstop=2 " Display <Tab> as two spaces in visual mode.
-setglobal softtabstop=2 " Insert <Tab> as two spaces when editing.
-setglobal shiftwidth=2 " Insert <Tab> as two spaces when auto-indenting.
-setglobal expandtab " In insert mode, use the appropriate number of spaes for <Tab>.
+set tabstop=2 " Display <Tab> as two spaces in visual mode.
+set softtabstop=2 " Insert <Tab> as two spaces when editing.
+set shiftwidth=2 " Insert <Tab> as two spaces when auto-indenting.
+set expandtab " In insert mode, use the appropriate number of spaes for <Tab>.
 
 set hlsearch " Highlight searches.
 set number " Number lines.
