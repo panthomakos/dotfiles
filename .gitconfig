@@ -8,7 +8,7 @@
 	ci = commit
 	st = status
 	mote = remote -v
-	last = log -1 HEAD
+	last = log -1
 	ba = branch -a
 	s = status -sb
 	splat = log --oneline --decorate
