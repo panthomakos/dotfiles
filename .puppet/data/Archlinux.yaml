@@ -36,6 +36,7 @@ packages::packages:
   - keepassx
   - libcups
   - linux-headers
+  - maim                  # Screen capture utility.
   - markdown
   - memcached
   - msmtp
@@ -54,6 +55,7 @@ packages::packages:
   - s3cmd                 # For syncing S3 buckets locally.
   - sane
   - screen
+  - slop                  # Allows selection with maim.
   - sxiv                  # Image Viewer
   - syncthing             # File sync service.
   - tar

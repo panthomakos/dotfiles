@@ -6,6 +6,9 @@ source ~/.puppet/puppy
 # AddressBook
 alias ab="abook --datafile $HOME/Dropbox/addressbook"
 
+# Screenshot Capture
+alias capture="maim -s --nokeyboard"
+
 # Todo Manager
 export TODOTXT_DEFAULT_ACTION='ls'
 alias t="$HOME/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
