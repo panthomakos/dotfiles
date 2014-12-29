@@ -7,4 +7,6 @@ node default {
 
   include services
   include vagrant
+
+  include power
 }
