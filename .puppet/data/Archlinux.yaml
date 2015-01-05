@@ -13,7 +13,6 @@ packages::packages:
   - bc
   - bluez
   - bluez-utils
-  - cgoban                # GO GUI Client
   - chromium              # Browser.
   - coreutils
   - cups                  # Printer management.
@@ -85,10 +84,8 @@ packages::bundles:
 
 yaourt::packages:
   - cgoban3               # Go GUI for KGS
-  - gogui                 # Go GUI for GTP clients
   - chromium-pepper-flash
   - dropbox
-  - goobook-git
   - jq
   - nixnote               # Evernote client for linux.
   - urlscan-git
