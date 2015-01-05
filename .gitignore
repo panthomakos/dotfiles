@@ -121,6 +121,8 @@ sync.log
 .xmonad/xmonad.errors
 .xmonad/xmonad.hi
 .xmonad/xmonad.o
+.xmonad/lib/XMonad/Layout/FullMaximize.hi
+.xmonad/lib/XMonad/Layout/FullMaximize.o
 .xsession-errors
 .xsession-errors.*
 .zcompdump

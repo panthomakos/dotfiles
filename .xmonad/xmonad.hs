@@ -15,6 +15,10 @@ import XMonad.Prompt.Shell
 
 import XMonad.Hooks.UrgencyHook
 
+import XMonad.Layout.SimplestFloat
+import XMonad.Layout.FullMaximize
+import XMonad.Layout.NoBorders
+
 myKeys c = mkKeymap c $
 	[ ("M-<Return>", spawn $ XMonad.terminal c)
 	, ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 5%+ unmute")
@@ -23,13 +27,24 @@ myKeys c = mkKeymap c $
   , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 20")
   , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 20")
 	, ("M-g", spawn "chromium")
-	, ("M-q", spawn "i3exit")
+	, ("M-q", spawn "i3lock")
 	, ("M-p", shellPrompt defaultXPConfig)
   , ("M-m", windows W.focusMaster)
+  , ("M-`", withFocused (sendMessage . maximizeRestore))
   , ("M-s", windows W.swapMaster)
   , ("M-u", focusUrgent)
   , ("M-S-s", withFocused $ windows . W.sink)
 	]
+
+myLayouts = maximize (noBorders simplestFloat) ||| Full ||| tiled
+  where
+    tiled = Tall nmaster delta ratio
+    -- Default number of windows in the master pane
+    nmaster = 1
+    -- Percent of screen to incremet by when resizing panes
+    delta = 3/100
+    -- Default portion of the screen occupied by master pane
+    ratio = 1/2
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmobarrc"
@@ -37,7 +52,7 @@ main = do
     { modMask = mod4Mask
     , keys = \c -> myKeys c `M.union` keys defaultConfig c
     , manageHook = manageDocks <+> manageHook defaultConfig
-    , layoutHook = avoidStruts  $  layoutHook defaultConfig
+    , layoutHook = avoidStruts  $  myLayouts
     , logHook = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn xmproc }
     , terminal = "urxvt -e tmux"
     , normalBorderColor = "#000000"
