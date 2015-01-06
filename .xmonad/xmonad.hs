@@ -15,10 +15,6 @@ import XMonad.Prompt.Shell
 
 import XMonad.Hooks.UrgencyHook
 
-import XMonad.Layout.SimplestFloat
-import XMonad.Layout.FullMaximize
-import XMonad.Layout.NoBorders
-
 myKeys c = mkKeymap c $
 	[ ("M-<Return>", spawn $ XMonad.terminal c)
 	, ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 5%+ unmute")
@@ -30,13 +26,17 @@ myKeys c = mkKeymap c $
 	, ("M-q", spawn "i3lock")
 	, ("M-p", shellPrompt defaultXPConfig)
   , ("M-m", windows W.focusMaster)
-  , ("M-`", withFocused (sendMessage . maximizeRestore))
   , ("M-s", windows W.swapMaster)
   , ("M-u", focusUrgent)
   , ("M-S-s", withFocused $ windows . W.sink)
 	]
 
-myLayouts = maximize (noBorders simplestFloat) ||| Full ||| tiled
+myManageHook = composeAll
+  [ title =? "Authy" --> doFloat
+  , manageDocks
+  ]
+
+myLayouts = Full ||| tiled
   where
     tiled = Tall nmaster delta ratio
     -- Default number of windows in the master pane
@@ -51,7 +51,7 @@ main = do
   xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
     { modMask = mod4Mask
     , keys = \c -> myKeys c `M.union` keys defaultConfig c
-    , manageHook = manageDocks <+> manageHook defaultConfig
+    , manageHook = myManageHook <+> manageHook defaultConfig
     , layoutHook = avoidStruts  $  myLayouts
     , logHook = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn xmproc }
     , terminal = "urxvt -e tmux"

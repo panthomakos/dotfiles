@@ -74,6 +74,7 @@ packages::packages:
   - xorg-server-xvfb
   - xorg-xbacklight
   - xorg-xinit
+  - xorg-xprop            # Display window properties by clicking.
   - xv
   - zip                   # ZIP Utility
 
