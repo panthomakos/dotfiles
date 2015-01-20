@@ -111,6 +111,7 @@ sync.log
 .tectonicus
 .Trash
 .tuneclone.data
+.vagrant.d/
 .vim/spell/
 .vimgolf/
 .viminfo
