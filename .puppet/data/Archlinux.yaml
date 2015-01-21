@@ -52,6 +52,7 @@ packages::packages:
   - pulseaudio-alsa
   - pygtk                 # Used by avahi-discover.
   - python-dbus           # Used by avahi-discover.
+  - redis
   - rxvt-unicode          # Simple terminal when using X.
   - s3cmd                 # For syncing S3 buckets locally.
   - sane

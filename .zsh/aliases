@@ -72,8 +72,8 @@ alias mem.start="sudo systemctl start memcached"
 alias mem.stop="sudo systemctl stop memcached"
 
 # Redis server start and stop.
-alias redis.start="systemctl --user start redis.service"
-alias redis.stop="systemctl --user stop redis.service"
+alias redis.start="sudo systemctl start redis"
+alias redis.stop="sudo systemctl stop redis"
 
 # MySql server start and stop.
 alias mysql.start="sudo systemctl start mysqld.service"
