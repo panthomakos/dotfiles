@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'time'
+
+KM_PER_MILE = 0.621371
+MILE_PER_KM = 1.0/KM_PER_MILE
+
+def seconds_to_time(seconds)
+  seconds = seconds.to_i
+  time = []
+  while (t = seconds/60) > 0
+    time << t
+    seconds = seconds - (t*60)
+  end
+  time << seconds
+  time.map{ |t| '%.2d' % t }.join(':')
+end
+
+pace = ARGV[0]
+
+time = pace.split(/[.:]/).map(&:to_i)
+
+seconds = time.reverse
+  .each_with_index
+  .map{ |t,i| i == 0 ? t : t*60*i }
+  .reduce(&:+)
+
+base = seconds_to_time(seconds)
+per_mi = seconds_to_time(seconds*MILE_PER_KM)
+per_km = seconds_to_time(seconds*KM_PER_MILE)
+
+puts "#{base}/km = #{per_mi}/mi"
+puts "#{base}/mi = #{per_km}/km"

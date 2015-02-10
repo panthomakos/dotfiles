@@ -67,6 +67,9 @@ alias known="vim ~/.ssh/known_hosts"
 # Alias to cleanup remote git branches.
 alias git:clean="ruby ~/bin/git:clean"
 
+# Alias to calculate running paces.
+alias pace="ruby ~/bin/pace"
+
 # Memcache server start and stop.
 alias mem.start="sudo systemctl start memcached"
 alias mem.stop="sudo systemctl stop memcached"

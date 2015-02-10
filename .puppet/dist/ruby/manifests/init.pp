@@ -1,7 +1,7 @@
 class ruby {
   include user
 
-  $version = '2.0.0-p353'
+  $version = '2.2.0'
 
   Exec {
     user => $user::user,
