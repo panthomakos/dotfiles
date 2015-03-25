@@ -1,0 +1,22 @@
+---
+- pacman: name={{ item }} state=present
+  with_items:
+    - virtualbox
+    - vagrant
+
+- name: Check Vagrant Plugin
+  shell: /usr/bin/vagrant plugin list
+  register: plugin
+  sudo: no
+
+- name: Install Vagrant Plugins
+  shell: /usr/bin/vagrant plugin install vagrant-vbguest
+  when: plugin.stdout.find('vagrant-vbguest') == -1
+  sudo: no
+
+- copy: src=vagrant-modules.conf dest=/etc/modules-load.d/virtualbox.conf
+  register: modules
+
+- name: Reload Modules
+  command: /usr/bin/vboxreload
+  when: modules|changed

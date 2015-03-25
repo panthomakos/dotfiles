@@ -1,4 +1,5 @@
 abs/
+.ansible/
 Applications/
 .aws/
 .boom
@@ -44,6 +45,7 @@ examples.desktop
 .gem/
 Gemfile.lock
 .ghc/
+.gnome/
 .gnupg/*
 !.gnupg/gpg.conf
 .goobook/personal.gpg
@@ -77,6 +79,7 @@ Music/
 .netrc
 .netrwhist
 .npm/
+.openambit/
 .passenger/
 *.pid
 Pictures/
@@ -88,9 +91,6 @@ Projects/
 .pry_history
 .psql_history
 Public/
-.puppet/.librarian/
-.puppet/ssl
-.puppet/var
 .rails-plugin-sources
 *.rbc
 .rbx/

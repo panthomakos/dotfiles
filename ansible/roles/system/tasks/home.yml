@@ -1,0 +1,56 @@
+---
+- name: Initialize Git Submodules
+  shell: git submodule update --init
+  sudo: no
+
+- name: Install ZSH
+  pacman: name=zsh state=present
+
+- name: Configure User
+  user: name={{ user }} shell=/bin/zsh groups=video,audio,users
+
+- name: Initialize RBENV
+  shell: eval "$(rbenv init -)"
+  sudo: no
+  environment:
+    PATH: "{{ home }}/.rbenv/bin:{{ lookup('env', 'PATH') }}"
+
+- name: Update ruby-build
+  shell: ./install.sh chdir={{ home }}/ruby-build
+
+- command: rbenv versions
+  sudo: no
+  register: ruby_installed
+  ignore_errors: True
+
+- name: Install Ruby
+  shell: rbenv install {{ ruby }}
+  sudo: no
+  when: ruby_installed.stdout.find('{{ruby}}') == -1
+
+- command: rbenv version
+  sudo: no
+  register: ruby_active
+  ignore_errors: True
+
+- name: Set Default Ruby
+  shell: rbenv global {{ ruby }}
+  sudo: no
+  when: ruby_active.stdout.find('{{ruby}}') == -1
+
+- command: gem list bundler
+  sudo: no
+  register: bundler_installed
+  ignore_errors: True
+
+- name: Install Bundler
+  shell: gem install bundler
+  sudo: no
+  when: bundler_installed.stdout.find('bundler') == -1
+
+- shell: rbenv rehash
+  sudo: no
+  when: bundler_installed.stdout.find('bundler') == -1
+
+- shell: bundle
+  sudo: no

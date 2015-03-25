@@ -1,0 +1,10 @@
+---
+- include: hostname.yml
+- include: packages.yml
+- include: home.yml
+- include: firewall.yml
+- include: time.yml
+- include: dropbox.yml
+- include: vagrant.yml
+- include: power.yml
+- include: u2f.yml

@@ -1,0 +1,12 @@
+---
+- pacman: name=dropbox state=present
+- service: name=dropbox@{{ user }} enabled=yes
+- stat: path={{ home }}/Dropbox/config/ssh.config
+  sudo: no
+  register: ssh
+- file: src={{ home }}/Dropbox/config/ssh.config
+        dest={{ home }}/.ssh/config
+        state=link
+        force=yes
+  sudo: no
+  when: ssh.stat.exists

@@ -1,8 +1,5 @@
 # vim: filetype=zsh:
 
-# Puppet aliases.
-source ~/.puppet/puppy
-
 # AddressBook
 alias ab="abook --datafile $HOME/Dropbox/addressbook"
 

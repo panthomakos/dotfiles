@@ -1,7 +1,0 @@
-# vim: filetype=zsh:
-alias puppy='
-  sudo puppet apply \
-    --modulepath=/etc/puppet/modules:/etc/puppet/dist \
-    --hiera_config=/etc/puppet/hiera.yaml'
-
-alias puppy:site='puppy /etc/puppet/manifests/site.pp'

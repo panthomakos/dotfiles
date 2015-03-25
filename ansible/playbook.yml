@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  user: pan
+  sudo: yes
+  vars:
+    user: pan
+    home: /home/pan
+    ruby: 2.0.0-p643
+  roles:
+    - system

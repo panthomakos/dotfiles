@@ -1,0 +1,2 @@
+---
+- copy: src=u2f.rules dest=/etc/udev/rules.d/70-u2f.rules

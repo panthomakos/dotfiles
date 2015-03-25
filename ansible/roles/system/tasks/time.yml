@@ -1,0 +1,3 @@
+---
+- pacman: name=ntp state=present
+- service: name=ntpd enabled=yes state=started
