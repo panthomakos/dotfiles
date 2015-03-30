@@ -68,7 +68,6 @@
     - screen
     - slop                  # Allows selection with maim.
     - sxiv                  # Image Viewer
-    - syncthing             # File sync service.
     - tar
     - tcpdump
     - tmux
@@ -90,10 +89,4 @@
     - xv
     - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
-- name: Install Yaourt Packages
-  pacman: name={{ item }} state=present
-  with_items:
-    - chromium-pepper-flash
-    - jq
-    - nixnote               # Evernote client for linux.
-    - urlscan-git
+- include: yaourt.yml pkg=chromium-pepper-flash

@@ -1,0 +1,8 @@
+---
+- name: Check {{ pkg }}
+  command: /usr/bin/pacman -Qs {{ pkg }}
+  register: check
+  ignore_errors: True
+- name: Install {{ pkg }}
+  command: yaourt -S {{ pkg }} --noconfirm
+  when: check.rc != 0
