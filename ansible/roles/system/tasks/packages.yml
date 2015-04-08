@@ -84,6 +84,7 @@
     - xmonad-contrib
     - xorg-server-xvfb
     - xorg-xbacklight
+    - xorg-xdpyinfo         # Get info about X server, like screen resolution.
     - xorg-xinit
     - xorg-xprop            # Display window properties by clicking.
     - xv
