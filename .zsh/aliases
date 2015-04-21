@@ -1,5 +1,8 @@
 # vim: filetype=zsh:
 
+# Bundler Development
+alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler/bin/bundle"
+
 # AddressBook
 alias ab="abook --datafile $HOME/Dropbox/addressbook"
 

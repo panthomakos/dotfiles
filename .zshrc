@@ -16,7 +16,10 @@ export AWS_CREDENTIAL_FILE=~/.aws/credentials
 export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
 
 # Ruby GC Tuning
-export RUBY_HEAP_MIN_SLOTS=2000000
+
+export RUBY_HEAP_MIN_SLOTS=2000000 # <= 2.0.0
+export RUBY_GC_HEAP_INIT_SLOTS=2000000 # >= 2.1.0
+
 export RUBY_HEAP_FREE_MIN=200000
 export RUBY_GC_MALLOC_LIMIT=100000000
 
