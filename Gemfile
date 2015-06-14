@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'facter'
-gem 'librarian-puppet'
-gem 'puppet'
-gem 'ru'
+gem 'ru'       # Easy Ruby in the Shell.
 gem 'typhoeus' # Good library for making HTTP calls using libcurl.
