@@ -1,6 +1,24 @@
-" Use pathogen to manage all of my bundled plugins.
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call plug#begin()
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-abolish'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-repeat'
+Plug 'SirVer/ultisnips'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'rust-lang/rust.vim'
+
+Plug 'tpope/vim-endwise'
+Plug 'bling/vim-airline'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh' }
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-sleuth'
+call plug#end()
 
 set shell=/bin/sh
 set nocompatible
@@ -35,21 +53,7 @@ set clipboard=unnamed,unnamedplus
 "   * the start of insert mode (start)
 set backspace=2
 
-" Status Line Display
-set statusline =
-" Path to the file (relative to the current directory). Also use %< to
-" truncate off the front of the path/file when the line is too long.
-set statusline +=%<%f
-set statusline +=\ %h " A space, followed by the help buffer flag.
-set statusline +=%m " Modifiable flag.
-set statusline +=%r " Read Only flag.
-set statusline +=%{fugitive#statusline()} " Git status line.
-set statusline +=%= " Separation between left and right status lines.
-" <line>,<column><virtual column>
-" This is left justified with a minimum width of 14.
-set statusline +=%-14.(%l,%c%V%)
-set statusline +=\ %P " A space, followed by the percentage through the file.
-
+" TODO (check w/ vim-airline)
 set laststatus=2 " The last window will always have a status line.
 
 " In split mode, make the current window big, but leave others for context.
@@ -61,6 +65,7 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
+" TODO (check w/ vim-sleuth)
 " Default <Tab> Configuration
 set tabstop=2 " Display <Tab> as two spaces in visual mode.
 set softtabstop=2 " Insert <Tab> as two spaces when editing.
@@ -83,15 +88,25 @@ set spelllang=en " Set spelling region to English.
 " Convenience Key Mappings
 """"""""""""""""""""""""""
 " Leader
-let mapleader=','
+let mapleader="\<space>"
+" Save the current file
+nnoremap <leader>w :w<CR>
+" Enter visual line mode
+nmap <leader><leader> V
+" Enter to go to line <line><CR> and enter to go to end of file
+nnoremap <cr> G
+" Backspace to go to beginning of file
+nnoremap <bs> gg
+" Skip the stupid command window
+map q: :q
 " Switch between two files
 nnoremap <leader>; <c-^>
 " Edit files in the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Insert a hash rocket.
 imap <c-l> <space>=><space>
-" Clear the search buffer.
-nnoremap <space> :nohlsearch<CR>
+" Clear the search buffer. (TODO)
+" nnoremap <space> :nohlsearch<CR>
 " Toggle spell-check.
 nmap <silent> <leader>sp :set spell!<CR>
 " Quickly edit vimrc.
@@ -131,7 +146,12 @@ map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 " Use Regular Expression mode in CtrlP.
 let g:ctrlp_regexp = 1
 " Only list version controlled files in CtrlP.
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+set grepprg=ag\ --nogroup\ --nocolor
+if isdirectory('.git')
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+else
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+end
 
 " Enable filetype detection.
 filetype plugin indent on

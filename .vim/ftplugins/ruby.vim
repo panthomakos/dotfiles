@@ -1,3 +1,4 @@
+" TODO (check w/ vim-sleuth)
 " Ruby Tab Configuration
 setlocal tabstop=2 " Display <Tab> as two spaces in visual mode.
 setlocal softtabstop=2 " Insert <Tab> as two spaces when editing.

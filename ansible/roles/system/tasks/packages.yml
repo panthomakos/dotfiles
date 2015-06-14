@@ -70,6 +70,7 @@
     - sxiv                  # Image Viewer
     - tar
     - tcpdump
+    - the_silver_searcher   # (ag) Code search tool like Ack but faster.
     - tmux
     - traceroute
     - tree

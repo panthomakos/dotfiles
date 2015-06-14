@@ -13,6 +13,7 @@ Applications/
 .bundler/
 .cabal
 .cache
+.cargo/
 .claws.yml
 .compiz/
 .config/*
@@ -22,6 +23,7 @@ Applications/
 .dbshell
 .dbus/
 Desktop/
+.divshot/
 .dmrc
 Documents/
 Downloads/
@@ -70,6 +72,7 @@ Library/
 .monit.*
 Movies/
 .mozilla/
+.mplayer/
 Music/
 .mutt/cache/bodies/*
 !.mutt/cache/bodies/.gitkeep
@@ -84,6 +87,7 @@ Music/
 *.pid
 Pictures/
 .pki/
+playbook.retry
 .pow
 .Private
 .profile
@@ -109,13 +113,19 @@ sync
 sync.log
 .sync
 .tectonicus
+.thumbnails/
 .Trash
 .tuneclone.data
 .vagrant.d/
+.vim/bundle/
+.vim/plugged/
 .vim/spell/
 .vimgolf/
 .viminfo
 .vpn/
+.wine-pipelight/
+.wine-pipelight64/
+.wine/
 .Xauthority
 .xmonad/history
 .xmonad/xmonad-x86_64-linux

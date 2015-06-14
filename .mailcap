@@ -1,3 +1,0 @@
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
-image/*; xv %s > /dev/null
-application/pdf; evince %s
