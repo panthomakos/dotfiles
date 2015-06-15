@@ -3,6 +3,7 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+export GOPATH=$HOME/Projects/go
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
 export EDITOR=vim
