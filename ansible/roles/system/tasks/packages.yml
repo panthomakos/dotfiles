@@ -57,6 +57,7 @@
     - openssh
     - openssl
     - openvpn
+    - pkg-config            # Retrieve information about installed binaries.
     - polkit
     - pulseaudio
     - pulseaudio-alsa
