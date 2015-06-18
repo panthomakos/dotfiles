@@ -11,6 +11,6 @@ PROJECT_DIR = "#{ENV['HOME']}/Projects"
 if ARGV[0].nil?
   puts(PROJECT_DIR)
 else
-  glob = ARGV[0].gsub(/\//, '*/')+'*'
-  puts(Dir.glob("#{PROJECT_DIR}/#{glob}").first)
+  glob = ARGV[0].gsub(/\//, '*/**/')+'*'
+  puts(Dir.glob("#{PROJECT_DIR}/**/#{glob}").sort_by(&:length).first)
 end

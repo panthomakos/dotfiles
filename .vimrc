@@ -18,6 +18,7 @@ Plug 'bling/vim-airline'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh' }
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-sleuth'
+Plug 'fatih/vim-go'
 call plug#end()
 
 set shell=/bin/sh
@@ -89,6 +90,7 @@ set spelllang=en " Set spelling region to English.
 """"""""""""""""""""""""""
 " Leader
 let mapleader="\<space>"
+let maplocalleader=","
 " Save the current file
 nnoremap <leader>w :w<CR>
 " Enter visual line mode
