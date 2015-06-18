@@ -7,5 +7,6 @@
     user: pan
     home: /home/pan
     ruby: 2.1.6
+    go: 1.4.2
   roles:
     - system

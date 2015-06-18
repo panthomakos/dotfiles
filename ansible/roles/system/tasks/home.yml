@@ -54,3 +54,20 @@
 
 - shell: bundle
   sudo: no
+
+- command: go version
+  sudo: no
+  register: go_version
+  ignore_errors: yes
+
+- name: Download Go
+  command: wget https://storage.googleapis.com/golang/go{{go}}.linux-amd64.tar.gz
+  args:
+    chdir: /tmp
+  when: go_version|failed or go_version.stdout.find('{{go}}') == -1
+
+- name: Install Go
+  command: tar -C /usr/local -xzf go{{go}}.linux-amd64.tar.gz
+  args:
+    chdir: /tmp
+  when: go_version|failed or go_version.stdout.find('{{go}}') == -1

@@ -35,7 +35,6 @@
     - glibc                 # C Development: GNU C Library.
     - gnupg
     - gnuplot               # GNU command line plotting utility
-    - go                    # The Go Programming Language.
     - gsfonts
     - gsl                   # C Development: GNU Scientific Library.
     - gutenprint
