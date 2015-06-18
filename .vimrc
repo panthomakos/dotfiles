@@ -107,8 +107,8 @@ nnoremap <leader>; <c-^>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Insert a hash rocket.
 imap <c-l> <space>=><space>
-" Clear the search buffer. (TODO)
-" nnoremap <space> :nohlsearch<CR>
+" Clear the search buffer.
+nnoremap <space><CR> :nohlsearch<CR>
 " Toggle spell-check.
 nmap <silent> <leader>sp :set spell!<CR>
 " Quickly edit vimrc.
