@@ -15,7 +15,7 @@ else
   result = Dir
     .glob("#{PROJECT_DIR}/**/#{glob}")
     .select{ |i| File.directory?(i) }
-    .sort_by{ |i| i.scan('/').length }
+    .sort_by{ |i| [i.scan('/').length, i] }
     .first
   puts(result)
 end
