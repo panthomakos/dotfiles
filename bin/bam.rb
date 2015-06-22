@@ -12,5 +12,10 @@ if ARGV[0].nil?
   puts(PROJECT_DIR)
 else
   glob = ARGV[0].gsub(/\//, '*/**/')+'*'
-  puts(Dir.glob("#{PROJECT_DIR}/**/#{glob}").select{ |i| File.directory?(i) }.sort_by(&:length).first)
+  result = Dir
+    .glob("#{PROJECT_DIR}/**/#{glob}")
+    .select{ |i| File.directory?(i) }
+    .sort_by{ |i| i.scan('/').length }
+    .first
+  puts(result)
 end

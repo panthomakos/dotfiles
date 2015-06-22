@@ -46,7 +46,6 @@
     - libmtp                # MTP filesystem support for Kindle.
     - linux-headers
     - maim                  # Screen capture utility.
-    - markdown
     - memcached
     - msmtp
     - mtpfs                 # MTP filesystem for Kindle.
