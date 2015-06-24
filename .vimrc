@@ -17,7 +17,6 @@ Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh' }
 Plug 'rking/ag.vim'
-Plug 'tpope/vim-sleuth'
 Plug 'fatih/vim-go'
 call plug#end()
 
