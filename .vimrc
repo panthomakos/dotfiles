@@ -94,10 +94,6 @@ let maplocalleader=","
 nnoremap <leader>w :w<CR>
 " Enter visual line mode
 nmap <leader><leader> V
-" Enter to go to line <line><CR> and enter to go to end of file
-nnoremap <cr> G
-" Backspace to go to beginning of file
-nnoremap <bs> gg
 " Skip the stupid command window
 map q: :q
 " Switch between two files
@@ -107,7 +103,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Insert a hash rocket.
 imap <c-l> <space>=><space>
 " Clear the search buffer.
-nnoremap <space><CR> :nohlsearch<CR>
+nnoremap <CR> :nohlsearch<CR>
 " Toggle spell-check.
 nmap <silent> <leader>sp :set spell!<CR>
 " Quickly edit vimrc.
