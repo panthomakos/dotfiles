@@ -1,5 +1,6 @@
 ---
 - pacman: name=dropbox state=present
+- include: yaourt.yml pkg=dropbox-cli
 - service: name=dropbox@{{ user }} enabled=yes
 - stat: path={{ home }}/Dropbox/config/ssh.config
   sudo: no
