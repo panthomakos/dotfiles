@@ -8,6 +8,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-abolish'
 Plug 'kien/ctrlp.vim'
+Plug 'JazzCore/ctrlp-cmatcher', { 'do' : './install.sh' }
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'Lokaltog/vim-easymotion'
@@ -79,7 +80,7 @@ set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
 set formatprg=par " Use par as the format program.
 
-" Wildignore - files we don't want to find/search using CtrlP.
+" Wildignore - files we don't want to find/search.
 set wildignore+=*.rbc,*/doc/*,*/spec/cassettes/*,tags,*/junit/*
 
 set spelllang=en " Set spelling region to English.
@@ -140,15 +141,18 @@ map <leader>f :CtrlP<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
-" Use Regular Expression mode in CtrlP.
-let g:ctrlp_regexp = 1
-" Only list version controlled files in CtrlP.
+" Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor
+
+" Only list version controlled files in CtrlP when possible.
 if isdirectory('.git')
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 else
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 end
+
+" Use ctrlp-cmatcher as the CtrlP matcher function.
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " Enable filetype detection.
 filetype plugin indent on
