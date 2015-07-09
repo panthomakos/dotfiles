@@ -50,7 +50,6 @@
     - msmtp
     - mtpfs                 # MTP filesystem for Kindle.
     - net-tools
-    - nfs-utils
     - nmap
     - openssh
     - openssl
