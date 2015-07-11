@@ -7,7 +7,7 @@
   pacman: name=zsh state=present
 
 - name: Configure User
-  user: name={{ user }} shell=/bin/zsh groups=video,audio,users
+  user: name={{ user }} shell=/bin/zsh groups=video,audio,users,docker
 
 - name: Initialize RBENV
   shell: eval "$(rbenv init -)"
