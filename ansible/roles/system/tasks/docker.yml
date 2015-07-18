@@ -1,0 +1,13 @@
+---
+- pacman: name=docker state=present
+- service: name=docker enabled=yes
+- name: Download Docker Compose
+  shell: curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  args:
+    creates: /usr/local/bin/docker-compose
+- name: Adjust Docker Compose Permissions
+  file:
+    path: /usr/local/bin/docker-compose
+    group: root
+    owner: root
+    mode: 0755

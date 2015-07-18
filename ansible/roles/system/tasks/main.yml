@@ -4,6 +4,7 @@
 - include: home.yml
 - include: firewall.yml
 - include: time.yml
+- include: docker.yml
 - include: dropbox.yml
 - include: vagrant.yml
 - include: power.yml

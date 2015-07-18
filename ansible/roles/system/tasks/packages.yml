@@ -12,6 +12,7 @@
 - include: package-bundle.yml pkg=base-devel
 - include: package-bundle.yml pkg=lxde
 - include: package-bundle.yml pkg=texlive-most # Used for pandoc PDF conversions.
+- include: package-bundle.yml pkg=dnsutils
 - name: Install Pacman Packages
   pacman: name={{ item }} state=present
   with_items:
@@ -26,10 +27,8 @@
     - coreutils
     - cups                  # Printer management.
     - curl
-    - docker
     - evince
     - expac
-    - dnsutils
     - doxygen               # C Development: documentation generation.
     - gdb                   # C Development: debugger.
     - ghostscript
