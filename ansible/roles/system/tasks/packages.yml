@@ -90,4 +90,3 @@
     - xv
     - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
-- include: yaourt.yml pkg=chromium-pepper-flash

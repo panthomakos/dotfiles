@@ -110,3 +110,21 @@ alias vpn="sudo openvpn $HOME/.vpn/config.ovpn"
 
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"
+
+# Easily open a github project in Chrome.
+function gh { chromium "https://github.com/$1" }
+
+# Docker Related Aliases and Functions
+# ------------------------------------
+
+alias dco="docker-compose"
+
+# Docker Compose Exec by docker-compose name instead of auto-generated name.
+function dce {
+  docker exec -it $(docker-compose ps | grep $1 | awk '{print $1}') ${@:2}
+}
+
+# Run a zeus command on the zeus docker-compose container.
+function z {
+  dce zeus zeus ${@}
+}
