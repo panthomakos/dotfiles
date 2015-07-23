@@ -118,6 +118,8 @@ function gh { chromium "https://github.com/$1" }
 # ------------------------------------
 
 alias dco="docker-compose"
+alias drm='docker rm -f $(docker ps -aq)'
+alias drmi='docker rmi $(docker images | grep "^<none>" | awk "{print \$3}")'
 
 # Docker Compose Exec by docker-compose name instead of auto-generated name.
 function dce {
