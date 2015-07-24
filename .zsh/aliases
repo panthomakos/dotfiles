@@ -3,9 +3,6 @@
 # Bundler Development
 alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler/bin/bundle"
 
-# AddressBook
-alias ab="abook --datafile $HOME/Dropbox/addressbook"
-
 # Screenshot Capture
 alias capture="maim -s --nokeyboard"
 
@@ -35,9 +32,6 @@ alias luksk="sudo cryptsetup luksChangeKey"
 
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
-
-# Open IRSSI in a screen session.
-alias irc="irssi --config=$HOME/Dropbox/config/irssi.config"
 
 # Lock the screen and suspend.
 alias i3exit="i3lock && systemctl suspend"
@@ -105,8 +99,20 @@ alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bundle exec rspec -c"
 alias sr="screen -r"
 alias sl="screen -ls"
 
-# Quickly connect to the default VPN.
-alias vpn="sudo openvpn $HOME/.vpn/config.ovpn"
+# Connect/Disconnect from a named VPN.
+function vpno {
+  sudo systemctl start openvpn@${1}.service
+}
+
+function vpnc {
+  sudo systemctl stop openvpn@${1}.service
+}
+
+function vpns {
+  sudo systemctl status openvpn@${1}.service -l
+}
+
+alias vpnls="sudo systemctl | grep 'openvpn@' | awk '{print \$1}'"
 
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"

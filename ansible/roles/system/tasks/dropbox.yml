@@ -2,6 +2,7 @@
 - pacman: name=dropbox state=present
 - include: yaourt.yml pkg=dropbox-cli
 - service: name=dropbox@{{ user }} enabled=yes
+
 - stat: path={{ home }}/Dropbox/config/ssh.config
   sudo: no
   register: ssh
@@ -11,3 +12,22 @@
         force=yes
   sudo: no
   when: ssh.stat.exists
+
+- stat: path={{ home }}/Dropbox/sync
+  sudo: no
+  register: sync
+- file: src={{ home }}/Dropbox/sync
+        dest={{ home }}/sync
+        state=link
+        force=yes
+  sudo: no
+  when: sync.stat.exists
+
+- stat: path={{ home }}/Dropbox/sync/vpn/etc
+  sudo: no
+  register: vpn
+- file: src={{ home }}/Dropbox/sync/vpn/etc
+        dest=/etc/openvpn
+        state=link
+        force=yes
+  when: sync.stat.exists
