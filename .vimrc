@@ -21,6 +21,7 @@ Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
 
 Plug 'GEverding/vim-hocon'
+Plug 'chase/vim-ansible-yaml'
 call plug#end()
 
 set shell=/bin/sh
