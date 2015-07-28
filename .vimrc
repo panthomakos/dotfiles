@@ -19,6 +19,8 @@ Plug 'bling/vim-airline'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh' }
 Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
+
+Plug 'GEverding/vim-hocon'
 call plug#end()
 
 set shell=/bin/sh
