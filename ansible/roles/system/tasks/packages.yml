@@ -59,6 +59,10 @@
     - pulseaudio
     - pulseaudio-alsa
     - pygtk                 # Used by avahi-discover.
+    - python
+    - python2
+    - python-pip
+    - python2-pip
     - python-dbus           # Used by avahi-discover.
     - redis
     - rxvt-unicode          # Simple terminal when using X.
@@ -90,3 +94,5 @@
     - xv
     - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
+# Used by ansible for EC2 related functionality.
+- pip: name=boto executable=pip2 state=present
