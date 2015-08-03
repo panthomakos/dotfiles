@@ -63,6 +63,8 @@ function! SetTestFile()
       let t:command='RAILS_ENV=test '.t:command
     end
   end
+
+  let t:command='TZ=UTC '.t:command
 endfunction
 
 function! CheckVagrant(...)
