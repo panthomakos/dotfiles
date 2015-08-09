@@ -22,6 +22,7 @@ Plug 'fatih/vim-go'
 
 Plug 'GEverding/vim-hocon'
 Plug 'chase/vim-ansible-yaml'
+Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
 call plug#end()
 
 set shell=/bin/sh
@@ -141,8 +142,13 @@ map gfv <C-w>L
 map gfs <C-w>f
 " Access CtrlP
 map <leader>f :CtrlP<CR>
+" Access CtrlPTags
+map <leader>tf :CtrlPTag<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
+
+" YouCompleteMe from ctags
+let g:ycm_collect_identifiers_from_tags_files=1
 
 " Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor

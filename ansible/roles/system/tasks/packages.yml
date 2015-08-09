@@ -25,6 +25,7 @@
     - bluez-utils
     - chromium              # Browser.
     - coreutils
+    - ctags
     - cups                  # Printer management.
     - curl
     - evince
