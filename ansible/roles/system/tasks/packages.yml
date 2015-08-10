@@ -39,6 +39,7 @@
     - gsfonts
     - gsl                   # C Development: GNU Scientific Library.
     - gutenprint
+    - guvcview              # Webcam configuration utility.
     - gvim
     - icedtea-web
     - irssi
