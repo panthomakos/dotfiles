@@ -66,6 +66,7 @@
     - python-pip
     - python2-pip
     - python-dbus           # Used by avahi-discover.
+    - ranger                # Text-based file manager.
     - redis
     - rxvt-unicode          # Simple terminal when using X.
     - s3cmd                 # For syncing S3 buckets locally.
