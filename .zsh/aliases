@@ -30,6 +30,9 @@ alias luksd="sudo cryptsetup luksDump"
 # Change a LUKS key. (luksk /dev/sdX -S <slot>)
 alias luksk="sudo cryptsetup luksChangeKey"
 
+# Run the Ranger File Browser
+alias ra="ranger"
+
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
 
