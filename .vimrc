@@ -16,7 +16,6 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh' }
 Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
 
@@ -147,8 +146,8 @@ map <leader>tf :CtrlPTag<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
-" YouCompleteMe from ctags
-let g:ycm_collect_identifiers_from_tags_files=1
+" Don't add vim-endwise mappings.
+let g:endwise_no_mappings = 1
 
 " Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor
