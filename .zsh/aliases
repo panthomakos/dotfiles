@@ -33,6 +33,9 @@ alias luksk="sudo cryptsetup luksChangeKey"
 # Run the Ranger File Browser
 alias ra="ranger"
 
+# Parse and display with JQ
+alias jqd="jq '.'"
+
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
 

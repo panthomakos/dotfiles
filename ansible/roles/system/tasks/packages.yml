@@ -43,6 +43,7 @@
     - gvim
     - icedtea-web
     - irssi
+    - jq                    # Command-line JSON parser.
     - keepassx
     - libcups
     - libmtp                # MTP filesystem support for Kindle.
