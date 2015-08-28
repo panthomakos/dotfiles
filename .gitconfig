@@ -30,6 +30,7 @@
 	excludesfile = ~/.global.gitignore
 	quotepath = false
 	ignorecase = false
+	attributesfile = ~/.gitattributes
 [color]
 	ui = true
 [push]
