@@ -1,4 +1,5 @@
 call plug#begin()
+Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-haml'
