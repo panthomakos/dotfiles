@@ -15,6 +15,12 @@ Plug 'SirVer/ultisnips'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rust-lang/rust.vim'
 
+" Additional text objects.
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-line'
+Plug 'nelstrom/vim-textobj-rubyblock'
+
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
@@ -78,7 +84,8 @@ set shiftwidth=2 " Insert <Tab> as two spaces when auto-indenting.
 set expandtab " In insert mode, use the appropriate number of spaes for <Tab>.
 
 set hlsearch " Highlight searches.
-set number " Number lines.
+set relativenumber " Relative line numbering...
+set number " with the current line number being absolute.
 set cursorline " Highlight the current line.
 set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
