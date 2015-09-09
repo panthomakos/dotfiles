@@ -19,7 +19,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
-Plug 'nelstrom/vim-textobj-rubyblock'
+
+Plug 'vim-ruby/vim-ruby'
 
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
@@ -153,9 +154,6 @@ map <leader>f :CtrlP<CR>
 map <leader>tf :CtrlPTag<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
-
-" Don't add vim-endwise mappings.
-let g:endwise_no_mappings = 1
 
 " Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor
