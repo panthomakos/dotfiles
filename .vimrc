@@ -77,7 +77,6 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
-" TODO (check w/ vim-sleuth)
 " Default <Tab> Configuration
 set tabstop=2 " Display <Tab> as two spaces in visual mode.
 set softtabstop=2 " Insert <Tab> as two spaces when editing.
@@ -113,8 +112,6 @@ map q: :q
 nnoremap <leader>; <c-^>
 " Edit files in the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-" Insert a hash rocket.
-imap <c-l> <space>=><space>
 " Clear the search buffer.
 nnoremap <CR> :nohlsearch<CR>
 " Toggle spell-check.

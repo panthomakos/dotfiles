@@ -1,4 +1,3 @@
-" TODO (check w/ vim-sleuth)
 setlocal tabstop=8
 setlocal shiftwidth=8
 setlocal textwidth=80
