@@ -38,23 +38,6 @@
   sudo: no
   when: ruby_active.stdout.find('{{ruby}}') == -1
 
-- command: gem list bundler
-  sudo: no
-  register: bundler_installed
-  ignore_errors: True
-
-- name: Install Bundler
-  shell: gem install bundler
-  sudo: no
-  when: bundler_installed.stdout.find('bundler') == -1
-
-- shell: rbenv rehash
-  sudo: no
-  when: bundler_installed.stdout.find('bundler') == -1
-
-- shell: bundle
-  sudo: no
-
 - command: go version
   sudo: no
   register: go_version

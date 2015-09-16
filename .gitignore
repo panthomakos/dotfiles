@@ -46,7 +46,6 @@ examples.desktop
 .gconf/
 .gdb_history
 .gem/
-Gemfile.lock
 .ghc/
 .gnome/
 .gnupg/*
