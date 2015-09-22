@@ -9,8 +9,8 @@ function ToggleOverLength()
 endfunction
 
 function EnableOverLength()
-  highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-  match OverLength /\%81v.\+/
+  highlight OverLength ctermbg=magenta
+  call matchadd('OverLength', '\%81v', 100)
   let b:overlength = 1
 endfunction
 
