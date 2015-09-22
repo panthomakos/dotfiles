@@ -21,6 +21,7 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 
 Plug 'vim-ruby/vim-ruby'
+Plug 'ngmy/vim-rubocop'
 
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
