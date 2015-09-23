@@ -115,7 +115,7 @@ nnoremap <leader>; <c-^>
 " Edit files in the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Clear the search buffer.
-nnoremap <CR> :nohlsearch<CR>
+nnoremap <leader><CR> :nohlsearch<CR>
 " Toggle spell-check.
 nmap <silent> <leader>sp :set spell!<CR>
 " Quickly edit vimrc.
