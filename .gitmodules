@@ -4,9 +4,6 @@
 [submodule "ruby-build"]
 	path = ruby-build
 	url = git://github.com/sstephenson/ruby-build.git
-[submodule "todo"]
-	path = todo
-	url = https://github.com/ginatrapani/todo.txt-cli
 [submodule ".vim/autoload"]
 	path = .vim/autoload
 	url = https://github.com/junegunn/vim-plug

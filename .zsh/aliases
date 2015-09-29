@@ -6,10 +6,6 @@ alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler
 # Screenshot Capture
 alias capture="maim -s --nokeyboard"
 
-# Todo Manager
-export TODOTXT_DEFAULT_ACTION='ls'
-alias t="$HOME/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
-
 # Encrypt a file for myself.
 alias gpge="gpg -e -r 'Pan Thomakos'"
 # Decrypt a file.
