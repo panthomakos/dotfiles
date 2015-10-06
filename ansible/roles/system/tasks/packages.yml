@@ -100,3 +100,4 @@
     - zip                   # ZIP Utility
 # Used by ansible for EC2 related functionality.
 - pip: name=boto executable=pip2 state=present
+- include: yaourt.yml pkg=xcape

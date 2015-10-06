@@ -1,6 +1,3 @@
-! Set CapsLock to Control
-keycode 66 = Control_L
-clear Lock
 add Control = Control_L
 
 ! Fix Mac Grave/Tilde Key

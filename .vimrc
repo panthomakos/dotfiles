@@ -131,11 +131,6 @@ noremap <C-l> <C-w>l
 " Upcase the current word in normal mode.
 nnoremap <leader>u viwU
 
-" Easily exit insert mode.
-inoremap jk <esc>
-" Break the habbit of using <esc>
-inoremap <esc> <nop>
-
 " routes.rb and Gemfile
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
