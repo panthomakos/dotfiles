@@ -1,3 +1,4 @@
+clear Lock
 add Control = Control_L
 
 ! Fix Mac Grave/Tilde Key
