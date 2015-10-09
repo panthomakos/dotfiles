@@ -132,7 +132,7 @@ alias drmi='docker rmi $(docker images | grep "^<none>" | awk "{print \$3}")'
 
 # Docker Compose Exec by docker-compose name instead of auto-generated name.
 function dce {
-  docker exec -it $(docker-compose ps | grep $1 | awk '{print $1}') ${@:2}
+  docker exec -it $(docker ps --format '{{.ID}} {{.Names}}' | grep $1 | awk '{print $1}') ${@:2}
 }
 
 # Run a zeus command on the zeus docker-compose container.
