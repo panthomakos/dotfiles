@@ -161,6 +161,9 @@ end
 " Use ctrlp-cmatcher as the CtrlP matcher function.
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
+" Enable lazy redrawing for improved performance.
+set lazyredraw
+
 " Enable filetype detection.
 filetype plugin indent on
 
