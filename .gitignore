@@ -50,10 +50,6 @@ examples.desktop
 .gnome/
 .gnupg/*
 !.gnupg/gpg.conf
-.goobook/personal.gpg
-.goobook/work.gpg
-.goobook/cache/*
-!.goobook/cache/.gitkeep
 .gpg/
 .gpg-agent-info
 .ICEauthority
