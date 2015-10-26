@@ -6,7 +6,7 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-abolish'
 Plug 'kien/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher', { 'do' : './install.sh' }
@@ -14,6 +14,11 @@ Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rust-lang/rust.vim'
+
+Plug 'reedes/vim-pencil'
+Plug 'junegunn/goyo.vim'
+
+Plug 'lukerandall/haskellmode-vim'
 
 " Additional text objects.
 Plug 'kana/vim-textobj-user'
@@ -160,6 +165,21 @@ end
 
 " Use ctrlp-cmatcher as the CtrlP matcher function.
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+
+" Configure browser for Haskell Doc
+let g:haddock_browser = "chromium"
+let g:haddock_browser_callformat = "%s %s"
+
+" Pencil Configuration
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
+
+" vim-markdown Configuration
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
 
 " Enable lazy redrawing for improved performance.
 set lazyredraw
