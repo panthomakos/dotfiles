@@ -17,6 +17,7 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 Plug 'lukerandall/haskellmode-vim'
 
@@ -181,6 +182,12 @@ augroup END
 " vim-markdown Configuration
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
+
+" Limelight Configuration
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_paragraph_span = 1
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Enable lazy redrawing for improved performance.
 set lazyredraw
