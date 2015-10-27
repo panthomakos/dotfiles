@@ -171,6 +171,7 @@ let g:haddock_browser = "chromium"
 let g:haddock_browser_callformat = "%s %s"
 
 " Pencil Configuration
+let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
