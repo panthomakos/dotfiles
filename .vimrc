@@ -154,6 +154,10 @@ map <leader>tf :CtrlPTag<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 
+" Convenient bindings for beginning and end of line.
+nnoremap B ^
+nnoremap E $
+
 " Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor
 
