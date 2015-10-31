@@ -12,7 +12,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher', { 'do' : './install.sh' }
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'rust-lang/rust.vim'
 
 Plug 'reedes/vim-pencil'
