@@ -54,3 +54,6 @@
   args:
     chdir: /tmp
   when: go_version|failed or go_version.stdout.find('{{go}}') == -1
+
+- name: Configure Chrome Alias
+  copy: src=chrome dest=/usr/bin/chrome mode=0755
