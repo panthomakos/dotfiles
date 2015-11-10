@@ -8,6 +8,6 @@
     home: /home/pan
     ruby: 2.2.2
     go: 1.5.1
-    docker_compose: 1.4.2
+    docker_compose: 1.5.0
   roles:
     - system
