@@ -8,15 +8,8 @@ function! RunTests()
   " Write the current file, then run the test file.
   :w
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if t:vagrant == 1
-    :silent exec ':!echo "Connecting to vagrant..."'
-  end
   :silent exec ':!echo '.t:command." ".t:filename
-  if t:vagrant == 1
-    :exec ':!vagrant ssh -c "cd /vagrant && '.t:command.' '.t:filename.'"'
-  else
-    :exec ':!'.t:command." ".t:filename
-  end
+  :exec ':!'.t:command." ".t:filename
 endfunction
 
 function! SetTestFile()
@@ -42,14 +35,7 @@ function! SetTestFile()
 
   " We only care if zeus is running when the test requires Rails.
   if t:rails
-    if t:vagrant && t:rails
-      let output=system("vagrant ssh -c 'test -n \"$ZEUSSOCK\" && test -S $ZEUSSOCK'")
-      if !v:shell_error
-        let t:zeus=1
-      end
-    elseif t:rails
-      let t:zeus=!empty(glob('.zeus.sock'))
-    end
+    let t:zeus=!empty(glob('.zeus.sock'))
   end
 
   if t:zeus
@@ -65,24 +51,14 @@ function! SetTestFile()
   end
 
   let t:command='TZ=UTC '.t:command
-endfunction
 
-function! CheckVagrant(...)
-  let t:vagrant=0
-  " Check if this is a vagrant enabled directory.
-  let t:dot_vagrant=!empty(glob('.vagrant'))
-
-  if t:dot_vagrant
-    let output=system('ps -ef | grep vagrant@ | grep -v grep')
-    if t:dot_vagrant && !v:shell_error
-      let t:vagrant=1
-    end
-  end
+  " Check if this is a ./env project.
+  if !empty(glob('env'))
+    let t:command='./env test'
+  endif
 endfunction
 
 function! RunRubyTestFile(...)
-  call CheckVagrant()
-
   if match(expand('%'), '\(.feature\|_spec.rb\|_test.rb\|Spec.coffee\)$') != -1
     call SetTestFile()
   end
