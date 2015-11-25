@@ -114,6 +114,7 @@ sync.log
 .tuneclone.data
 .vagrant.d/
 .vim/bundle/
+.vim/haskellmode.config
 .vim/plugged/
 .vim/spell/
 .vimgolf/

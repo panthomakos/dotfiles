@@ -20,6 +20,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 Plug 'lukerandall/haskellmode-vim'
+Plug 'vim-scripts/haskell.vim'
 
 " Additional text objects.
 Plug 'kana/vim-textobj-user'
@@ -172,7 +173,7 @@ end
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " Configure browser for Haskell Doc
-let g:haddock_browser = "chromium"
+let g:haddock_browser = "/usr/bin/chromium"
 let g:haddock_browser_callformat = "%s %s"
 
 " Pencil Configuration

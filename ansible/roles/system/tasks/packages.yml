@@ -32,6 +32,7 @@
     - expac
     - doxygen               # C Development: documentation generation.
     - gdb                   # C Development: debugger.
+    - ghc                   # Haskell Compiler
     - ghostscript
     - glibc                 # C Development: GNU C Library.
     - gnupg
@@ -42,6 +43,7 @@
     - guvcview              # Webcam configuration utility.
     - gvim
     - icedtea-web
+    - imagemagick           # Image stuff and convert.
     - irssi
     - jq                    # Command-line JSON parser.
     - keepassx
