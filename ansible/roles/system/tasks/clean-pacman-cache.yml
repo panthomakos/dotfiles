@@ -1,0 +1,4 @@
+---
+- copy: src=paccache.service dest=/etc/systemd/system/paccache.service
+- copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
+- service: name=paccache.timer enabled=yes state=started

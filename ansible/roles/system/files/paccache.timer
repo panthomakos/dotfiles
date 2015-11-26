@@ -1,0 +1,9 @@
+[Unit]
+Description=Clean Pacman Cache Weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
