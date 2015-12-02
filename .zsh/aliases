@@ -93,7 +93,7 @@ alias pg.stop="pg stop -s -m fast"
 
 alias print.start="sudo systemctl start org.cups.cupsd.service avahi-daemon"
 alias print.stop="sudo systemctl stop org.cups.cupsd.service avahi-daemon"
-alias print.manage="chromium localhost:631"
+alias print.manage="chromium http://localhost:631"
 
 # Convenience aliases for running Ruby specs.
 alias specs="find spec/**/*_spec.rb"
