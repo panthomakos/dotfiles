@@ -8,6 +8,14 @@ function! OpenTestAlternate()
   exec ':e ' . new_file
 endfunction
 
+function SpecFileName(name)
+  return 'spec/' . substitute(a:name, '\.rb$', '_spec.rb', '')
+endfunction
+
+function TestFileName(name)
+  return 'test/' . substitute(a:name, '\.rb$', '_test.rb', '')
+endfunction
+
 function! AlternateForCurrentFile()
   let current_file = expand('%')
   let new_file = current_file
@@ -15,12 +23,15 @@ function! AlternateForCurrentFile()
   let in_spec = match(current_file, '^spec/') != -1
   let in_test = match(current_file, '^test/') != -1
 
-  let in_controllers = match(current_file, '\<controllers\>') != -1
-  let in_models = match(current_file, '\<models\>') != -1
-  let in_views = match(current_file, '\<views\>') != -1
-  let in_workers = match(current_file, '\<workers\>') != -1
+  let app_directories = [ 'controllers', 'models', 'views', 'workers' ]
 
-  let in_app = in_controllers || in_models || in_views || in_workers
+  let in_app = 0
+
+  for dir in app_directories
+    let in_app = in_app || match(current_file, '\<' . dir . '\>') != -1
+  endfor
+
+  let files = []
 
   if in_spec || in_test
     if in_spec
@@ -31,28 +42,34 @@ function! AlternateForCurrentFile()
       let new_file = substitute(new_file, '^test/', '', '')
     end
 
+    call add(files, new_file)
+
     if in_app
-      let new_file = 'app/' . new_file
+      call add(files, 'app/' . new_file)
     end
 
-    return new_file
+    call add(files, 'lib/' . new_file)
   else
     if in_app
       let new_file = substitute(new_file, '^app/', '', '')
     end
 
-    let spec_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let spec_file = 'spec/' . spec_file
+    let files = []
 
-    let test_file = substitute(new_file, '\.rb$', '_test.rb', '')
-    let test_file = 'test/' . test_file
+    call add(files, SpecFileName(new_file))
+    call add(files, TestFileName(new_file))
 
-    if filereadable(test_file)
-      return test_file
-    else
-      return spec_file
-    end
+    let new_file = substitute(new_file, '^lib/', '', '')
+
+    call add(files, SpecFileName(new_file))
+    call add(files, TestFileName(new_file))
   end
+
+  for file in files
+    if filereadable(file)
+      return file
+    endif
+  endfor
 endfunction
 
 nnoremap <leader>. :call OpenTestAlternate()<cr>
