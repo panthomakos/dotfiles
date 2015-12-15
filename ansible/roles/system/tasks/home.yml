@@ -9,6 +9,20 @@
 - name: Configure User
   user: name={{ user }} shell=/bin/zsh groups=video,audio,users,docker
 
+- command: pandoc -v
+  sudo: no
+  register: pandoc_version
+  ignore_errors: True
+
+- name: Update Cabal
+  shell: cabal update
+  sudo: no
+
+- name: Install Pandoc
+  shell: cabal install pandoc
+  sudo: no
+  when: pandoc_version|failed
+
 - name: Initialize RBENV
   shell: eval "$(rbenv init -)"
   sudo: no

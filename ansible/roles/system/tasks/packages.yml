@@ -23,6 +23,7 @@
     - bc
     - bluez
     - bluez-utils
+    - cabal-install
     - chromium              # Browser.
     - coreutils
     - ctags
