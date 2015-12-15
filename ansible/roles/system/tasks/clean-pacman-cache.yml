@@ -2,3 +2,7 @@
 - copy: src=paccache.service dest=/etc/systemd/system/paccache.service
 - copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
 - service: name=paccache.timer enabled=yes state=started
+
+- copy: src=pacoptimize.service dest=/etc/systemd/system/pacoptimize.service
+- copy: src=pacoptimize.timer dest=/etc/systemd/system/pacoptimize.timer
+- service: name=pacoptimize.timer enabled=yes state=started

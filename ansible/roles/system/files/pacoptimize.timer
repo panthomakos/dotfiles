@@ -1,0 +1,9 @@
+[Unit]
+Description=Optimize Pacman Database Weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
