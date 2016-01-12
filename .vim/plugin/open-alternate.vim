@@ -8,17 +8,19 @@ function! OpenTestAlternate()
   exec ':e ' . new_file
 endfunction
 
-function SpecFileName(name)
-  return 'spec/' . substitute(a:name, '\.rb$', '_spec.rb', '')
-endfunction
-
-function TestFileName(name)
-  return 'test/' . substitute(a:name, '\.rb$', '_test.rb', '')
+function TestFileName(name, type)
+  return a:type . '/' . substitute(a:name, '\.rb$', '_' . a:type . '.rb', '')
 endfunction
 
 function! AlternateForCurrentFile()
   let current_file = expand('%')
   let new_file = current_file
+
+  if isdirectory('spec')
+    let prefix = 'spec'
+  else
+    let prefix = 'test'
+  endif
 
   let in_spec = match(current_file, '^spec/') != -1
   let in_test = match(current_file, '^test/') != -1
@@ -56,13 +58,11 @@ function! AlternateForCurrentFile()
 
     let files = []
 
-    call add(files, SpecFileName(new_file))
-    call add(files, TestFileName(new_file))
+    call add(files, TestFileName(new_file, prefix))
 
     let new_file = substitute(new_file, '^lib/', '', '')
 
-    call add(files, SpecFileName(new_file))
-    call add(files, TestFileName(new_file))
+    call add(files, TestFileName(new_file, prefix))
   end
 
   for file in files
@@ -70,6 +70,8 @@ function! AlternateForCurrentFile()
       return file
     endif
   endfor
+
+  return files[0] " If the file does not yet exist, return the first one.
 endfunction
 
 nnoremap <leader>. :call OpenTestAlternate()<cr>
