@@ -52,6 +52,10 @@
   sudo: no
   when: ruby_active.stdout.find('{{ruby}}') == -1
 
+- name: Install Seeing Is Believing Gem
+  shell: gem install seeing_is_believing
+  sudo: no
+
 - command: go version
   sudo: no
   register: go_version

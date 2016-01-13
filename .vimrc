@@ -22,6 +22,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'lukerandall/haskellmode-vim'
 Plug 'vim-scripts/haskell.vim'
 
+Plug 'hwartig/vim-seeing-is-believing'
+
 " Additional text objects.
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
@@ -193,6 +195,14 @@ let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_paragraph_span = 1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" Seeing Is Believing Configuration
+augroup seeingIsBelievingSettings
+  autocmd!
+
+  autocmd FileType ruby nmap <buffer> <leader>r <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <leader>r <Plug>(seeing-is-believing-mark-and-run)
+augroup END
 
 " Enable lazy redrawing for improved performance.
 set lazyredraw
