@@ -19,8 +19,8 @@ Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+Plug 'neovimhaskell/haskell-vim'
 Plug 'lukerandall/haskellmode-vim'
-Plug 'vim-scripts/haskell.vim'
 
 Plug 'hwartig/vim-seeing-is-believing'
 
