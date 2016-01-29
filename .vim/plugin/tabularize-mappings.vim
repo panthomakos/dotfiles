@@ -7,3 +7,6 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a, :Tabularize /[^,],\zs<CR>
 vmap <Leader>a, :Tabularize /[^,],\zs<CR>
+
+nmap <Leader>acl :Tabularize comma_first_list<CR>
+vmap <Leader>acl :Tabularize comma_first_list<CR>

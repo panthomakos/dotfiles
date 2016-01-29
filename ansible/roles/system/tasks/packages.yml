@@ -43,6 +43,7 @@
     - gutenprint
     - guvcview              # Webcam configuration utility.
     - gvim
+    - haskell-quickcheck    # Haskell testing library.
     - icedtea-web
     - imagemagick           # Image stuff and convert.
     - irssi
@@ -77,6 +78,7 @@
     - sane
     - screen
     - slop                  # Allows selection with maim.
+    - stylish-haskell       # Haskell Pretty Printer.
     - sxiv                  # Image Viewer
     - tar
     - tcpdump

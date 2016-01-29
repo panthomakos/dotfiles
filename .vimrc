@@ -21,6 +21,8 @@ Plug 'junegunn/limelight.vim'
 
 Plug 'neovimhaskell/haskell-vim'
 Plug 'lukerandall/haskellmode-vim'
+Plug 'gilligan/vim-textobj-haskell'
+Plug 'nbouscal/vim-stylish-haskell'
 
 Plug 'hwartig/vim-seeing-is-believing'
 
