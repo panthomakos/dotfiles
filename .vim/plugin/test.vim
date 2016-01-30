@@ -51,11 +51,6 @@ function! SetTestFile()
   end
 
   let t:command='TZ=UTC '.t:command
-
-  " Check if this is a ./env project.
-  if !empty(glob('env'))
-    let t:command='./env test'
-  endif
 endfunction
 
 function! RunRubyTestFile(...)
