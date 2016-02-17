@@ -8,7 +8,13 @@ function! OpenTestAlternate()
   exec ':e ' . new_file
 endfunction
 
-function TestFileName(name, type)
+function TestFileNamePrefix(name, type)
+  let bname = fnamemodify(a:name, ':t')
+  let hdir = fnamemodify(a:name, ':h')
+  return a:type . '/' . hdir . '/' . a:type . '_' . bname
+endfunction
+
+function TestFileNameSuffix(name, type)
   return a:type . '/' . substitute(a:name, '\.rb$', '_' . a:type . '.rb', '')
 endfunction
 
@@ -41,6 +47,7 @@ function! AlternateForCurrentFile()
       let new_file = substitute(new_file, '^spec/', '', '')
     elseif in_test
       let new_file = substitute(new_file, '_test\.rb$', '.rb', '')
+      let new_file = substitute(new_file, '/test_', '/', '')
       let new_file = substitute(new_file, '^test/', '', '')
     end
 
@@ -58,11 +65,21 @@ function! AlternateForCurrentFile()
 
     let files = []
 
-    call add(files, TestFileName(new_file, prefix))
+    if prefix == 'spec'
+      call add(files, TestFileNameSuffix(new_file, prefix))
+    elseif prefix == 'test'
+      call add(files, TestFileNamePrefix(new_file, prefix))
+      call add(files, TestFileNameSuffix(new_file, prefix))
+    end
 
     let new_file = substitute(new_file, '^lib/', '', '')
 
-    call add(files, TestFileName(new_file, prefix))
+    if prefix == 'spec'
+      call add(files, TestFileNameSuffix(new_file, prefix))
+    elseif
+      call add(files, TestFileNamePrefix(new_file, prefix))
+      call add(files, TestFileNameSuffix(new_file, prefix))
+    end
   end
 
   for file in files

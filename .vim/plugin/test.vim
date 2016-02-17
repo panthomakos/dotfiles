@@ -24,6 +24,8 @@ function! SetTestFile()
     let t:command='rspec --color'
   elseif match(t:filename, '_test\.rb$') != -1
     let t:command='ruby -Ilib'
+  elseif match(t:filename, 'test_.*\.rb$') != -1
+    let t:command='ruby -Ilib'
   elseif match(t:filename, '\.coffee$') != -1
     let t:command='jasmine-headless-webkit --no-full-fun'
   elseif match(t:filename, '\.feature$') != -1
@@ -54,7 +56,7 @@ function! SetTestFile()
 endfunction
 
 function! RunRubyTestFile(...)
-  if match(expand('%'), '\(.feature\|_spec.rb\|_test.rb\|Spec.coffee\)$') != -1
+  if match(expand('%'), '\(.feature\|_spec.rb\|test_.*.rb\|_test.rb\|Spec.coffee\)$') != -1
     call SetTestFile()
   end
 
