@@ -4,7 +4,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
-Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-abolish'
@@ -158,6 +158,10 @@ map <leader>f :CtrlP<CR>
 map <leader>tf :CtrlPTag<CR>
 " Reload CtlrP Cache.
 map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
+
+" Easy Alignment Mappings
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Convenient bindings for beginning and end of line.
 nnoremap B ^
