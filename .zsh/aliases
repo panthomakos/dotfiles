@@ -51,8 +51,8 @@ alias ls="ls -G --color=auto"
 alias grep="grep --color=auto"
 
 # Systemctl
-alias s=systemctl
-alias ss=sudo systemctl
+alias s="systemctl"
+alias ss="sudo systemctl"
 
 # Convenience shell aliases.
 alias psf="ps -ef | grep "
