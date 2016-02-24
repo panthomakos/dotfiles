@@ -89,6 +89,7 @@
     - valgrind              # C Development: test for memory usage errors.
     - vlc                   # Video player.
     - w3m
+    - wireshark-gtk         # Network Packet Analyzer
     - xautolock
     - xclip
     - xf86-input-synaptics

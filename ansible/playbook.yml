@@ -4,7 +4,14 @@
   user: pan
   sudo: yes
   vars:
-    user: pan
+    user:
+      name: pan
+      groups:
+        - audio
+        - docker
+        - users
+        - video
+        - wireshark
     home: /home/pan
     ruby: 2.2.4
     go: 1.5.1
