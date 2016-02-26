@@ -31,7 +31,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 
-Plug 'vim-ruby/vim-ruby'
+Plug 'panthomakos/vim-ruby'
 Plug 'ngmy/vim-rubocop'
 
 Plug 'tpope/vim-endwise'
@@ -201,6 +201,9 @@ let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_paragraph_span = 1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" Configure Ruby Indentation
+let g:ruby_indent_block_style = 'do'
 
 " Seeing Is Believing Configuration
 augroup seeingIsBelievingSettings
