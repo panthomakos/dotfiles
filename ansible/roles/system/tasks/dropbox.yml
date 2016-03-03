@@ -4,27 +4,27 @@
 - service: name=dropbox@{{ user.name }} enabled=yes
 
 - stat: path={{ home }}/Dropbox/config/ssh.config
-  sudo: no
+  become: no
   register: ssh
 - file: src={{ home }}/Dropbox/config/ssh.config
         dest={{ home }}/.ssh/config
         state=link
         force=yes
-  sudo: no
+  become: no
   when: ssh.stat.exists
 
 - stat: path={{ home }}/Dropbox/sync
-  sudo: no
+  become: no
   register: sync
 - file: src={{ home }}/Dropbox/sync
         dest={{ home }}/sync
         state=link
         force=yes
-  sudo: no
+  become: no
   when: sync.stat.exists
 
 - stat: path={{ home }}/Dropbox/sync/vpn/etc
-  sudo: no
+  become: no
   register: vpn
 - file: src={{ home }}/Dropbox/sync/vpn/etc
         dest=/etc/openvpn

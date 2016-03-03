@@ -1,7 +1,9 @@
 ---
 - name: Initialize Git Submodules
   shell: git submodule update --init
-  sudo: no
+  args:
+    warn: no
+  become: no
 
 - name: Install ZSH
   pacman: name=zsh state=present
@@ -14,22 +16,22 @@
   with_items: "{{ user.groups }}"
 
 - command: pandoc -v
-  sudo: no
+  become: no
   register: pandoc_version
   ignore_errors: True
 
 - name: Update Cabal
   shell: cabal update
-  sudo: no
+  become: no
 
 - name: Install Pandoc
   shell: cabal install pandoc
-  sudo: no
+  become: no
   when: pandoc_version|failed
 
 - name: Initialize RBENV
   shell: eval "$(rbenv init -)"
-  sudo: no
+  become: no
   environment:
     PATH: "{{ home }}/.rbenv/bin:{{ lookup('env', 'PATH') }}"
 
@@ -37,31 +39,31 @@
   shell: ./install.sh chdir={{ home }}/ruby-build
 
 - command: rbenv versions
-  sudo: no
+  become: no
   register: ruby_installed
   ignore_errors: True
 
 - name: Install Ruby
   shell: rbenv install {{ ruby }}
-  sudo: no
+  become: no
   when: ruby_installed.stdout.find('{{ruby}}') == -1
 
 - command: rbenv version
-  sudo: no
+  become: no
   register: ruby_active
   ignore_errors: True
 
 - name: Set Default Ruby
   shell: rbenv global {{ ruby }}
-  sudo: no
+  become: no
   when: ruby_active.stdout.find('{{ruby}}') == -1
 
 - name: Install Seeing Is Believing Gem
   shell: gem install seeing_is_believing
-  sudo: no
+  become: no
 
 - command: go version
-  sudo: no
+  become: no
   register: go_version
   ignore_errors: yes
 

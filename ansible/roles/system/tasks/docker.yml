@@ -2,7 +2,7 @@
 - pacman: name=docker state=present
 - service: name=docker enabled=yes
 - command: docker-compose --version
-  sudo: no
+  become: no
   register: docker_compose_version
   ignore_errors: True
 - name: Download Docker Compose

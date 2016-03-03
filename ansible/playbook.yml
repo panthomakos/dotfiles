@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   user: pan
-  sudo: yes
+  become: yes
   vars:
     user:
       name: pan
