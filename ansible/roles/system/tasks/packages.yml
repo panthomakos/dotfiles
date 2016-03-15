@@ -58,6 +58,9 @@
     - mtpfs                 # MTP filesystem for Kindle.
     - net-tools
     - nmap
+    - noto-fonts            # Google Noto Font Family
+    - noto-fonts-cjk        # Google Noto Font Family CJK
+    - noto-fonts-emoji      # Google Noto Font Family Emoji
     - openssh
     - openssl
     - openvpn
