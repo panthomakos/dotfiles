@@ -104,6 +104,7 @@ Public/
 .shef_history
 .ssh/
 !.ssh/config
+.sqlite_history
 .subversion/
 *.swp
 sync
