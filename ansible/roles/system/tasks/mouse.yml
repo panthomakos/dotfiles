@@ -1,0 +1,3 @@
+---
+- name: Configure Natural Scrolling
+  copy: src=synaptics.conf dest=/etc/X11/xorg.conf.d/50-synaptics.conf

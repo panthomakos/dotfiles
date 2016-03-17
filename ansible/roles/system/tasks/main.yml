@@ -7,6 +7,7 @@
 - include: time.yml
 - include: docker.yml
 - include: dropbox.yml
+- include: mouse.yml
 - include: vagrant.yml
 - include: power.yml
 - include: u2f.yml
