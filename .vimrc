@@ -31,6 +31,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 
+Plug 'rhysd/vim-textobj-ruby'
+
 Plug 'panthomakos/vim-ruby'
 Plug 'ngmy/vim-rubocop'
 
