@@ -30,4 +30,6 @@ highlight DiffDelete term=reverse cterm=bold ctermbg=lightred   ctermfg=16
 
 highlight PmenuSel ctermfg=16 ctermbg=156
 
+highlight ColorColumn ctermbg=235
+
 hi rubySymbol ctermfg=lightgreen
