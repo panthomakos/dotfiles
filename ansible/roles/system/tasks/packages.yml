@@ -112,3 +112,4 @@
 - include: yaourt.yml pkg=xcape
 # Used to watch Netflix in chrome.
 - include: yaourt.yml pkg=chromium-widevine
+- include: yaourt.yml pkg=spotify
