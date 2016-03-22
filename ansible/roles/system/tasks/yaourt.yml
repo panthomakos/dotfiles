@@ -5,4 +5,5 @@
   ignore_errors: True
 - name: Install {{ pkg }}
   command: yaourt -S {{ pkg }} --noconfirm
+  become: no
   when: check.rc != 0
