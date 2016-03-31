@@ -17,6 +17,8 @@
   pacman: name={{ item }} state=present
   with_items:
     - abs
+    - acpi
+    - acpid
     - alsa-oss
     - alsa-utils
     - avahi
