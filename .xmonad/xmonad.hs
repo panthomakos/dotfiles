@@ -23,7 +23,7 @@ myKeys c = mkKeymap c $
     , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 20")
     , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 20")
     , ("M-g", spawn "chrome")
-    , ("M-q", spawn "i3lock")
+    , ("M-q", spawn "i3lock -c 191970 -d")
     , ("M-p", shellPrompt defaultXPConfig)
     , ("M-m", windows W.focusMaster)
     , ("M-s", windows W.swapMaster)

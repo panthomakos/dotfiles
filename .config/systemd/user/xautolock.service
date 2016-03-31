@@ -4,4 +4,4 @@ Description=Lock the screen automatically after a timeout
 [Service]
 Type=simple
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/xautolock -time 10 -locker "i3lock -n"
+ExecStart=/usr/bin/xautolock -time 10 -locker "i3lock -c 191970 -n"

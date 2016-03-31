@@ -36,7 +36,7 @@ alias jqd="jq '.'"
 alias fingerprint="ssh-keygen -lf"
 
 # Lock the screen and suspend.
-alias i3exit="i3lock && systemctl suspend"
+alias i3exit="i3lock -c 191970 && systemctl suspend"
 alias cxlock="systemctl --user stop xautolock"
 alias oxlock="systemctl --user start xautolock"
 
