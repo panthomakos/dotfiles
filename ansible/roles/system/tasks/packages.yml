@@ -49,6 +49,7 @@
     - irssi
     - jq                    # Command-line JSON parser.
     - keepassx
+    - keybase
     - libcups
     - libmtp                # MTP filesystem support for Kindle.
     - linux-headers
