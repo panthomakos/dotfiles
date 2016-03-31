@@ -99,7 +99,9 @@
     - xautolock
     - xclip
     - xf86-input-synaptics
+    - xf86-video-ati        # ATI/Radeon
     - xf86-video-fbdev
+    - xf86-video-intel
     - xmonad
     - xmonad-contrib
     - xorg-server-xvfb
