@@ -1,0 +1,7 @@
+---
+- name: "Fix xinit mod for 'xf86EnableIOPorts: Failed to set IOPL for I/O'"
+  file:
+    path: /usr/bin/xinit
+    group: root
+    owner: root
+    mode: '4755'

@@ -12,3 +12,4 @@
 - include: vagrant.yml
 - include: power.yml
 - include: u2f.yml
+- include: xorg.yml
