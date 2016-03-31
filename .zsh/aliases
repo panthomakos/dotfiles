@@ -29,6 +29,9 @@ alias luksk="sudo cryptsetup luksChangeKey"
 # Run the Ranger File Browser
 alias ra="ranger"
 
+# Get Numerical MOD value of file (mod <file>)
+alias mod="stat --format '%a'"
+
 # Parse and display with JQ
 alias jqd="jq '.'"
 
