@@ -118,3 +118,5 @@
 # Used to watch Netflix in chrome.
 - include: yaourt.yml pkg=chromium-widevine
 - include: yaourt.yml pkg=spotify
+# Video driver for MacBook Air built-in camera.
+- include: yaourt.yml pkg=bcwc-pcie-git
