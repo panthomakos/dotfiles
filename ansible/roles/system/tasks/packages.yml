@@ -67,6 +67,7 @@
     - openssh
     - openssl
     - openvpn
+    - perl-image-exiftool   # EXIF reader/writer (example: edit PDF title)
     - pkg-config            # Retrieve information about installed binaries.
     - polkit
     - pulseaudio
