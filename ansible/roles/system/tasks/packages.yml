@@ -120,3 +120,5 @@
 - include: yaourt.yml pkg=spotify
 # Video driver for MacBook Air built-in camera.
 - include: yaourt.yml pkg=bcwc-pcie-git
+# Brother MFC-J4510DW Printer Driver
+- include: yaourt.yml pkg=brother-mfc-j4510dw
