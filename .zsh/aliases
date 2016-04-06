@@ -144,3 +144,8 @@ function dce {
 function z {
   dce zeus zeus ${@}
 }
+
+# Merge PDF files
+function pdfmerge {
+  gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=$1 ${@:2}
+}
