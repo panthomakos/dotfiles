@@ -9,6 +9,12 @@
             section=archlinuxfr
             option=Server
             value=http://repo.archlinux.fr/{{ ansible_architecture }}
+- name: Configure multilib
+  ini_file: dest=/etc/pacman.conf
+            section=multilib
+            option=Include
+            value=/etc/pacman.d/mirrorlist
+- pacman: update_cache=yes
 - include: package-bundle.yml pkg=base-devel
 - include: package-bundle.yml pkg=lxde
 - include: package-bundle.yml pkg=texlive-most # Used for pandoc PDF conversions.
