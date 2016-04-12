@@ -36,6 +36,9 @@ function bam() {
 # I use ~/.env to store my secret environment variables. If it exists, source it.
 [[ -f .env ]] && source .env
 
+# Local BIN
+export PATH=$PATH:$HOME/bin
+
 # CABAL
 export PATH=$PATH:$HOME/.cabal/bin
 

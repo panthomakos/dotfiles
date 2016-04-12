@@ -123,3 +123,5 @@
 - include: yaourt.yml pkg=bcwc-pcie-git
 # Brother MFC-J4510DW Printer Driver
 - include: yaourt.yml pkg=brother-mfc-j4510dw
+# tmate.io (tmux remote pair programming)
+- include: yaourt.yml pkg=tmate-git
