@@ -67,9 +67,6 @@ alias r="bundle exec ruby -Ilib"
 alias k="be rake"
 alias known="vim ~/.ssh/known_hosts"
 
-# Alias to cleanup remote git branches.
-alias git:clean="ruby ~/bin/git:clean"
-
 # Alias to calculate running paces.
 alias pace="ruby ~/bin/pace"
 
