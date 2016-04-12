@@ -1,0 +1,5 @@
+---
+- pacman: name=reflector state=present
+- copy: src=reflector.service dest=/etc/systemd/system/reflector.service
+- copy: src=reflector.timer dest=/etc/systemd/system/reflector.timer
+- service: name=reflector.timer enabled=yes state=started
