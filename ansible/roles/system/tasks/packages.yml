@@ -32,7 +32,9 @@
     - cups                  # Printer management.
     - curl
     - evince
+    - exfat-utils           # exFAT filesystem support
     - expac
+    - darktable             # Image Workflow and Editing
     - doxygen               # C Development: documentation generation.
     - gdb                   # C Development: debugger.
     - ghc                   # Haskell Compiler
