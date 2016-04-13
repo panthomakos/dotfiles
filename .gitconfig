@@ -20,10 +20,15 @@
 	dc = diff --cached
 	cp = cherry-pick
 	vim = !vim .git/index
-	sl = log --pretty=\"format:%h %G? %aN %s\"
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	logs = log --show-signature
 	review = push origin HEAD:refs/for/master
+	sl = stash list
+	ss = stash save
+	sp = stash pop
+	sa = "!sh -c 'git stash apply stash@{$1}' -"
+	sx = "!sh -c 'git stash drop stash@{$1}' -"
+	ds = "!sh -c 'git stash show -p stash@{$1}' -"
 [core]
 	editor = vim
 	whitespace = trailing-space
