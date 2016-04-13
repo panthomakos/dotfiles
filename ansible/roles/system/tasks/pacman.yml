@@ -1,0 +1,18 @@
+---
+- name: Configure archlinuxfr SigLevel
+  ini_file: dest=/etc/pacman.conf
+            section=archlinuxfr
+            option=SigLevel
+            value=Never
+- name: Configure archlinuxfr Server
+  ini_file: dest=/etc/pacman.conf
+            section=archlinuxfr
+            option=Server
+            value=http://repo.archlinux.fr/{{ ansible_architecture }}
+- name: Configure multilib
+  ini_file: dest=/etc/pacman.conf
+            section=multilib
+            option=Include
+            value=/etc/pacman.d/mirrorlist
+- include: reflector.yml
+- pacman: update_cache=yes

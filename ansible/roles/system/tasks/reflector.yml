@@ -3,3 +3,9 @@
 - copy: src=reflector.service dest=/etc/systemd/system/reflector.service
 - copy: src=reflector.timer dest=/etc/systemd/system/reflector.timer
 - service: name=reflector.timer enabled=yes state=started
+- command: cat /etc/pacman.d/mirrorlist
+  become: no
+  register: mirrorlist
+  ignore_errors: True
+- service: name=reflector.service state=started
+  when: mirrorlist.stdout.find('reflector') == -1

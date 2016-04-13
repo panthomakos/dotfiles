@@ -1,5 +1,6 @@
 ---
 - include: hostname.yml
+- include: pacman.yml
 - include: packages.yml
 - include: clean-pacman-cache.yml
 - include: home.yml
@@ -14,4 +15,3 @@
 - include: u2f.yml
 - include: xorg.yml
 - include: scanner.yml
-- include: reflector.yml

@@ -1,23 +1,8 @@
 ---
-- name: Configure archlinuxfr SigLevel
-  ini_file: dest=/etc/pacman.conf
-            section=archlinuxfr
-            option=SigLevel
-            value=Never
-- name: Configure archlinuxfr Server
-  ini_file: dest=/etc/pacman.conf
-            section=archlinuxfr
-            option=Server
-            value=http://repo.archlinux.fr/{{ ansible_architecture }}
-- name: Configure multilib
-  ini_file: dest=/etc/pacman.conf
-            section=multilib
-            option=Include
-            value=/etc/pacman.d/mirrorlist
-- pacman: update_cache=yes
 - include: package-bundle.yml pkg=base-devel
 - include: package-bundle.yml pkg=lxde
-- include: package-bundle.yml pkg=texlive-most # Used for pandoc PDF conversions.
+# Used for pandoc PDF conversions.
+- include: package-bundle.yml pkg=texlive-most
 - include: package-bundle.yml pkg=dnsutils
 - name: Install Pacman Packages
   pacman: name={{ item }} state=present
