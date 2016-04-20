@@ -4,10 +4,11 @@
 - command: docker-compose --version
   become: no
   register: docker_compose_version
-  ignore_errors: True
+  ignore_errors: yes
 - name: Download Docker Compose
   shell: curl -L https://github.com/docker/compose/releases/download/{{docker_compose}}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-  when: docker_compose_version.stdout.find('{{docker_compose}}') == -1
+  when: docker_compose_version|failed or
+        docker_compose_version.stdout.find('{{docker_compose}}') == -1
 - name: Adjust Docker Compose Permissions
   file:
     path: /usr/local/bin/docker-compose
