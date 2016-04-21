@@ -120,3 +120,5 @@
 - include: yaourt.yml pkg=slack-desktop
 # Zoom Meeting Application
 - include: yaourt.yml pkg=zoom
+# Paragraph Reformatter
+- include: yaourt.yml pkg=par
