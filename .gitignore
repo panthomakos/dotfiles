@@ -17,6 +17,7 @@ Applications/
 .claws.yml
 .compiz/
 .config/*
+!.config/mimeapps.list
 !.config/systemd/
 .csv
 .cups/
