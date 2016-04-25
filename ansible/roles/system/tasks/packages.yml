@@ -22,6 +22,7 @@
     - ctags
     - cups                  # Printer management.
     - curl
+    - elixir                # Elixir Programming Language
     - evince
     - exfat-utils           # exFAT filesystem support
     - expac

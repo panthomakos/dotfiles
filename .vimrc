@@ -41,6 +41,9 @@ Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
 
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
 Plug 'GEverding/vim-hocon'
 Plug 'chase/vim-ansible-yaml'
 Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
