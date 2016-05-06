@@ -53,6 +53,7 @@ examples.desktop
 !.gnupg/gpg.conf
 .gpg/
 .gpg-agent-info
+.hex/
 .ICEauthority
 .icedtea/
 .infinity_test
@@ -66,6 +67,7 @@ examples.desktop
 Library/
 .local/
 .macromedia/
+.mix/
 .monit.*
 Movies/
 .mozilla/
