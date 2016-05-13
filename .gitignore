@@ -38,6 +38,7 @@ Dropbox/
 .ecryptfs
 .elinks/
 .env
+.erlang.cookie
 .esd_auth
 examples.desktop
 .eyrc
