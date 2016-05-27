@@ -47,6 +47,8 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'GEverding/vim-hocon'
 Plug 'chase/vim-ansible-yaml'
 Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
+
+Plug 'tpope/vim-vinegar' " Additions to the built-in netrw directory browser.
 call plug#end()
 
 set shell=/bin/sh
