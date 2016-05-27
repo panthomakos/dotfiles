@@ -170,6 +170,8 @@ map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+let g:easy_align_delimiters = { '>': { 'pattern': '->\|>' } }
+
 " Convenient bindings for beginning and end of line.
 nnoremap B ^
 nnoremap E $
