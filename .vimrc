@@ -33,7 +33,7 @@ Plug 'kana/vim-textobj-line'
 
 Plug 'rhysd/vim-textobj-ruby'
 
-Plug 'panthomakos/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 Plug 'ngmy/vim-rubocop'
 
 Plug 'tpope/vim-endwise'
