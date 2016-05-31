@@ -46,6 +46,7 @@ alias oxlock="systemctl --user start xautolock"
 # Convenience methods for vim.
 alias vi='vim'
 alias v='vim'
+alias vimp='vim --noplugin' # No plugins for large files.
 
 # Colorful ls.
 alias ls="ls -G --color=auto"
