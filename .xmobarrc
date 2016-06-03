@@ -13,10 +13,11 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
              , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
              , Run Com "/home/pan/.xmonad/volume.sh" [] "vol" 10
              , Run Com "/home/pan/.xmonad/bright.sh" [] "bright" 10
+             , Run CommandReader "~/pymodoro/pymodoro.py" "pomodoro"
              , Run StdinReader
              ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%cpu% | %memory% | %swap% | %wlp3s0wi% | %wlp3s0% | %battery% | %StdinReader% }{ %vol% | %bright% | %KOAK% | <fc=#ee9a00>%date%</fc>"
+, template = "%pomodoro% | %cpu% | %memory% | %swap% | %wlp3s0wi% | %wlp3s0% | %battery% | %StdinReader% }{ %vol% | %bright% | %KOAK% | <fc=#ee9a00>%date%</fc>"
 }
 

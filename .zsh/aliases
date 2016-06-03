@@ -144,3 +144,7 @@ function z {
 function pdfmerge {
   gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=$1 ${@:2}
 }
+
+# Pomodoro Timer Control
+alias pom="touch $HOME/.pomodoro_session"
+alias cpom="rm $HOME/.pomodoro_session"

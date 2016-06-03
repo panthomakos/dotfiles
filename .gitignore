@@ -88,6 +88,7 @@ Music/
 Pictures/
 .pki/
 playbook.retry
+.pomodoro_session
 .pow
 .Private
 .profile
