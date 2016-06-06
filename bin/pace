@@ -20,6 +20,9 @@ pace = ARGV[0]
 
 time = pace.split(/[.:]/).map(&:to_i)
 
+# If only minutes were passed in (`pace 7`) then add seconds.
+time = time + [0] if time.length == 1
+
 seconds = time.reverse
   .each_with_index
   .map{ |t,i| i == 0 ? t : t*60*i }
