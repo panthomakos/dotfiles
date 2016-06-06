@@ -23,6 +23,7 @@
     - cups                  # Printer management.
     - curl
     - elixir                # Elixir Programming Language
+    - encfs                 # File Encryption
     - erlang                # Full Erlang (for additional elixir functionality)
     - evince
     - exfat-utils           # exFAT filesystem support

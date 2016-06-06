@@ -148,3 +148,7 @@ function pdfmerge {
 # Pomodoro Timer Control
 alias pom="touch $HOME/.pomodoro_session"
 alias cpom="rm $HOME/.pomodoro_session"
+
+# Encrypted Dropbox
+alias drop="encfs $HOME/Dropbox/Encrypted $HOME/Private"
+alias cdrop="fusermount -u $HOME/Private"
