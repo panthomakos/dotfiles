@@ -44,3 +44,5 @@
 	insteadOf = https://github.com/
 [rerere]
 	enabled = true
+[diff]
+	compactionHeuristic = true
