@@ -4,6 +4,7 @@ Applications/
 .aws/
 .boom
 .boom.conf
+.bundle/
 .CFUserTextEncoding
 .bashrc
 .bash_history
