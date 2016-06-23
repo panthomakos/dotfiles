@@ -29,6 +29,7 @@
 	sa = "!sh -c 'git stash apply stash@{$1}' -"
 	sx = "!sh -c 'git stash drop stash@{$1}' -"
 	ds = "!sh -c 'git stash show -p stash@{$1}' -"
+	rhm = reset --hard origin/master
 [core]
 	editor = vim
 	whitespace = trailing-space
