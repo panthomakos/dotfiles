@@ -19,6 +19,7 @@
     - cabal-install
     - chromium              # Browser.
     - coreutils
+    - crystal               # Crystal Programming Language
     - ctags
     - cups                  # Printer management.
     - curl
