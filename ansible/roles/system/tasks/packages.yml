@@ -125,3 +125,5 @@
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter
 - include: yaourt.yml pkg=par
+# Docker Squash (https://github.com/jwilder/docker-squash)
+- include: yaourt.yml pkg=docker-squash
