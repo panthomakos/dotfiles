@@ -108,14 +108,14 @@ function vpno {
 }
 
 function vpnc {
-  sudo systemctl stop openvpn@${1}.service
+  sudo systemctl stop $(vpnls)
 }
 
 function vpns {
-  sudo systemctl status openvpn@${1}.service -l
+  systemctl status $(vpnls) -l
 }
 
-alias vpnls="sudo systemctl | grep 'openvpn@' | awk '{print \$1}'"
+alias vpnls="systemctl | grep 'openvpn@' | grep 'active' | awk '{print \$1}'"
 
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"
