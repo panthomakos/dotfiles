@@ -3,8 +3,7 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 , fgColor = "grey"
 , position = Top
 , lowerOnStart = True
-, commands = [ Run Weather "KOAK" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
-             , Run Network "wlp3s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+, commands = [ Run Network "wlp3s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
              , Run Wireless "wlp3s0" ["-t","<essid>"] 10
              , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
              , Run Com "/home/pan/.xmonad/vpn.sh" [] "vpn" 10
@@ -18,6 +17,6 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
              ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%pomodoro% | %cpu% | %memory% | %vpn% | %wlp3s0wi% | %wlp3s0% | %battery% | %StdinReader% }{ %vol% | %bright% | %KOAK% | <fc=#ee9a00>%date%</fc>"
+, template = "%pomodoro% | %cpu% | %memory% | %vpn% | %wlp3s0wi% | %wlp3s0% | %battery% | %StdinReader% }{ %vol% | %bright% | <fc=#ee9a00>%date%</fc>"
 }
 
