@@ -120,8 +120,6 @@
 - include: yaourt.yml pkg=brother-mfc-j4510dw
 # tmate.io (tmux remote pair programming)
 - include: yaourt.yml pkg=tmate-git
-# Slack Destop Application
-- include: yaourt.yml pkg=slack-desktop
 # Zoom Meeting Application
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter
