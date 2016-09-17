@@ -114,7 +114,10 @@
 # Used to watch Netflix in chrome.
 - include: yaourt.yml pkg=chromium-widevine
 - include: yaourt.yml pkg=spotify
+# WiFi driver for MacBook Air.
+- include: yaourt.yml pkg=broadcom-wl
 # Video driver for MacBook Air built-in camera.
+- include: yaourt.yml pkg=bcwc-pcie-firmware
 - include: yaourt.yml pkg=bcwc-pcie-git
 # Brother MFC-J4510DW Printer Driver
 - include: yaourt.yml pkg=brother-mfc-j4510dw
