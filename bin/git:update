@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+cd $HOME/Projects/$1
+
+echo
+echo "Updating local repositories..."
+echo
+
+for dir in $(find . -type d -name '.git') ; do
+pushd ${dir%/.git}
+git remote update -p
+popd
+done

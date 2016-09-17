@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+cd $HOME/Projects/$1
+
+since=$2
+since=${2:-1 week ago}
+
+for dir in $(find . -type d -name '.git') ; do
+pushd ${dir%/.git} > /dev/null
+git log origin/master --author=$USER --no-merges --since="${since}" --format=format:"[${PWD#$HOME/Projects/$1/}] %h %s"
+if [[ ! -z $output ]] ; then
+  logs="${logs}\n${output}"
+fi
+popd > /dev/null
+done
