@@ -1,2 +1,4 @@
 snippets_directory: /home/pan/sync/snippets
 snippets_format: markdown
+markdown:
+  timestamp_format: '%m/%d @ %H:%M'
