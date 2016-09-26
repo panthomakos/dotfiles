@@ -45,7 +45,6 @@
     - haskell-quickcheck    # Haskell testing library.
     - icedtea-web
     - imagemagick           # Image stuff and convert.
-    - irssi
     - jq                    # Command-line JSON parser.
     - keepassx
     - keybase
