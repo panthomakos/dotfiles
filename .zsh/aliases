@@ -68,6 +68,9 @@ alias r="bundle exec ruby -Ilib"
 alias k="be rake"
 alias known="vim ~/.ssh/known_hosts"
 
+# Snippets
+alias sn="ruby -I $HOME/Projects/strava/sn/lib $HOME/Projects/strava/sn/bin/sn"
+
 # Memcache server start and stop.
 alias mem.start="sudo systemctl start memcached"
 alias mem.stop="sudo systemctl stop memcached"
