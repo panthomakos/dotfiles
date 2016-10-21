@@ -1,0 +1,7 @@
+---
+- name: Configure Google Public DNS
+  copy: src=resolv.conf.head dest=/etc/resolv.conf.head
+  register: resolv_head
+- name: Refresh Resolv Conf
+  shell: /usr/bin/resolvconf -u
+  when: resolv_head|changed

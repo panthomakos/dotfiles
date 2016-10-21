@@ -1,5 +1,6 @@
 ---
 - include: hostname.yml
+- include: dns.yml
 - include: pacman.yml
 - include: packages.yml
 - include: clean-pacman-cache.yml
