@@ -16,27 +16,30 @@
     - bc
     - bluez
     - bluez-utils
-    - cabal-install
+    - cairo                 # Fonts (Vector Graphics Library)
     - chromium              # Browser.
     - coreutils
     - crystal               # Crystal Programming Language
     - ctags
     - cups                  # Printer management.
     - curl
+    - erlang                # Full Erlang (out of order on purpose)
     - elixir                # Elixir Programming Language
     - encfs                 # File Encryption
-    - erlang                # Full Erlang (for additional elixir functionality)
     - evince
     - exfat-utils           # exFAT filesystem support
     - expac
     - darktable             # Image Workflow and Editing
     - doxygen               # C Development: documentation generation.
+    - fontconfig            # Fonts
+    - freetype2             # Fonts
     - gdb                   # C Development: debugger.
     - ghc                   # Haskell Compiler
     - ghostscript
     - glibc                 # C Development: GNU C Library.
     - gnupg
     - gnuplot               # GNU command line plotting utility
+    - go                    # Go Programming Language
     - gsfonts
     - gsl                   # C Development: GNU Scientific Library.
     - gutenprint
@@ -63,6 +66,7 @@
     - openssh
     - openssl
     - openvpn
+    - pandoc
     - perl-image-exiftool   # EXIF reader/writer (example: edit PDF title)
     - pkg-config            # Retrieve information about installed binaries.
     - polkit
@@ -89,6 +93,8 @@
     - tmux
     - traceroute
     - tree
+    - ttf-dejavu            # Fonts
+    - ttf-inconsolata       # Fonts
     - valgrind              # C Development: test for memory usage errors.
     - vlc                   # Video player.
     - w3m
@@ -96,9 +102,6 @@
     - xautolock
     - xclip
     - xf86-input-synaptics
-    - xf86-video-ati        # ATI/Radeon
-    - xf86-video-fbdev
-    - xf86-video-intel
     - xmobar
     - xmonad
     - xmonad-contrib
@@ -112,16 +115,8 @@
 - include: yaourt.yml pkg=xcape
 # Used to watch Netflix in chrome.
 - include: yaourt.yml pkg=chromium-widevine
-- include: yaourt.yml pkg=spotify
-# WiFi driver for MacBook Air.
-- include: yaourt.yml pkg=broadcom-wl
-# Video driver for MacBook Air built-in camera.
-- include: yaourt.yml pkg=bcwc-pcie-firmware
-- include: yaourt.yml pkg=bcwc-pcie-git
 # Brother MFC-J4510DW Printer Driver
 - include: yaourt.yml pkg=brother-mfc-j4510dw
-# tmate.io (tmux remote pair programming)
-- include: yaourt.yml pkg=tmate-git
 # Zoom Meeting Application
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter

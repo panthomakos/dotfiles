@@ -12,22 +12,7 @@
   user: name={{ user.name }} shell=/bin/zsh
 
 - name: Configure User Groups
-  user: name={{ user.name }} group={{ item }} append=yes
-  with_items: "{{ user.groups }}"
-
-- command: pandoc -v
-  become: no
-  register: pandoc_version
-  ignore_errors: True
-
-- name: Update Cabal
-  shell: cabal update
-  become: no
-
-- name: Install Pandoc
-  shell: cabal install pandoc
-  become: no
-  when: pandoc_version|failed
+  user: name={{ user.name }} groups={{ user.groups }} append=yes
 
 - name: Initialize RBENV
   shell: eval "$(rbenv init -)"
@@ -61,23 +46,6 @@
 - name: Install Seeing Is Believing Gem
   shell: gem install seeing_is_believing
   become: no
-
-- command: go version
-  become: no
-  register: go_version
-  ignore_errors: yes
-
-- name: Download Go
-  command: wget https://storage.googleapis.com/golang/go{{go}}.linux-amd64.tar.gz
-  args:
-    chdir: /tmp
-  when: go_version|failed or go_version.stdout.find('{{go}}') == -1
-
-- name: Install Go
-  command: tar -C /usr/local -xzf go{{go}}.linux-amd64.tar.gz
-  args:
-    chdir: /tmp
-  when: go_version|failed or go_version.stdout.find('{{go}}') == -1
 
 - name: Configure Chrome Alias
   copy: src=chrome dest=/usr/bin/chrome mode=0755

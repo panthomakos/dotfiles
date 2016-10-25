@@ -39,9 +39,6 @@ function bam() {
 # Local BIN
 export PATH=$PATH:$HOME/bin
 
-# CABAL
-export PATH=$PATH:$HOME/.cabal/bin
-
 # RBENV
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

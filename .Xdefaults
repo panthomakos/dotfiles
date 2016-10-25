@@ -1,13 +1,12 @@
 
 !-< Xft >---------------
-Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
-Xft.hinstyle:   hintslight
+Xft.hinstyle:   hintfull
 
 
-URxvt*font:     xft:inconsolata:medium:antialias=true:hinting:false:pixelsize=13
+URxvt*font:     xft:inconsolata:medium:antialias=true:hinting:false:pixelsize=30
 
 !fixes scrolling performance issues under large buffers
 !however buffered:false seems to cause flickering

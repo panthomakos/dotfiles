@@ -1,0 +1,9 @@
+---
+- name: Disable Headphone Mic Boost
+  ini_file: dest=/usr/share/pulseaudio/alsa-mixer/paths/analog-input-headphone-mic.conf
+            section="Element Headphone Mic Boost"
+            state=absent
+- name: Disable Internal Mic Boost
+  ini_file: dest=/usr/share/pulseaudio/alsa-mixer/paths/analog-input-internal-mic.conf
+            section="Element Headphone Mic Boost"
+            state=absent

@@ -15,6 +15,12 @@ import           XMonad.Prompt.Shell
 
 import           XMonad.Hooks.UrgencyHook
 
+myXPConfig = defaultXPConfig
+    { font = "xft:DejaVu Sans Mono:pixelsize=20"
+    , position          = Bottom
+    , height            = 30
+    }
+
 myKeys c = mkKeymap c $
     [ ("M-<Return>", spawn $ XMonad.terminal c)
     , ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse set Master 5%+ unmute")
@@ -24,7 +30,7 @@ myKeys c = mkKeymap c $
     , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 20")
     , ("M-g", spawn "chrome")
     , ("M-q", spawn "i3lock -c 191970 -d")
-    , ("M-p", shellPrompt defaultXPConfig)
+    , ("M-p", shellPrompt myXPConfig)
     , ("M-m", windows W.focusMaster)
     , ("M-s", windows W.swapMaster)
     , ("M-u", focusUrgent)

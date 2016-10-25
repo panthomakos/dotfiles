@@ -4,12 +4,13 @@
 - include: pacman.yml
 - include: packages.yml
 - include: clean-pacman-cache.yml
+- include: docker.yml
 - include: home.yml
 - include: firewall.yml
 - include: fstab.yml
 - include: time.yml
-- include: docker.yml
 - include: dropbox.yml
+- include: sound.yml
 - include: mouse.yml
 - include: vagrant.yml
 - include: power.yml
