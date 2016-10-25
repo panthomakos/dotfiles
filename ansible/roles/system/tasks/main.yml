@@ -11,6 +11,7 @@
 - include: time.yml
 - include: dropbox.yml
 - include: sound.yml
+- include: fonts.yml
 - include: mouse.yml
 - include: vagrant.yml
 - include: power.yml
