@@ -94,7 +94,6 @@
     - traceroute
     - tree
     - ttf-dejavu            # Fonts
-    - ttf-inconsolata       # Fonts
     - valgrind              # C Development: test for memory usage errors.
     - vlc                   # Video player.
     - w3m
