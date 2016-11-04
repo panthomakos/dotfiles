@@ -2,7 +2,7 @@
 function! MarkdownOpen()
   let l:filename = expand("%:p")
   let l:output = "/tmp/markdown-preview.html"
-  silent exe "!pandoc -f markdown ".l:filename." -o ".l:output
+  silent exe "!grip ".l:filename." --export ".l:output
   silent exe "!chromium ".l:output
   redraw!
 endfunction

@@ -55,6 +55,7 @@ examples.desktop
 !.gnupg/gpg.conf
 .gpg/
 .gpg-agent-info
+.grip
 .hex/
 .ICEauthority
 .icedtea/

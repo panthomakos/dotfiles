@@ -121,3 +121,5 @@
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter
 - include: yaourt.yml pkg=par
+# Grip (GitHub Flavored Markdown Preview)
+- include: yaourt.yml pkg=python-grip-git
