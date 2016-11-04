@@ -1,3 +1,14 @@
 ---
 - name: Configure Natural Scrolling
   copy: src=synaptics.conf dest=/etc/X11/xorg.conf.d/50-synaptics.conf
+- name: Add modprobe.conf to disable psmouse
+  copy: src=modprobe.conf dest=/etc/modprobe.d/modprobe.conf
+- name: Add modprobe.conf to mkinitcpio.conf
+  lineinfile: dest=/etc/mkinitcpio.conf
+              backrefs=yes
+              regexp=^FILES=\"\"
+              line=FILES=\"/etc/modprobe.d/modprobe.conf\"
+  register: mkinitcpio_file
+- name: Regenerate Initial Ramdisk
+  shell: mkinitcpio -p linux
+  when: mkinitcpio_file|changed
