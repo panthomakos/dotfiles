@@ -1,8 +1,0 @@
----
-- mount: name={{ home }}/.cache
-         state=mounted
-         src=tmpfs
-         fstype=tmpfs
-         opts=noatime,nodev,nosuid,size=1G
-         dump=0
-         passno=0
