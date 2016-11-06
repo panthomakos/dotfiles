@@ -9,7 +9,6 @@ fi
 
 keyboard
 
-systemctl --user start syndaemon
 systemctl --user start xautolock.service
 
 # Accelerate the mouse a bit.
