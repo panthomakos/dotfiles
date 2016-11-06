@@ -4,8 +4,8 @@ font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
 , fgColor = "grey"
 , position = Top
 , lowerOnStart = True
-, commands = [ Run Network "wlp3s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
-             , Run Wireless "wlp3s0" ["-t","<essid>"] 10
+, commands = [ Run DynNetwork ["-L","0","-H","32","--normal","green","--high","red"] 10
+             , Run Wireless "wlp58s0" ["-t","<essid>"] 10
              , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
              , Run Com "/home/pan/.xmonad/vpn.sh" [] "vpn" 10
              , Run Memory ["-t","Mem: <usedratio>%"] 10
@@ -18,6 +18,6 @@ font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
              ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%pomodoro% | %cpu% | %memory% | %vpn% | %wlp3s0wi% | %wlp3s0% | %battery% | %StdinReader% }{ %vol% | %bright% | <fc=#ee9a00>%date%</fc>"
+, template = "%pomodoro% | %cpu% | %memory% | %vpn% | %wlp58s0wi% | %dynnetwork% | %battery% | %StdinReader% }{ %vol% | %bright% | <fc=#ee9a00>%date%</fc>"
 }
 
