@@ -36,6 +36,8 @@ Plug 'rhysd/vim-textobj-ruby'
 Plug 'vim-ruby/vim-ruby'
 Plug 'ngmy/vim-rubocop'
 
+Plug 'derekwyatt/vim-scala'
+
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
