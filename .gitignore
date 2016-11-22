@@ -107,6 +107,7 @@ Public/
 .rubinius_last_error
 .rvm
 .s3cfg
+.scala_history
 .shef_history
 .ssh/
 !.ssh/config
