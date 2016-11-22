@@ -42,6 +42,8 @@
     - go                    # Go Programming Language
     - gsfonts
     - gsl                   # C Development: GNU Scientific Library.
+    - gtk3
+    - gtk3-print-backends   # Print from Gtk3 applications.
     - gutenprint
     - guvcview              # Webcam configuration utility.
     - gvim
