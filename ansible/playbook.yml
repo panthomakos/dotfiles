@@ -9,9 +9,5 @@
       groups: audio,docker,users,video,wireshark
     home: /home/pan
     ruby: 2.3.1
-    scanner:
-      name: Brother
-      ip: '192.168.0.102'
-      model: MFC-J4510DW
   roles:
     - system

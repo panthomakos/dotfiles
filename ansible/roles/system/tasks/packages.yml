@@ -117,8 +117,8 @@
 - include: yaourt.yml pkg=xcape
 # Used to watch Netflix in chrome.
 - include: yaourt.yml pkg=chromium-widevine
-# Brother MFC-J4510DW Printer Driver
-- include: yaourt.yml pkg=brother-mfc-j4510dw
+# Brother HL-L2360DW Printer Driver
+- include: yaourt.yml pkg=brother-hll2360d
 # Zoom Meeting Application
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter
