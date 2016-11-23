@@ -127,3 +127,5 @@
 - include: yaourt.yml pkg=par
 # Grip (GitHub Flavored Markdown Preview)
 - include: yaourt.yml pkg=python-grip-git
+# Userspace Software Suspend (used to retrieve resume_offset of swap file)
+- include: yaourt.yml pkg=uswsusp-git
