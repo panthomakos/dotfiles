@@ -3,6 +3,7 @@
 - include: dns.yml
 - include: pacman.yml
 - include: packages.yml
+- include: scala.yml
 - include: clean-pacman-cache.yml
 - include: docker.yml
 - include: home.yml

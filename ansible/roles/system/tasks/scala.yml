@@ -1,0 +1,13 @@
+---
+- name: Install Java
+  pacman: name=jdk8-openjdk state=present
+- name: Check Java Version
+  shell: archlinux-java get
+  register: java_version
+- name: Set Java Version
+  shell: archlinux-java set java-8-openjdk
+  when: java_version.stdout.find('java-8-openjdk') == -1
+- name: Install Scala
+  pacman: name=scala state=present
+- name: Install SBT
+  pacman: name=sbt state=present
