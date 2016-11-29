@@ -26,6 +26,7 @@
     - erlang                # Full Erlang (out of order on purpose)
     - elixir                # Elixir Programming Language
     - encfs                 # File Encryption
+    - eog                   # Image Viewer
     - evince
     - exfat-utils           # exFAT filesystem support
     - expac
