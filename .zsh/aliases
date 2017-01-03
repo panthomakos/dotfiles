@@ -107,7 +107,7 @@ alias sl="screen -ls"
 
 # Connect/Disconnect from a named VPN.
 function vpno {
-  sudo systemctl start openvpn@${1}.service
+  sudo systemctl start openvpn-client@${1}.service
 }
 
 function vpnc {
@@ -118,7 +118,7 @@ function vpns {
   systemctl status $(vpnls) -l
 }
 
-alias vpnls="systemctl | grep 'openvpn@' | grep 'active' | awk '{print \$1}'"
+alias vpnls="systemctl | grep 'openvpn-client@' | grep 'active' | awk '{print \$1}'"
 
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"

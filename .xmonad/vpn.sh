@@ -1,7 +1,7 @@
 #!/bin/sh
 
-output=`systemctl | grep 'openvpn@' | grep 'active' | awk '{print \$1}'`
-regex="openvpn@(.+)\.service"
+output=`systemctl | grep 'openvpn-client@' | grep 'active' | awk '{print \$1}'`
+regex="openvpn-client@(.+)\.service"
 
 if [[ $output =~ $regex ]]; then
   echo ${BASH_REMATCH[1]}

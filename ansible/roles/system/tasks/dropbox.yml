@@ -28,7 +28,7 @@
   become: no
   register: vpn
 - file: src={{ home }}/Dropbox/sync/vpn/etc
-        dest=/etc/openvpn
+        dest=/etc/openvpn/client
         state=link
         force=yes
   when: sync.stat.exists
