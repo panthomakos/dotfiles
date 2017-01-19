@@ -30,6 +30,7 @@
 	sx = "!sh -c 'git stash drop stash@{$1}' -"
 	ds = "!sh -c 'git stash show -p stash@{$1}' -"
 	rhm = reset --hard origin/master
+	tip = !sh -c 'git rev-list --boundary HEAD...master | grep -v "^-" | tail -n1'
 	tags = tag -l
 [core]
 	editor = vim
