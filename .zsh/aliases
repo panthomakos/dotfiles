@@ -38,6 +38,9 @@ alias jqd="jq '.'"
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
 
+# Exec and SSH (cascades exiting of multiple shells)
+alias essh="exec ssh"
+
 # Lock the screen and suspend.
 alias i3exit="i3lock -c 191970 && systemctl suspend"
 alias cxlock="systemctl --user stop xautolock"
