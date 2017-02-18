@@ -6,4 +6,5 @@ doc/tags
 *.swp
 *.swo
 tags
+.test.runner
 zeus.json

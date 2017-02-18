@@ -16,6 +16,11 @@ function! SetTestFile()
   " Set the spec file.
   let t:filename=@%
 
+  if filereadable('.test.runner')
+    let t:command=readfile('.test.runner')[0]
+    return 0
+  end
+
   " Determine if the spec file requires rails.
   let t:rails=(match(getline(1,'$'), 'require\s\+.spec_helper.') != -1)
 
