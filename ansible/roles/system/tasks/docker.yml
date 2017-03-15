@@ -2,3 +2,10 @@
 - pacman: name=docker state=present
 - pacman: name=docker-compose state=present
 - service: name=docker enabled=yes
+- file: path=/etc/systemd/system/docker.service.d state=directory
+- copy: src=docker.override dest=/etc/systemd/system/docker.service.d/override.conf
+  register: file
+- service: name=docker state=reloaded
+  when: file|changed
+- service: name=docker state=restarted
+  when: file|changed
