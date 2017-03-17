@@ -3,9 +3,6 @@
 # Bundler Development
 alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler/bin/bundle"
 
-# Screenshot Capture
-alias capture="maim -s --nokeyboard"
-
 # Encrypt a file for myself.
 alias gpge="gpg -e -r 'Pan Thomakos'"
 # Decrypt a file.

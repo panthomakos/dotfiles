@@ -33,6 +33,7 @@ myKeys c = mkKeymap c $
     , ("M-p", shellPrompt myXPConfig)
     , ("M-m", windows W.focusMaster)
     , ("M-s", windows W.swapMaster)
+    , ("M-c", spawn "sleep 0.2; maim -s ~/capture-$(date +%s).png")
     , ("M-u", focusUrgent)
     , ("M-S-s", withFocused $ windows . W.sink)
     ]
