@@ -90,6 +90,7 @@
     - s3cmd                 # For syncing S3 buckets locally.
     - sane
     - screen
+    - shellcheck            # Bash script linter.
     - slop                  # Allows selection with maim.
     - stylish-haskell       # Haskell Pretty Printer.
     - sxiv                  # Image Viewer
