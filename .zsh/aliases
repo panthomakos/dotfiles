@@ -26,6 +26,9 @@ alias luksk="sudo cryptsetup luksChangeKey"
 # Run the Ranger File Browser
 alias ra="ranger"
 
+# Run kdenlive
+alias kdl="QT_AUTO_SCREEN_SCALE_FACTOR=0 kdenlive"
+
 # Get Numerical MOD value of file (mod <file>)
 alias mod="stat --format '%a'"
 
