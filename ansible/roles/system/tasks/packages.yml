@@ -53,6 +53,7 @@
     - icedtea-web
     - imagemagick           # Image stuff and convert.
     - jq                    # Command-line JSON parser.
+    - kdenlive              # Video Editing.
     - keepassx2
     - keybase
     - libcups
@@ -85,6 +86,7 @@
     - python-dbus           # Used by avahi-discover.
     - ranger                # Text-based file manager.
     - readline
+    - recordmydesktop       # Screen record utility.
     - redis
     - rxvt-unicode          # Simple terminal when using X.
     - s3cmd                 # For syncing S3 buckets locally.
