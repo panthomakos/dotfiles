@@ -13,7 +13,9 @@ import           XMonad.Util.Run              (spawnPipe)
 import           XMonad.Prompt
 import           XMonad.Prompt.Shell
 
+import           XMonad.Actions.MouseResize
 import           XMonad.Hooks.UrgencyHook
+import           XMonad.Layout.WindowArranger
 
 myXPConfig = defaultXPConfig
     { font = "xft:DejaVu Sans Mono:pixelsize=20"
@@ -59,7 +61,7 @@ main = do
     { modMask = mod4Mask
     , keys = \c -> myKeys c `M.union` keys defaultConfig c
     , manageHook = myManageHook <+> manageHook defaultConfig
-    , layoutHook = avoidStruts  $  myLayouts
+    , layoutHook = mouseResize $ windowArrange $ avoidStruts $ myLayouts
     , handleEventHook = mconcat
                       [ docksEventHook
                       , handleEventHook defaultConfig ]
