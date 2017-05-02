@@ -27,8 +27,11 @@
 - stat: path={{ home }}/Dropbox/sync/vpn/etc
   become: no
   register: vpn
-- file: src={{ home }}/Dropbox/sync/vpn/etc
-        dest=/etc/openvpn/client
-        state=link
-        force=yes
-  when: sync.stat.exists
+- copy:
+    src: "{{ item }}"
+    dest: /etc/openvpn/client/
+    owner: root
+    mode: "0600"
+  with_fileglob:
+    - "{{ home }}/Dropbox/sync/vpn/etc/*.conf"
+  when: vpn.stat.exists
