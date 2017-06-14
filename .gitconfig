@@ -33,6 +33,9 @@
 	tip = !git rev-list `git merge-base origin/master HEAD`..HEAD | tail -n1
 	fix = !git commit --fixup `git tip`
 	tags = tag -l
+	m = checkout master
+	ca = commit --amend
+	can = commit --amend --no-edit
 [core]
 	editor = vim
 	whitespace = trailing-space
