@@ -49,6 +49,7 @@
     - guvcview              # Webcam configuration utility.
     - gvim
     - haskell-quickcheck    # Haskell testing library.
+    - hub                   # GitHub CLI for Git
     - i3lock                # Screen Locker
     - icedtea-web
     - imagemagick           # Image stuff and convert.
