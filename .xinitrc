@@ -14,4 +14,7 @@ systemctl --user start xautolock.service
 # Accelerate the mouse a bit.
 xset m 3/1 4
 
+# Turn on Xcompmgr
+xcompmgr -o 0 -c &
+
 exec xmonad

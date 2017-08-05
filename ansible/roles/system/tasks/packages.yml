@@ -102,6 +102,7 @@
     - the_silver_searcher   # (ag) Code search tool like Ack but faster.
     - tmux
     - traceroute
+    - transset-df           # Transparency for Xcompmgr
     - tree
     - ttf-dejavu            # Fonts
     - valgrind              # C Development: test for memory usage errors.
@@ -110,6 +111,7 @@
     - wireshark-gtk         # Network Packet Analyzer
     - xautolock
     - xclip
+    - xcompmgr              # Composite Window Manager
     - xf86-input-synaptics
     - xmobar
     - xmonad
@@ -133,5 +135,7 @@
 - include: yaourt.yml pkg=python-grip-git
 # Userspace Software Suspend (used to retrieve resume_offset of swap file)
 - include: yaourt.yml pkg=uswsusp-git
-  # acpilight (backward-compatible replacement for xbacklight)
+# acpilight (backward-compatible replacement for xbacklight)
 - include: yaourt.yml pkg=acpilight
+# Peek GIF Screen Recording Utility
+- include: yaourt.yml pkg=peek
