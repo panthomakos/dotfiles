@@ -90,11 +90,6 @@ alias mysql.stop="sudo systemctl stop mysqld.service"
 alias zk.start="zkServer start"
 alias zk.stop="zkServer stop"
 
-# Postgres start, stop and connect.
-alias pg="pg_ctl -D /usr/local/var/postgres"
-alias pg.start="pg -l /usr/local/var/postgres/server.log start"
-alias pg.stop="pg stop -s -m fast"
-
 alias print.start="sudo systemctl start org.cups.cupsd.service avahi-daemon"
 alias print.stop="sudo systemctl stop org.cups.cupsd.service avahi-daemon"
 alias print.manage="chromium http://localhost:631"
