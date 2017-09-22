@@ -2,7 +2,7 @@ source $HOME/.zsh/gpg
 source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export GOPATH=$HOME/Projects/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -38,6 +38,10 @@ function bam() {
 
 # Local BIN
 export PATH=$PATH:$HOME/bin
+
+# Yarn/NPM BIN
+export PATH="$PATH:/$HOME/.node_modules/bin"
+export npm_config_prefix=~/.node_modules
 
 # RBENV
 export PATH="$HOME/.rbenv/bin:$PATH"

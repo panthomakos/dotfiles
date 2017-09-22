@@ -43,6 +43,9 @@ Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
 
+" Elm
+Plug 'ElmCast/elm-vim'
+
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 
