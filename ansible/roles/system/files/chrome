@@ -2,4 +2,9 @@
 
 exec chromium \
   --cipher-suite-blacklist=0x0033,0x0039,0x009E,0xcc15 \
-  --force-device-scale-factor=2
+  --force-device-scale-factor=2 \
+  --enable-checker-imaging \
+  --enable-native-gpu-memory-buffers \
+  --disable-gpu-driver-bug-workarounds \
+  --ignore-gpu-blacklist \
+  --enable-threaded-composting
