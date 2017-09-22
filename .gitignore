@@ -38,6 +38,7 @@ Dropbox/
 .dvdcss
 .ecryptfs
 .elinks/
+.elm/
 .env
 .erlang.cookie
 .esd_auth
@@ -82,6 +83,7 @@ Music/
 .mysql_history
 .netrc
 .netrwhist
+.node_modules/
 .npm/
 .openambit/
 .passenger/
@@ -143,5 +145,6 @@ sync.log
 .xmonad/lib/XMonad/Layout/FullMaximize.o
 .xsession-errors
 .xsession-errors.*
+.yarnrc
 .zcompdump
 .zoom
