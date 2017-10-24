@@ -1,28 +1,21 @@
 call plug#begin()
+Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
-Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-abolish'
 Plug 'kien/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher', { 'do' : './install.sh' }
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
-Plug 'rust-lang/rust.vim'
 
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-
-Plug 'neovimhaskell/haskell-vim'
-Plug 'lukerandall/haskellmode-vim'
-Plug 'gilligan/vim-textobj-haskell'
-Plug 'nbouscal/vim-stylish-haskell'
 
 Plug 'hwartig/vim-seeing-is-believing'
 
@@ -33,24 +26,13 @@ Plug 'kana/vim-textobj-line'
 
 Plug 'rhysd/vim-textobj-ruby'
 
-Plug 'vim-ruby/vim-ruby'
 Plug 'ngmy/vim-rubocop'
-
-Plug 'derekwyatt/vim-scala'
 
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
-Plug 'fatih/vim-go'
-
-" Elm
-Plug 'ElmCast/elm-vim'
-
-" Elixir
-Plug 'elixir-lang/vim-elixir'
 
 Plug 'GEverding/vim-hocon'
-Plug 'chase/vim-ansible-yaml'
 Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
 
 Plug 'tpope/vim-vinegar' " Additions to the built-in netrw directory browser.
