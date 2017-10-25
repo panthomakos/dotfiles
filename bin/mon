@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -e
+
+intern=eDP-1
+extern=DP-1
+
+case "$1" in
+  dev)
+    xrandr \
+      --output eDP-1 --auto \
+      --output DP-1 --primary --auto \
+        --panning 3200x1800+3200+0 --scale 1.25x1.25 --right-of eDP-1
+    ;;
+  pres)
+    xrandr \
+      --output eDP-1 --primary --auto \
+      --output DP-1 --auto --right-of eDP-1
+    ;;
+  *)
+    xrandr --output eDP-1 --primary --auto --output DP-1 --off
+    ;;
+esac
+
+exec xmonad --restart
