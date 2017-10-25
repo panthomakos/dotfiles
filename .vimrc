@@ -150,11 +150,11 @@ map gfs <C-w>f
 
 " FZF Configuration
 map <leader>f :GFiles<CR>
-map <leader>tf :Tags<CR>
+map <leader>b :Buffers<CR>
+map <leader>c :Tags<CR>
 map <leader>cf :BCommits<CR>
 map <leader>lf :BLines<CR>
 map <leader>mf :Marks<CR>
-map <leader>bf :Buffers<CR>
 
 " Unload Buffer Using Ctrl-W
 nmap <C-w> :bd<CR>
