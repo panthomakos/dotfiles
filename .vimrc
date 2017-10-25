@@ -7,8 +7,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
-Plug 'kien/ctrlp.vim'
-Plug 'JazzCore/ctrlp-cmatcher', { 'do' : './install.sh' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
@@ -146,12 +145,14 @@ nmap gV `[v`]
 " Goto File Horizontal and Vertical Splits
 map gfv <C-w>L
 map gfs <C-w>f
-" Access CtrlP
-map <leader>f :CtrlP<CR>
-" Access CtrlPTags
-map <leader>tf :CtrlPTag<CR>
-" Reload CtlrP Cache.
-map <leader>cf :CtrlPClearCache<CR>\|:CtrlP<CR>
+
+" FZF Configuration
+map <leader>f :GFiles<CR>
+map <leader>tf :Tags<CR>
+map <leader>cf :BCommits<CR>
+map <leader>lf :BLines<CR>
+map <leader>mf :Marks<CR>
+map <leader>bf :Buffers<CR>
 
 " Easy Alignment Mappings
 xmap ga <Plug>(EasyAlign)
@@ -165,16 +166,6 @@ nnoremap E $
 
 " Use AG as the VIM grep command.
 set grepprg=ag\ --nogroup\ --nocolor
-
-" Only list version controlled files in CtrlP when possible.
-if isdirectory('.git')
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
-else
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-end
-
-" Use ctrlp-cmatcher as the CtrlP matcher function.
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " Configure browser for Haskell Doc
 let g:haddock_browser = "/usr/bin/chromium"

@@ -34,6 +34,7 @@
     - doxygen               # C Development: documentation generation.
     - fontconfig            # Fonts
     - freetype2             # Fonts
+    - fzf                   # Command line fuzzy finder.
     - gdb                   # C Development: debugger.
     - ghc                   # Haskell Compiler
     - ghostscript
