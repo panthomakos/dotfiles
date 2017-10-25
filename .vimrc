@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
@@ -15,6 +16,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+
+Plug 'w0rp/ale' " Asynchronous Lint Engine
 
 Plug 'hwartig/vim-seeing-is-believing'
 
