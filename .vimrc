@@ -29,7 +29,6 @@ Plug 'ngmy/vim-rubocop'
 
 Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
-Plug 'rking/ag.vim'
 
 Plug 'GEverding/vim-hocon'
 Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
