@@ -4,7 +4,7 @@ function! MakeRubyMethodMultiline()
   :normal! P
   mark y
   " Add newlines for opening braces and commas.
-  :.s/\([,{(]\)/\1\r/g
+  :.s/\([,{(]\)\([^$]\)/\1\r\2/g
   mark z
   " Add newlines for closing braces.
   :'y,'zs/\s*\([})]\)/\r\1/g
