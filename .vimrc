@@ -157,7 +157,7 @@ map <leader>lf :BLines<CR>
 map <leader>mf :Marks<CR>
 
 " Unload Buffer Using Ctrl-W
-nmap <C-w> :bd<CR>
+nmap <C-x> :bd<CR>
 
 " Easy Alignment Mappings
 xmap ga <Plug>(EasyAlign)
