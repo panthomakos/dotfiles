@@ -156,6 +156,9 @@ map <leader>cf :BCommits<CR>
 map <leader>lf :BLines<CR>
 map <leader>mf :Marks<CR>
 
+" Ale Configuration
+let g:ale_ruby_rubocop_executable = 'bundle'
+
 " Unload Buffer Using Ctrl-W
 nmap <C-x> :bd<CR>
 
