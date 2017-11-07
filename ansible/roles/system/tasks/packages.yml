@@ -17,7 +17,6 @@
     - bluez
     - bluez-utils
     - cairo                 # Fonts (Vector Graphics Library)
-    - chromium              # Browser.
     - coreutils
     - crystal               # Crystal Programming Language
     - ctags
@@ -124,8 +123,8 @@
     - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
 - include: yaourt.yml pkg=xcape
-# Used to watch Netflix in chrome.
-- include: yaourt.yml pkg=chromium-widevine
+# Google Chrome Browser
+- include: yaourt.yml pkg=google-chrome
 # Brother HL-L2360DW Printer Driver
 - include: yaourt.yml pkg=brother-hll2360d
 # Zoom Meeting Application
