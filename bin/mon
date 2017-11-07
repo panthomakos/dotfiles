@@ -4,21 +4,33 @@ set -e
 
 intern=eDP-1
 extern=DP-1
+scale=1.25x1.25
+
+# In the `xrandr` commands below, the `--right-of` options are set
+# in separate command invocations in order to allow for proper
+# switching from one setup to another.
 
 case "$1" in
+  ext)
+    xrandr \
+      --output ${intern} --off \
+      --output ${extern} --primary --auto --panning 3200x1800+0+0 --scale ${scale}
+    ;;
   dev)
     xrandr \
-      --output eDP-1 --auto \
-      --output DP-1 --primary --auto \
-        --panning 3200x1800+3200+0 --scale 1.25x1.25 --right-of eDP-1
+      --output ${intern} --auto \
+      --output ${extern} --primary --auto \
+        --panning 3200x1800+3200+0 --scale ${scale}
+    xrandr --output ${extern} --right-of ${intern}
     ;;
   pres)
     xrandr \
-      --output eDP-1 --primary --auto \
-      --output DP-1 --auto --right-of eDP-1
+      --output ${intern} --primary --auto \
+      --output ${extern} --auto
+    xrandr output ${extern} --right-of ${intern}
     ;;
   *)
-    xrandr --output eDP-1 --primary --auto --output DP-1 --off
+    xrandr --output ${intern} --primary --auto --output ${extern} --off
     ;;
 esac
 
