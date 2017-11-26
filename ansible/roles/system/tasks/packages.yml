@@ -139,3 +139,5 @@
 - include: yaourt.yml pkg=acpilight
 # Peek GIF Screen Recording Utility
 - include: yaourt.yml pkg=peek
+# Graph Editor (flowcart, network, UML)
+- include: yaourt.yml pkg=yed
