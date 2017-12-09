@@ -92,7 +92,7 @@ alias zk.stop="zkServer stop"
 
 alias print.start="sudo systemctl start org.cups.cupsd.service avahi-daemon"
 alias print.stop="sudo systemctl stop org.cups.cupsd.service avahi-daemon"
-alias print.manage="chromium http://localhost:631"
+alias print.manage="google-chrome-stable http://localhost:631"
 
 # Convenience aliases for running Ruby specs.
 alias specs="find spec/**/*_spec.rb"
@@ -122,7 +122,7 @@ alias vpnls="systemctl | grep 'openvpn-client@' | grep 'active' | awk '{print \$
 alias gits-update="git submodule foreach git pull origin master"
 
 # Easily open a github project in Chrome.
-function gh { chromium "https://github.com/$1" }
+function gh { google-chrome-stable "https://github.com/$1" }
 
 # Docker Related Aliases and Functions
 # ------------------------------------
