@@ -26,8 +26,8 @@ case "$1" in
   pres)
     xrandr \
       --output ${intern} --primary --auto \
-      --output ${extern} --auto
-    xrandr output ${extern} --right-of ${intern}
+      --output ${extern} --auto --panning 0x0+0+0 --scale 1x1
+    xrandr --output ${extern} --right-of ${intern}
     ;;
   *)
     xrandr --output ${intern} --primary --auto --output ${extern} --off
