@@ -9,5 +9,7 @@
       groups: audio,docker,users,video,wireshark
     home: /home/pan
     ruby: 2.3.1
+    network:
+      iface: wlp58s0
   roles:
     - system

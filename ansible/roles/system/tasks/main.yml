@@ -1,6 +1,7 @@
 ---
 - include: hostname.yml
 - include: dns.yml
+- include: network.yml
 - include: pacman.yml
 - include: packages.yml
 - include: mimeo.yml

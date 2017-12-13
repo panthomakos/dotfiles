@@ -1,0 +1,4 @@
+---
+- name: Install Netctl Systemd Auto-Connect Manager
+  pacman: name=wpa_actiond state=present
+- service: name=netctl-auto@{{network.iface}}.service enabled=yes state=started
