@@ -13,60 +13,41 @@
     - alsa-oss
     - alsa-utils
     - avahi
-    - bc
     - bluez
     - bluez-utils
     - cairo                 # Fonts (Vector Graphics Library)
     - coreutils
-    - crystal               # Crystal Programming Language
-    - ctags
     - cups                  # Printer management.
     - curl
-    - erlang                # Full Erlang (out of order on purpose)
-    - elixir                # Elixir Programming Language
     - encfs                 # File Encryption
     - eog                   # Image Viewer
-    - evince
+    - evince                # PDF Viewer
     - exfat-utils           # exFAT filesystem support
     - expac
-    - darktable             # Image Workflow and Editing
-    - doxygen               # C Development: documentation generation.
     - fontconfig            # Fonts
     - freetype2             # Fonts
-    - fzf                   # Command line fuzzy finder.
-    - gdb                   # C Development: debugger.
-    - ghc                   # Haskell Compiler
     - ghostscript
-    - glibc                 # C Development: GNU C Library.
     - gnupg
+    - glibc                 # C Development: GNU C Library.
     - gnuplot               # GNU command line plotting utility
-    - go                    # Go Programming Language
     - gsfonts
-    - gsl                   # C Development: GNU Scientific Library.
+    - gthumb                # Simple Image Editor
     - gtk3
-    - gtk3-print-backends   # Print from Gtk3 applications.
     - gutenprint
     - guvcview              # Webcam configuration utility.
-    - gvim
-    - haskell-quickcheck    # Haskell testing library.
-    - hub                   # GitHub CLI for Git
+    - gvim                  # Vim (with GTK/X support)
     - i3lock                # Screen Locker
-    - icedtea-web
     - imagemagick           # Image stuff and convert.
-    - jq                    # Command-line JSON parser.
     - kdenlive              # Video Editing.
-    - keepassx2
-    - keybase
-    - libcups
+    - keepassx2             # Password Manager
+    - libcups               # CUPS Printing Library
     - libmtp                # MTP filesystem support for Kindle.
     - linux-headers
     - maim                  # Screen capture utility.
-    - memcached
     - msmtp
     - mtpfs                 # MTP filesystem for Kindle.
     - net-tools
     - nmap
-    - nodejs
     - noto-fonts            # Google Noto Font Family
     - noto-fonts-cjk        # Google Noto Font Family CJK
     - noto-fonts-emoji      # Google Noto Font Family Emoji
@@ -88,28 +69,25 @@
     - ranger                # Text-based file manager.
     - readline
     - recordmydesktop       # Screen record utility.
-    - redis
     - rxvt-unicode          # Simple terminal when using X.
     - s3cmd                 # For syncing S3 buckets locally.
     - sane
     - screen
     - shellcheck            # Bash script linter.
+    - siege                 # Load testing and benchmarking tool.
     - slop                  # Allows selection with maim.
-    - stylish-haskell       # Haskell Pretty Printer.
     - sxiv                  # Image Viewer
     - tar
     - tcpdump
-    - the_silver_searcher   # (ag) Code search tool like Ack but faster.
     - tmux
     - traceroute
     - transset-df           # Transparency for Xcompmgr
     - tree
     - ttf-dejavu            # Fonts
-    - valgrind              # C Development: test for memory usage errors.
     - vlc                   # Video player.
     - w3m
     - wireshark-gtk         # Network Packet Analyzer
-    - xautolock
+    - xautolock             # Screen Locking
     - xclip
     - xcompmgr              # Composite Window Manager
     - xf86-input-synaptics
@@ -122,6 +100,19 @@
     - xorg-xprop            # Display window properties by clicking.
     - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
+- name: Install Programming Packages
+  pacman: name={{ item }} state=present
+  with_items:
+    - ctags
+    - fzf                   # Command line fuzzy finder.
+    - ghc                   # Haskell Compiler
+    - haskell-quickcheck    # Haskell testing library.
+    - hub                   # GitHub CLI for Git
+    - memcached
+    - nodejs
+    - redis
+    - stylish-haskell       # Haskell Pretty Printer.
+    - the_silver_searcher   # (ag) Code search tool like Ack but faster.
 - include: yaourt.yml pkg=xcape
 # Google Chrome Browser
 - include: yaourt.yml pkg=google-chrome
@@ -131,8 +122,6 @@
 - include: yaourt.yml pkg=zoom
 # Paragraph Reformatter
 - include: yaourt.yml pkg=par
-# Grip (GitHub Flavored Markdown Preview)
-- include: yaourt.yml pkg=python-grip-git
 # Userspace Software Suspend (used to retrieve resume_offset of swap file)
 - include: yaourt.yml pkg=uswsusp-git
 # acpilight (backward-compatible replacement for xbacklight)
@@ -141,3 +130,7 @@
 - include: yaourt.yml pkg=peek
 # Graph Editor (flowcart, network, UML)
 - include: yaourt.yml pkg=yed
+# Keybase
+- include: yaourt.yml pkg=keybase-bin
+- pip:
+    name: grip # GitHub Flavored Markdown Preview
