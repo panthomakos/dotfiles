@@ -1,6 +1,7 @@
 abs/
 .ansible/
 Applications/
+.asdf/
 .aws/
 .boom
 .boom.conf

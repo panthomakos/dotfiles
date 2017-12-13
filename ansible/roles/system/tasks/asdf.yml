@@ -1,0 +1,33 @@
+---
+- name: Install ASDF
+  become: no
+  git:
+    repo: 'https://github.com/asdf-vm/asdf.git'
+    dest: "{{home}}/.asdf"
+    version: v0.4.0
+    update: no
+
+- name: Update ASDF
+  shell: asdf update
+  become: no
+
+- command: asdf plugin-list
+  become: no
+  register: asdf_plugins
+  ignore_errors: True
+
+- name: Add ASDF Plugins
+  shell: asdf plugin-add {{item}}
+  become: no
+  when: asdf_plugins.stdout.find('{{item}}') == -1
+  with_items:
+    - crystal
+    - elixir
+    - erlang
+    - golang
+
+- name: Install ASDF Language Versions
+  shell: asdf install
+  become: no
+  args:
+    chdir: "{{home}}"
