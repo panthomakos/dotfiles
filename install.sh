@@ -3,5 +3,5 @@
 which ansible-playbook || sudo pacman -S ansible
 
 pushd $HOME/ansible
-ansible-playbook -K -i inventory playbook.yml
+ansible-playbook -K -i inventory playbook.yml "$@"
 popd
