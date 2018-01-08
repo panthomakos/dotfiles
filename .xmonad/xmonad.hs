@@ -46,7 +46,7 @@ myManageHook = composeAll
   , manageDocks
   ]
 
-myLayouts = Full ||| tiled
+myLayouts = Full ||| tiled ||| Mirror tiled
   where
     tiled = Tall nmaster delta ratio
     -- Default number of windows in the master pane
