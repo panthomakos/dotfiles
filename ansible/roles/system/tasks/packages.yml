@@ -55,6 +55,7 @@
     - openssl
     - openvpn
     - pandoc
+    - perf                  # CLI for Performance Benchmarks
     - perl-image-exiftool   # EXIF reader/writer (example: edit PDF title)
     - pkg-config            # Retrieve information about installed binaries.
     - polkit
