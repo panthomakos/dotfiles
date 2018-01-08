@@ -124,7 +124,6 @@ sync.log
 .thumbnails/
 .Trash
 .tuneclone.data
-.vagrant.d/
 .vim/bundle/
 .vim/haskellmode.config
 .vim/plugged/

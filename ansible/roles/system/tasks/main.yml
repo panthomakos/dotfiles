@@ -16,7 +16,6 @@
 - include: sound.yml
 - include: fonts.yml
 - include: mouse.yml
-- include: vagrant.yml
 - include: power.yml
 - include: display.yml
 - include: u2f.yml
