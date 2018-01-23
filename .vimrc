@@ -158,6 +158,8 @@ map <leader>mf :Marks<CR>
 
 " Ale Configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
+nmap <silent> ]g <Plug>(ale_previous_wrap)
+nmap <silent> [g <Plug>(ale_next_wrap)
 
 " Unload Buffer Using Ctrl-W
 nmap <C-x> :bd<CR>
