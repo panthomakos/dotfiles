@@ -111,9 +111,12 @@
     - hub                   # GitHub CLI for Git
     - memcached
     - nodejs
+    - npm
     - redis
     - stylish-haskell       # Haskell Pretty Printer.
     - the_silver_searcher   # (ag) Code search tool like Ack but faster.
+    - yarn
+- include: yaourt.yml pkg=libtinfo5 # Fixes issue with elm/elm-repl
 - include: yaourt.yml pkg=xcape
 # Google Chrome Browser
 - include: yaourt.yml pkg=google-chrome
