@@ -61,3 +61,7 @@
 
 - name: Configure Chrome Alias
   copy: src=chrome dest=/usr/bin/chrome mode=0755
+
+- name: Upgrade VIM Plugins
+  command: vim +PlugUpdate +qall
+  become: no

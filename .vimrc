@@ -155,9 +155,11 @@ map <leader>c :Tags<CR>
 map <leader>cf :BCommits<CR>
 map <leader>lf :BLines<CR>
 map <leader>mf :Marks<CR>
+map <leader>df :Files<CR>
 
 " Ale Configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_set_highlights = 0
 nmap <silent> ]g <Plug>(ale_previous_wrap)
 nmap <silent> [g <Plug>(ale_next_wrap)
 
