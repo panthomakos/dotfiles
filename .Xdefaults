@@ -6,7 +6,25 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hinstyle:   hintfull
 
+! resize-font: Use Ctrl++, Ctrl--, Ctrl=, and Ctrl? to increase,
+!   decrease, reset, and view the font size.
+! default,matcher: Make URLs in the terminal clickable.
+URxvt.perl-ext-common: default,matcher,resize-font
+
+! Default font configuration.
 URxvt*font:     xft:DejaVuSansMono:size=7
+
+! Underline URLs, make them bold, and colorful.
+URxvt.matcher.rend.0: Uline Bold fg5
+! Open URLs using google-chrome-stable.
+URxvt.url-launcher: /usr/bin/google-chrome-stable
+! Use the mouse button to click on URLs.
+URxvt.matcher.button: 1
+
+! Disable "Picture Insert Mode" and "ISO 14755 Mode" which
+! are enabled when using Ctrl+Shift combinations by default.
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 !fixes scrolling performance issues under large buffers
 !however buffered:false seems to cause flickering

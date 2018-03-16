@@ -136,5 +136,7 @@
 - include: yaourt.yml pkg=yed
 # Keybase
 - include: yaourt.yml pkg=keybase-bin
+# Change urxvt Font Size Dynamically
+- include: yaourt.yml pkg=urxvt-resize-font-git
 - pip:
     name: grip # GitHub Flavored Markdown Preview
