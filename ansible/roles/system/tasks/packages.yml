@@ -57,6 +57,7 @@
     - pandoc
     - perf                  # CLI for Performance Benchmarks
     - perl-image-exiftool   # EXIF reader/writer (example: edit PDF title)
+    - pinta                 # Simple Image Editor
     - pkg-config            # Retrieve information about installed binaries.
     - polkit
     - pulseaudio
