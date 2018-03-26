@@ -9,7 +9,9 @@ font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
              , Run Com "/home/pan/.xmonad/vpn.sh" [] "vpn" 10
              , Run Memory ["-t","Mem: <usedratio>%"] 10
              , Run Date "%a %Y %m %d %H:%M:%S" "date" 10
-             , Run Battery ["-t","<left>% / <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 10
+             , Run Battery [ "-t", "<left>% (<timeleft>)"
+                            , "-L", "50", "-H", "75"
+                            , "-h", "green", "-n", "yellow", "-l", "red" ] 10
              , Run Com "/home/pan/.xmonad/volume.sh" [] "vol" 10
              , Run Com "/home/pan/.xmonad/bright.sh" [] "bright" 10
              , Run CommandReader "~/pymodoro/pymodoro.py" "pomodoro"
