@@ -4,4 +4,4 @@
   register: resolv_head
 - name: Refresh Resolv Conf
   shell: /usr/bin/resolvconf -u
-  when: resolv_head|changed
+  when: resolv_head is changed

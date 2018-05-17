@@ -6,6 +6,6 @@
 - copy: src=docker.override dest=/etc/systemd/system/docker.service.d/override.conf
   register: file
 - service: name=docker state=reloaded
-  when: file|changed
+  when: file is changed
 - service: name=docker state=restarted
-  when: file|changed
+  when: file is changed

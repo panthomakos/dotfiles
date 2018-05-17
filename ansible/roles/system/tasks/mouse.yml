@@ -11,4 +11,4 @@
   register: mkinitcpio_file
 - name: Regenerate Initial Ramdisk
   shell: mkinitcpio -p linux
-  when: mkinitcpio_file|changed
+  when: mkinitcpio_file is changed

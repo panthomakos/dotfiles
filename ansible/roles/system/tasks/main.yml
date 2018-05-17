@@ -9,6 +9,7 @@
 - include: clean-pacman-cache.yml
 - include: docker.yml
 - include: home.yml
+- include: js.yml
 - include: asdf.yml
 - include: firewall.yml
 - include: time.yml

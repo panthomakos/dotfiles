@@ -39,8 +39,7 @@ function bam() {
 export PATH=$PATH:$HOME/bin
 
 # Yarn/NPM BIN
-export PATH="$PATH:/$HOME/.node_modules/bin"
-export npm_config_prefix=~/.node_modules
+source /usr/share/nvm/init-nvm.sh
 
 # RBENV
 export PATH="$HOME/.rbenv/bin:$PATH"

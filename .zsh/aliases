@@ -1,5 +1,8 @@
 # vim: filetype=zsh:
 
+# Quick Source ZSHRC
+alias src="source $HOME/.zshrc"
+
 # Bundler Development
 alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler/bin/bundle"
 

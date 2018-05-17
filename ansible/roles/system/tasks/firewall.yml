@@ -4,4 +4,4 @@
 - service: name=iptables enabled=yes state=started
 - name: Refresh iptables Rules
   shell: /usr/bin/iptables-restore < /etc/iptables/iptables.rules
-  when: file|changed
+  when: file is changed
