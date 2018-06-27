@@ -100,7 +100,6 @@
     - xorg-xdpyinfo         # Get info about X server, like screen resolution.
     - xorg-xinit
     - xorg-xprop            # Display window properties by clicking.
-    - yaourt                # Provides easy installation for AUR packages.
     - zip                   # ZIP Utility
 - name: Install Programming Packages
   pacman: name={{ item }} state=present
@@ -123,27 +122,27 @@
   command: gpg --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
   become: no
   when: ncurses5_gpg_key.rc != 0
-- include: yaourt.yml pkg=ncurses5-compat-libs # Fixes issue with elm/elm-repl
-- include: yaourt.yml pkg=xcape
+- include: yay.yml pkg=ncurses5-compat-libs # Fixes issue with elm/elm-repl
+- include: yay.yml pkg=xcape
 # Google Chrome Browser
-- include: yaourt.yml pkg=google-chrome
+- include: yay.yml pkg=google-chrome
 # Brother HL-L2360DW Printer Driver
-- include: yaourt.yml pkg=brother-hll2360d
+- include: yay.yml pkg=brother-hll2360d
 # Zoom Meeting Application
-- include: yaourt.yml pkg=zoom
+- include: yay.yml pkg=zoom
 # Paragraph Reformatter
-- include: yaourt.yml pkg=par
+- include: yay.yml pkg=par
 # Userspace Software Suspend (used to retrieve resume_offset of swap file)
-- include: yaourt.yml pkg=uswsusp-git
+- include: yay.yml pkg=uswsusp-git
 # acpilight (backward-compatible replacement for xbacklight)
-- include: yaourt.yml pkg=acpilight
+- include: yay.yml pkg=acpilight
 # Peek GIF Screen Recording Utility
-- include: yaourt.yml pkg=peek
+- include: yay.yml pkg=peek
 # Graph Editor (flowcart, network, UML)
-- include: yaourt.yml pkg=yed
+- include: yay.yml pkg=yed
 # Keybase
-- include: yaourt.yml pkg=keybase-bin
+- include: yay.yml pkg=keybase-bin
 # Change urxvt Font Size Dynamically
-- include: yaourt.yml pkg=urxvt-resize-font-git
+- include: yay.yml pkg=urxvt-resize-font-git
 - pip:
     name: grip # GitHub Flavored Markdown Preview

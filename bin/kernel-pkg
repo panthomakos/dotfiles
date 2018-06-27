@@ -1,3 +1,0 @@
-#!/bin/bash
-
-yaourt -S broadcom-wl bcwc-pcie-git bcwc-pcie-firmware --noconfirm

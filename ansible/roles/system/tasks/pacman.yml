@@ -1,14 +1,4 @@
 ---
-- name: Configure archlinuxfr SigLevel
-  ini_file: dest=/etc/pacman.conf
-            section=archlinuxfr
-            option=SigLevel
-            value=Never
-- name: Configure archlinuxfr Server
-  ini_file: dest=/etc/pacman.conf
-            section=archlinuxfr
-            option=Server
-            value=http://repo.archlinux.fr/{{ ansible_architecture }}
 - name: Configure multilib
   ini_file: dest=/etc/pacman.conf
             section=multilib
@@ -16,3 +6,20 @@
             value=/etc/pacman.d/mirrorlist
 - include: reflector.yml
 - pacman: update_cache=yes
+
+- pacman: name=go state=present
+- name: Clone Yay
+  become: no
+  git:
+    repo: 'https://aur.archlinux.org/yay.git'
+    dest: '{{ home }}/.yay'
+    version: master
+    update: yes
+  register: yayrepo
+- copy: content="golang system" dest="{{ home }}/.yay/.tool-versions"
+- name: Install Yay
+  become: no
+  command: makepkg -si --noconfirm --force
+  args:
+    chdir: '{{ home }}/.yay'
+  when: yayrepo.changed

@@ -146,5 +146,6 @@ sync.log
 .xsession-errors
 .xsession-errors.*
 .yarnrc
+.yay
 .zcompdump
 .zoom

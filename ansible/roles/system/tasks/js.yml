@@ -1,5 +1,5 @@
 ---
-- include: yaourt.yml pkg=nvm
+- include: yay.yml pkg=nvm
 
 - name: Install and Use NodeJS
   shell: ". /usr/share/nvm/init-nvm.sh && nvm install {{ node }} && nvm alias default {{ node }}"

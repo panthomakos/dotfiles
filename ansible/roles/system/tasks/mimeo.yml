@@ -1,8 +1,9 @@
+---
 - name: Check for Mimeo
   command: /usr/bin/pacman -Qs mimeo
   register: check
   ignore_errors: True
 - name: Install Mimeo
-  command: yaourt -S mimeo xdg-utils-mimeo --noconfirm --m-arg "--skippgpcheck"
+  command: yay -S --noconfirm mimeo xdg-utils-mimeo --m-arg "--skippgpcheck"
   become: no
   when: check.rc != 0
