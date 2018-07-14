@@ -150,5 +150,7 @@
 - include: yay.yml pkg=keybase-bin
 # Change urxvt Font Size Dynamically
 - include: yay.yml pkg=urxvt-resize-font-git
+# Visual Studio Code
+- include: yay.yml pkg=visual-studio-code-bin
 - pip:
     name: grip # GitHub Flavored Markdown Preview
