@@ -1,5 +1,5 @@
 Config {
-font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
+font = "xft:Bitstream Vera Sans Mono:size=5:antialias=true"
 , bgColor = "black"
 , fgColor = "grey"
 , position = Top

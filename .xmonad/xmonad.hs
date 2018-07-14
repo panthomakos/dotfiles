@@ -18,7 +18,7 @@ import           XMonad.Hooks.UrgencyHook
 import           XMonad.Layout.WindowArranger
 
 myXPConfig = defaultXPConfig
-    { font = "xft:DejaVu Sans Mono:pixelsize=20"
+    { font = "xft:DejaVu Sans Mono:size=5"
     , position          = Bottom
     , height            = 30
     }
