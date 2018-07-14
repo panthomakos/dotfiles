@@ -69,6 +69,10 @@
     - python2
     - python-pip
     - python2-pip
+    - python2-six           # Required by pip2.
+    - python2-appdirs       # Required by pip2.
+    - python2-pyparsing     # Required by pip2.
+    - python2-ipaddr        # Required by pip2.
     - python-dbus           # Used by avahi-discover.
     - ranger                # Text-based file manager.
     - readline
