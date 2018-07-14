@@ -15,6 +15,9 @@ alias gpglp="gpg --list-packets <"
 # Check an ENCFILE.
 alias gpgss="gpg -o /dev/null --show-session-key <"
 
+# Image Sort and Delete
+alias imgsort="feh --recursive --action \"rm '%f'\" *.{png,jpg,jpeg}"
+
 # Format a disk with LUKS.
 alias luksf="sudo cryptsetup -c aes-xts-plain64 -s 512 -h sha512 luksFormat"
 # Open a LUKS encrypted device.

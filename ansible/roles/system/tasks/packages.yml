@@ -24,6 +24,7 @@
     - evince                # PDF Viewer
     - exfat-utils           # exFAT filesystem support
     - expac
+    - feh                   # Image Viewer.
     - fontconfig            # Fonts
     - freetype2             # Fonts
     - ghostscript
@@ -51,6 +52,7 @@
     - noto-fonts            # Google Noto Font Family
     - noto-fonts-cjk        # Google Noto Font Family CJK
     - noto-fonts-emoji      # Google Noto Font Family Emoji
+    - openshot              # Video Editing.
     - openssh
     - openssl
     - openvpn
