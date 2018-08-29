@@ -28,6 +28,7 @@
     - fontconfig            # Fonts
     - freetype2             # Fonts
     - ghostscript
+    - gifsicle              # CLI for editing and getting info on GIFs.
     - gnupg
     - glibc                 # C Development: GNU C Library.
     - gnuplot               # GNU command line plotting utility
