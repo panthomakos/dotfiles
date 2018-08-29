@@ -38,6 +38,7 @@
 	m = checkout master
 	ca = commit --amend
 	can = commit --amend --no-edit
+	cpy = !git rev-parse HEAD | tr -d '\n' | xclip -selection c
 [core]
 	editor = vim
 	whitespace = trailing-space
