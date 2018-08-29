@@ -8,13 +8,19 @@ function! RunTests()
   " Write the current file, then run the test file.
   :w
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent exec ':!echo '.t:command." ".t:filename
-  :exec ':!'.t:command." ".t:filename
+  :silent exec ':!echo '.t:command." ".t:filename.t:lineno
+  :exec ':!'.t:command." ".t:filename.t:lineno
 endfunction
 
-function! SetTestFile()
+function! SetTestFile(useLine)
   " Set the spec file.
   let t:filename=@%
+
+  if a:useLine
+    let t:lineno=':'.line('.')
+  else
+    let t:lineno=''
+  endif
 
   if filereadable('.test.runner')
     let t:command=readfile('.test.runner')[0]
@@ -60,12 +66,13 @@ function! SetTestFile()
   let t:command='TZ=UTC '.t:command
 endfunction
 
-function! RunRubyTestFile(...)
+function! RunRubyTestFile(useLine)
   if match(expand('%'), '\(.feature\|_spec.rb\|test_.*.rb\|_test.rb\|Spec.coffee\)$') != -1
-    call SetTestFile()
+    call SetTestFile(a:useLine)
   end
 
   call RunTests()
 endfunction
 
-autocmd FileType ruby map <buffer> <leader>t :call RunRubyTestFile()<cr>
+autocmd FileType ruby map <buffer> <leader>t :call RunRubyTestFile(0)<cr>
+autocmd FileType ruby map <buffer> <leader>lt :call RunRubyTestFile(1)<cr>
