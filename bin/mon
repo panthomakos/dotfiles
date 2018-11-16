@@ -15,6 +15,12 @@ case "$1" in
       --output ${intern} --off \
       --output ${extern} --primary --auto
     ;;
+  dev)
+    xrandr \
+      --output ${intern} --auto \
+      --output ${extern} --primary --auto
+    xrandr --output ${extern} --right-of ${intern}
+    ;;
   pres)
     xrandr \
       --output ${intern} --primary --auto \
