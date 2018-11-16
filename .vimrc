@@ -139,6 +139,7 @@ nnoremap <leader>u viwU
 " routes.rb and Gemfile
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
+map <leader>gd :topleft 100 :split config/database.yml<cr>
 " Command-Dash to split screen
 map <leader>v :vsplit<ESC><C-w><C-w>
 map <leader>s :split<ESC><C-w><C-w>
