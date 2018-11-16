@@ -1,7 +1,6 @@
 doc/tags
 .powder
 .powenv
-.ruby-version
 .rvmrc
 *.swp
 *.swo
