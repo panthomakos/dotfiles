@@ -25,9 +25,33 @@
     - elixir
     - erlang
     - golang
+    - nodejs
+
+- name: Add NodeJS OpenPGP Keys
+  command: '{{ home }}/.asdf/plugins/nodejs/bin/import-release-team-keyring'
+  become: no
 
 - name: Install ASDF Language Versions
   shell: asdf install
   become: no
   args:
     chdir: "{{home}}"
+
+- name: Install Yarn
+  become: no
+  npm:
+    name: yarn
+    state: latest
+    global: yes
+
+- name: Install Elm
+  become: no
+  npm:
+    name: "{{item}}"
+    state: latest
+    global: yes
+  with_items:
+    - elm
+    - elm-test
+    - elm-oracle
+    - elm-format

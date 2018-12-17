@@ -38,9 +38,6 @@ function bam() {
 # Local BIN
 export PATH=$PATH:$HOME/bin
 
-# Yarn/NPM BIN
-source /usr/share/nvm/init-nvm.sh
-
 # RBENV
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
