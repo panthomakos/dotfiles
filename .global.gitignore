@@ -6,4 +6,5 @@ doc/tags
 *.swo
 tags
 .test.runner
+.tool-versions
 zeus.json

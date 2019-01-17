@@ -14,39 +14,6 @@
 - name: Configure User Groups
   user: name={{ user.name }} groups={{ user.groups }} append=yes
 
-- name: Initialize RBENV
-  shell: eval "$(rbenv init -)"
-  become: no
-  environment:
-    PATH: "{{ home }}/.rbenv/bin:{{ lookup('env', 'PATH') }}"
-
-- name: Update ruby-build
-  shell: ./install.sh chdir={{ home }}/ruby-build
-
-- command: rbenv versions
-  become: no
-  register: ruby_installed
-  ignore_errors: True
-
-- name: Install Ruby
-  shell: rbenv install {{ ruby }}
-  become: no
-  when: ruby_installed.stdout.find('{{ruby}}') == -1
-
-- command: rbenv version
-  become: no
-  register: ruby_active
-  ignore_errors: True
-
-- name: Set Default Ruby
-  shell: rbenv global {{ ruby }}
-  become: no
-  when: ruby_active.stdout.find('{{ruby}}') == -1
-
-- name: Install Seeing Is Believing Gem
-  shell: gem install seeing_is_believing
-  become: no
-
 - name: Configure Chrome Alias
   copy: src=chrome dest=/usr/bin/chrome mode=0755
 

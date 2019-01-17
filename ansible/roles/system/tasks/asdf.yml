@@ -26,6 +26,7 @@
     - erlang
     - golang
     - nodejs
+    - ruby
 
 - name: Add NodeJS OpenPGP Keys
   command: '{{ home }}/.asdf/plugins/nodejs/bin/import-release-team-keyring'
@@ -36,6 +37,10 @@
   become: no
   args:
     chdir: "{{home}}"
+
+- name: Install Seeing Is Believing Gem
+  shell: gem install seeing_is_believing
+  become: no
 
 - name: Install Yarn
   become: no

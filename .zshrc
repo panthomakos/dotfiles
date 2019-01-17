@@ -38,12 +38,9 @@ function bam() {
 # Local BIN
 export PATH=$PATH:$HOME/bin
 
-# RBENV
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-function rbenv_prompt_info() {
+function asdf_ruby_prompt_info() {
   local ruby_version
-  ruby_version=$(rbenv version 2> /dev/null) || return
+  ruby_version=$(asdf current ruby | awk -F' ' '{print $1}') || return
   echo "$ruby_version" | sed 's/[ \t].*$//'
 }
 
@@ -69,7 +66,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(rbenv_prompt_info)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(asdf_ruby_prompt_info)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
 
 # Vi Command Line Mode
 set -o vi
