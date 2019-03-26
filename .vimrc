@@ -36,6 +36,8 @@ Plug 'bling/vim-airline'
 Plug 'GEverding/vim-hocon'
 Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
 
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'tpope/vim-vinegar' " Additions to the built-in netrw directory browser.
 call plug#end()
 
