@@ -6,7 +6,7 @@
   vars:
     user:
       name: pan
-      groups: audio,docker,users,video,wireshark
+      groups: audio,docker,users,video,wireshark,uucp,lock
     home: /home/pan
     ruby: 2.4.1
     network:
