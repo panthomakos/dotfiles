@@ -14,3 +14,5 @@ map <leader>l <Plug>(easymotion-lineforward)
 
 " Use smartcase when searching.
 let g:EasyMotion_smartcase = 1
+" Jump to first match on enter.
+let g:EasyMotion_enter_jump_first = 1

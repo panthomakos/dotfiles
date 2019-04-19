@@ -7,4 +7,5 @@ function! MarkdownOpen()
   redraw!
 endfunction
 
-map <leader>m :call MarkdownOpen()<CR>
+autocmd FileType markdown map <buffer> <leader>m :call MarkdownOpen()<CR>
+autocmd FileType markdown map <buffer> <leader>g :Goyo<CR>

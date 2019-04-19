@@ -27,3 +27,18 @@ function! MakeRubyBlockMultiline()
 endfunction
 
 autocmd FileType ruby map <buffer> <leader>mb :call MakeRubyBlockMultiline()<cr>
+
+" Convert a single Ruby function line chain into a multi-line one.
+function! MakeRubyChainMultiline()
+  :normal! dd
+  :normal! P
+  while getline(".") =~ ').'
+    :normal! f(
+    :normal! %
+    :execute "normal! a\<cr>"
+  endwhile
+  :normal v%
+  :normal ==
+endfunction
+
+autocmd FileType ruby map <buffer> <leader>mc :call MakeRubyChainMultiline()<cr>

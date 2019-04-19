@@ -203,7 +203,6 @@ let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_paragraph_span = 1
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-nmap <leader>g :Goyo<CR>
 
 " Configure Ruby Indentation
 let g:ruby_indent_block_style = 'do'
