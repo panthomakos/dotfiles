@@ -1,4 +1,3 @@
----
 - include: package-bundle.yml pkg=base-devel
 - include: package-bundle.yml pkg=lxde
 # Used for pandoc PDF conversions.
@@ -75,6 +74,8 @@
     - python2-pyparsing     # Required by pip2.
     - python2-ipaddr        # Required by pip2.
     - python-dbus           # Used by avahi-discover.
+    - qpdf                  # PDF transformation tool.
+    - geeqie                # List image viewer.
     - ranger                # Text-based file manager.
     - readline
     - recordmydesktop       # Screen record utility.
@@ -95,7 +96,6 @@
     - ttf-dejavu            # Fonts
     - vlc                   # Video player.
     - w3m
-    - wireshark-gtk         # Network Packet Analyzer
     - xautolock             # Screen Locking
     - xclip
     - xcompmgr              # Composite Window Manager
