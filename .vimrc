@@ -1,5 +1,6 @@
 call plug#begin()
 Plug 'sheerun/vim-polyglot'
+Plug 'jparise/vim-graphql'
 
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
