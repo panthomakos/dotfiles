@@ -1,6 +1,7 @@
 abs/
 .ansible/
 Applications/
+Arduino/
 .asdf/
 .aws/
 .boom
@@ -64,6 +65,7 @@ examples.desktop
 .infinity_test
 .irb-history
 .irb_history
+.ivy2/
 .java/
 .keepassx/
 .keybase/
@@ -112,7 +114,9 @@ Public/
 .rubinius_last_error
 .rvm
 .s3cfg
+.sbt/
 .scala_history
+.scalac/
 .shef_history
 .ssh/
 !.ssh/config
@@ -130,6 +134,7 @@ sync.log
 .vim/haskellmode.config
 .vim/plugged/
 .vim/spell/
+.vim/view/
 .vimgolf/
 .viminfo
 .wine-pipelight/
