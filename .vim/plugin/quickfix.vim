@@ -25,5 +25,20 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
+" Given a line-break separated file of filenames, add all of the listed
+" files to the quickfix list.
+"
+" Example (open `.vimrc` and `.zshrc`):
+"
+"     $ cat foo
+"     .vimrc
+"     .zshrc
+"     $ vim
+"     :call OpenFileList("foo")
+function! OpenFileList(filename)
+  set errorformat=%f
+  exec('cf '.a:filename)
+endfunction
+
 nmap <silent> <leader>L :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>E :call ToggleList("Quickfix List", 'c')<CR>
