@@ -1,5 +1,7 @@
 call plug#begin()
 Plug 'sheerun/vim-polyglot'
+
+Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -206,6 +208,10 @@ autocmd! User GoyoLeave Limelight!
 
 " Configure Ruby Indentation
 let g:ruby_indent_block_style = 'do'
+
+" Use horizontal split for vimux
+let g:VimuxOrientation = "h"
+let g:VimuxHeight=50
 
 " Seeing Is Believing Configuration
 augroup seeingIsBelievingSettings
