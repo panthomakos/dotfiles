@@ -28,7 +28,7 @@ export RUBY_GC_MALLOC_LIMIT=100000000
 
 # Fast directory switching function for Projects.
 function bam() {
-  local dest=$(${HOME}/bin/bam $1)
+  local dest=$(${HOME}/bin/bam -root $HOME/Projects $1)
   cd $dest
 }
 
