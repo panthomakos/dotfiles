@@ -18,6 +18,9 @@ alias gpgss="gpg -o /dev/null --show-session-key <"
 # Image Sort and Delete
 alias imgsort="feh --recursive --action \"rm '%f'\" *.{png,jpg,jpeg}"
 
+# Image List Viewer
+alias ils="geeqie"
+
 # Format a disk with LUKS.
 alias luksf="sudo cryptsetup -c aes-xts-plain64 -s 512 -h sha512 luksFormat"
 # Open a LUKS encrypted device.
