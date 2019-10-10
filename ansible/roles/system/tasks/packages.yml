@@ -19,6 +19,7 @@
       - coreutils
       - cups                  # Printer management.
       - curl
+      - dolphin               # File/Directory Manager
       - encfs                 # File Encryption
       - eog                   # Image Viewer
       - evince                # PDF Viewer
