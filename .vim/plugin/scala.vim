@@ -35,3 +35,4 @@ endfunction
 
 autocmd FileType scala map <buffer> <leader>o :call OpenScalaWorksheet()<cr>
 autocmd FileType scala map <buffer> <leader>r :call RunScalaWorksheet()<cr>
+autocmd FileType scala map <buffer> <leader>si :SortScalaImports<cr>

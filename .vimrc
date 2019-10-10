@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'sheerun/vim-polyglot'
 Plug 'jparise/vim-graphql'
+Plug 'derekwyatt/vim-scala'
 
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
@@ -20,7 +21,7 @@ Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-Plug 'w0rp/ale' " Asynchronous Lint Engine
+Plug 'dense-analysis/ale' " Asynchronous Lint Engine
 
 Plug 'hwartig/vim-seeing-is-believing'
 
