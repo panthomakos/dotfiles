@@ -112,6 +112,11 @@ alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bundle exec rspec -c"
 alias sr="screen -r"
 alias sl="screen -ls"
 
+# SBT console for a specific project w/ term properly set.
+function sbtc {
+  TERM=xterm-color sbt "project ${1}" console
+}
+
 # Connect/Disconnect from a named VPN.
 function vpno {
   sudo systemctl start openvpn-client@${1}.service
