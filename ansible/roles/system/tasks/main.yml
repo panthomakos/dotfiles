@@ -14,6 +14,7 @@
 - include: time.yml
 - include: dropbox.yml
 - include: sound.yml
+- include: bluetooth.yml
 - include: fonts.yml
 - include: mouse.yml
 - include: power.yml

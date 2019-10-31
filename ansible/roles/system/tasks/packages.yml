@@ -66,6 +66,7 @@
       - polkit
       - pulseaudio
       - pulseaudio-alsa
+      - pulseaudio-bluetooth
       - pygtk                 # Used by avahi-discover.
       - python
       - python2

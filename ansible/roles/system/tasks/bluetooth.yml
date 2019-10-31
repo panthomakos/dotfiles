@@ -1,0 +1,7 @@
+---
+- service: name=bluetooth enabled=yes state=started
+- name: AutoEnable Bluetooth
+  ini_file: dest=/etc/bluetooth/main.conf
+            section="Policy"
+            option="AutoEnable"
+            value="true"
