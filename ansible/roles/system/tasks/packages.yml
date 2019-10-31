@@ -97,6 +97,7 @@
       - transset-df           # Transparency for Xcompmgr
       - tree
       - ttf-dejavu            # Fonts
+      - typora                # Distraction Free Writing
       - vlc                   # Video player.
       - w3m
       - xautolock             # Screen Locking
