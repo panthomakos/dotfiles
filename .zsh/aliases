@@ -61,7 +61,7 @@ alias v='vim'
 alias vimp='vim --noplugin' # No plugins for large files.
 
 # Colorful ls.
-alias ls="ls -G --color=auto"
+alias ls="ls -G"
 
 # Colorful grep.
 alias grep="grep --color=auto"
@@ -79,9 +79,6 @@ alias ber='bundle exec rspec --color'
 alias r="bundle exec ruby -Ilib"
 alias k="be rake"
 alias known="vim ~/.ssh/known_hosts"
-
-# Snippets
-alias sn="ruby -I $HOME/Projects/strava/sn/lib $HOME/Projects/strava/sn/bin/sn"
 
 # Memcache server start and stop.
 alias mem.start="sudo systemctl start memcached"

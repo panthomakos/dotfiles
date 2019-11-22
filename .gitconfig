@@ -1,6 +1,8 @@
 [user]
 	name = Pan Thomakos
 	email = pan.thomakos@gmail.com
+[includeIf "gitdir:~/src/github.com/InVisionApp/"]
+	path = ~/.gitconfig.invision
 [alias]
 	unstage = reset HEAD --
 	co = checkout

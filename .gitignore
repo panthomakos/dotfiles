@@ -56,6 +56,7 @@ examples.desktop
 .gnome/
 .gnupg/*
 !.gnupg/gpg.conf
+!.gnupg/gpg-agent.conf
 .gpg/
 .gpg-agent-info
 .grip
@@ -98,9 +99,7 @@ Pictures/
 playbook.retry
 .pomodoro_session
 .pow
-.Private
 .profile
-Projects/
 .pry_history
 .psql_history
 Public/
@@ -117,7 +116,9 @@ Public/
 .sbt/
 .scala_history
 .scalac/
+.secret/
 .shef_history
+src/
 .ssh/
 !.ssh/config
 .sqlite_history

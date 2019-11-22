@@ -3,32 +3,24 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export GOPATH=$HOME/Projects/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export CDPATH=$HOME/src
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
 export EDITOR=vim
 export VISUAL=vim
-# Tell Java that XMonad is non-reparenting. This fixes some issues with
-# maximizing java windows.
-export _JAVA_AWT_WM_NONREPARENTING=1
-# If java_home is available, set the environment variable.
-[[ -f /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
-# Temporary AWS Credentials
-source ~/.aws/token_profile
-export SSH_AUTH_SOCK=~/.config/ssh-agent.socket
+# Work Related Secret Environment Variables
+source ~/.secret/work.env
 
 # Ruby GC Tuning
-
 export RUBY_HEAP_MIN_SLOTS=2000000 # <= 2.0.0
 export RUBY_GC_HEAP_INIT_SLOTS=2000000 # >= 2.1.0
 
 export RUBY_HEAP_FREE_MIN=200000
 export RUBY_GC_MALLOC_LIMIT=100000000
 
-# Fast directory switching function for Projects.
+# Fast directory switching function for projects (~/src).
 function bam() {
-  local dest=$(${HOME}/bin/bam -root $HOME/Projects $1)
+  local dest=$(${HOME}/bin/bam -root $HOME/src $1)
   cd $dest
 }
 

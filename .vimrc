@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'sheerun/vim-polyglot'
 Plug 'jparise/vim-graphql'
 Plug 'derekwyatt/vim-scala'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
@@ -156,6 +157,7 @@ map gfv <C-w>L
 map gfs <C-w>f
 
 " FZF Configuration
+set rtp+=/usr/local/opt/fzf
 map <leader>f :GFiles<CR>
 map <leader>b :Buffers<CR>
 map <leader>c :Tags<CR>
