@@ -1,8 +1,10 @@
 call plug#begin()
-Plug 'sheerun/vim-polyglot'
 Plug 'jparise/vim-graphql'
 Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Vim Polyglot should load after language specific plugins.
+Plug 'sheerun/vim-polyglot'
 
 Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
