@@ -21,6 +21,7 @@ Arduino/
 .compiz/
 .config/*
 !.config/mimeapps.list
+!.config/nvim/
 !.config/systemd/
 .csv
 .cups/
@@ -97,7 +98,6 @@ Music/
 Pictures/
 .pki/
 playbook.retry
-.pomodoro_session
 .pow
 .profile
 .pry_history
@@ -116,7 +116,6 @@ Public/
 .sbt/
 .scala_history
 .scalac/
-.secret/
 .shef_history
 src/
 .ssh/
@@ -157,3 +156,4 @@ sync.log
 .yay
 .zcompdump
 .zoom
+.zsh_history

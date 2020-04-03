@@ -8,8 +8,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
 export EDITOR=vim
 export VISUAL=vim
-# Work Related Secret Environment Variables
-source ~/.secret/work.env
+# Secret Environment Variables and Configs
+source ~/Dropbox/secret.env
 
 # Ruby GC Tuning
 export RUBY_HEAP_MIN_SLOTS=2000000 # <= 2.0.0
@@ -29,12 +29,6 @@ function bam() {
 
 # Local BIN
 export PATH=$PATH:$HOME/bin
-
-function asdf_ruby_prompt_info() {
-  local ruby_version
-  ruby_version=$(asdf current ruby | awk -F' ' '{print $1}') || return
-  echo "$ruby_version" | sed 's/[ \t].*$//'
-}
 
 # Prompt
 autoload -U colors
@@ -58,7 +52,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(asdf_ruby_prompt_info)$(~/bin/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(~/bin/git-cwd-info.rb)%{$reset_color%}'
 
 # Vi Command Line Mode
 set -o vi

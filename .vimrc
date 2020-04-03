@@ -41,7 +41,6 @@ Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 
 Plug 'GEverding/vim-hocon'
-Plug 'craigemery/vim-autotag' " Automatically regenerate ctags.
 
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -93,12 +92,6 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
-" Default <Tab> Configuration
-set tabstop=2 " Display <Tab> as two spaces in visual mode.
-set softtabstop=2 " Insert <Tab> as two spaces when editing.
-set shiftwidth=2 " Insert <Tab> as two spaces when auto-indenting.
-set expandtab " In insert mode, use the appropriate number of spaes for <Tab>.
-
 set hlsearch " Highlight searches.
 set relativenumber " Relative line numbering...
 set number " with the current line number being absolute.
@@ -141,6 +134,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" Paste that doesn't replace the default register.
+vnoremap <leader>p "_dP
 
 " Upcase the current word in normal mode.
 nnoremap <leader>u viwU

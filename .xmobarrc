@@ -14,11 +14,10 @@ font = "xft:Bitstream Vera Sans Mono:size=5:antialias=true"
                             , "-h", "green", "-n", "yellow", "-l", "red" ] 10
              , Run Com "/home/pan/.xmonad/volume.sh" [] "vol" 10
              , Run Com "/home/pan/.xmonad/bright.sh" [] "bright" 10
-             , Run CommandReader "~/pymodoro/pymodoro.py" "pomodoro"
              , Run StdinReader
              ]
 , sepChar = "%"
 , alignSep = "}{"
-, template = "%pomodoro% | %cpu% | %memory% | %vpn% | %wlp58s0wi% | %battery% | %StdinReader% }{ %vol% | %bright% | <fc=#ee9a00>%date%</fc>"
+, template = "%cpu% | %memory% | %vpn% | %wlp58s0wi% | %battery% | %StdinReader% }{ %vol% | %bright% | <fc=#ee9a00>%date%</fc>"
 }
 

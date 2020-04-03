@@ -50,14 +50,10 @@ alias fingerprint="ssh-keygen -lf"
 # Exec and SSH (cascades exiting of multiple shells)
 alias essh="exec ssh"
 
-# Lock the screen and suspend.
-alias i3exit="i3lock -c 191970 && systemctl suspend"
-alias cxlock="systemctl --user stop xautolock"
-alias oxlock="systemctl --user start xautolock"
-
 # Convenience methods for vim.
-alias vi='vim'
-alias v='vim'
+alias vim='nvim'
+alias vi='nvim'
+alias v='nvim'
 alias vimp='vim --noplugin' # No plugins for large files.
 
 # Colorful ls.
@@ -65,10 +61,6 @@ alias ls="ls -G"
 
 # Colorful grep.
 alias grep="grep --color=auto"
-
-# Systemctl
-alias s="systemctl"
-alias ss="sudo systemctl"
 
 # Convenience shell aliases.
 alias psf="ps -ef | grep "
@@ -79,6 +71,9 @@ alias ber='bundle exec rspec --color'
 alias r="bundle exec ruby -Ilib"
 alias k="be rake"
 alias known="vim ~/.ssh/known_hosts"
+
+# Easily edit secret environment variables and configs
+alias esec="vim ~/Dropbox/secret.env"
 
 # Memcache server start and stop.
 alias mem.start="sudo systemctl start memcached"
@@ -114,26 +109,15 @@ function sbtc {
   TERM=xterm-color sbt "project ${1}" console
 }
 
-# Connect/Disconnect from a named VPN.
-function vpno {
-  sudo systemctl start openvpn-client@${1}.service
-}
-
-function vpnc {
-  sudo systemctl stop $(vpnls)
-}
-
-function vpns {
-  systemctl status $(vpnls) -l
-}
-
-alias vpnls="systemctl | grep 'openvpn-client@' | grep 'active' | awk '{print \$1}'"
-
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"
 
 # Easily open a github project in Chrome.
-function gh { google-chrome-stable "https://github.com/$1" }
+function gh {
+	directory=`pwd`
+	repository=${directory#"$HOME/src/github.com"}
+	open -a "Google Chrome" "https://github.com/${repository}"
+}
 
 # Docker Related Aliases and Functions
 # ------------------------------------
@@ -147,20 +131,7 @@ function dce {
   docker exec -it $(docker ps --format '{{.ID}} {{.Names}}' | grep $1 | awk '{print $1}') ${@:2}
 }
 
-# Run a zeus command on the zeus docker-compose container.
-function z {
-  dce zeus zeus ${@}
-}
-
 # Merge PDF files
 function pdfmerge {
   gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=$1 ${@:2}
 }
-
-# Pomodoro Timer Control
-alias pom="touch $HOME/.pomodoro_session"
-alias cpom="rm $HOME/.pomodoro_session"
-
-# Encrypted Dropbox
-alias drop="encfs $HOME/Dropbox/Encrypted $HOME/Private"
-alias cdrop="fusermount -u $HOME/Private"
