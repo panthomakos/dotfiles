@@ -112,8 +112,11 @@ function sbtc {
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"
 
+# Update brew packages and vim plugins
+alias sys.update="brew update && brew upgrade && vim +PlugUpgrade +PlugUpdate"
+
 # Easily open a github project in Chrome.
-function gh {
+function gho {
 	directory=`pwd`
 	repository=${directory#"$HOME/src/github.com"}
 	open -a "Google Chrome" "https://github.com/${repository}"
