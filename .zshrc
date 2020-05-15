@@ -1,7 +1,3 @@
-source $HOME/.zsh/gpg
-source $HOME/.zsh/aliases
-source $HOME/.zsh/ctrl-z
-
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export CDPATH=$HOME/src
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -68,6 +64,10 @@ compinit
 if [[ -f /usr/local/bin/aws_zsh_completer.sh ]]; then
   source /usr/local/bin/aws_zsh_completer.sh
 fi
+
+source $HOME/.zsh/gpg
+source $HOME/.zsh/aliases
+source $HOME/.zsh/ctrl-z
 
 # ASDF
 . $HOME/.asdf/asdf.sh

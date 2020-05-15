@@ -126,6 +126,14 @@ function gho {
 # ------------------------------------
 
 alias dco="docker-compose"
+compdef dco="docker-compose"
+
+# Pull all currently running container images only and then restart.
+function dco.update {
+	docker-compose ps | awk '{print $1}' | grep -v 'Name' | grep -v '\-\-\-' | xargs docker-compose pull
+	docker-compose restart
+}
+
 alias drm='docker rm -f $(docker ps -aq)'
 alias drmi='docker rmi $(docker images | grep "^<none>" | awk "{print \$3}")'
 
