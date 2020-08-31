@@ -112,7 +112,7 @@ function sbtc {
 alias home="cd $HOME"
 
 # Update all submodules
-alias gits-update="git submodule foreach git pull origin master"
+alias gits-update="git submodule foreach git pull"
 
 alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets\""
 alias vim.update="vim +PlugUpgrade +PlugUpdate! +CocUpdateSync +q"

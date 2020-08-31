@@ -23,7 +23,6 @@
 	dc = diff --cached
 	cp = cherry-pick
 	vim = !vim .git/index
-	up = "!git remote update -p; git merge --ff-only @{u}"
 	logs = log --show-signature
 	review = push origin HEAD:refs/for/master
 	sl = stash list
@@ -58,3 +57,7 @@
 	enabled = true
 [diff]
 	compactionHeuristic = true
+[pull]
+	ff = only
+[fetch]
+	prune = true
