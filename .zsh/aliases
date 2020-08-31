@@ -109,11 +109,16 @@ function sbtc {
   TERM=xterm-color sbt "project ${1}" console
 }
 
+alias home="cd $HOME"
+
 # Update all submodules
 alias gits-update="git submodule foreach git pull origin master"
 
+alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets\""
+alias vim.update="vim +PlugUpgrade +PlugUpdate! +CocUpdateSync +q"
+
 # Update brew packages and vim plugins
-alias sys.update="brew update && brew upgrade && vim +PlugUpgrade +PlugUpdate"
+alias sys.update="brew update && brew upgrade && asdf plugin update --all && vim.update"
 
 # Easily open a github project in Chrome.
 function gho {

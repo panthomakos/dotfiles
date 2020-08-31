@@ -8,6 +8,7 @@ Arduino/
 .boom.conf
 .bundle/
 .CFUserTextEncoding
+.babel.json
 .bashrc
 .bash_history
 .bash_logout
@@ -42,7 +43,6 @@ Dropbox/
 .ecryptfs
 .elinks/
 .elm/
-.env
 .erlang.cookie
 .esd_auth
 examples.desktop
@@ -65,6 +65,7 @@ examples.desktop
 .ICEauthority
 .icedtea/
 .infinity_test
+.invision-studio
 .irb-history
 .irb_history
 .ivy2/

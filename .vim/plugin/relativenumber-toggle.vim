@@ -6,4 +6,4 @@ function! ToggleRelativeNumber()
   endif
 endfunction
 
-nmap <leader>rn :call ToggleRelativeNumber()<CR>
+nmap <leader>ln :call ToggleRelativeNumber()<CR>

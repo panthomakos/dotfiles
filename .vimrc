@@ -3,10 +3,12 @@ Plug 'jparise/vim-graphql'
 Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+
 " Vim Polyglot should load after language specific plugins.
 Plug 'sheerun/vim-polyglot'
 
-Plug 'benmills/vimux'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -37,7 +39,6 @@ Plug 'rhysd/vim-textobj-ruby'
 
 Plug 'ngmy/vim-rubocop'
 
-Plug 'tpope/vim-endwise'
 Plug 'bling/vim-airline'
 
 Plug 'GEverding/vim-hocon'
@@ -80,17 +81,15 @@ set clipboard=unnamed,unnamedplus
 "   * the start of insert mode (start)
 set backspace=2
 
-" TODO (check w/ vim-airline)
-set laststatus=2 " The last window will always have a status line.
-
-" In split mode, make the current window big, but leave others for context.
-set winwidth=84
-" This is an oddity of vim. We have to set winheight bigger than we want to
-" set winminheight. If we set winheight to be huge, before winminheight, then
-" winminheight set will fail.
+" In horizontal split modes, make the current window big but leave others for context.
 set winheight=5
 set winminheight=5
-set winheight=999
+autocmd WinEnter * wincmd _
+
+" In vertical split modes, make the current window big but leave others for context.
+set winwidth=84
+set winminwidth=84
+autocmd WinEnter * wincmd |
 
 set hlsearch " Highlight searches.
 set relativenumber " Relative line numbering...
@@ -129,11 +128,6 @@ nmap <silent> <leader>sp :set spell!<CR>
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 " Source vimrc.
 nnoremap <leader>sv :source $MYVIMRC<CR>
-" Move in viewports
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
 
 " Paste that doesn't replace the default register.
 vnoremap <leader>p "_dP
@@ -158,7 +152,6 @@ map gfs <C-w>f
 set rtp+=/usr/local/opt/fzf
 map <leader>f :GFiles<CR>
 map <leader>b :Buffers<CR>
-map <leader>c :Tags<CR>
 map <leader>cf :BCommits<CR>
 map <leader>lf :BLines<CR>
 map <leader>mf :Marks<CR>
@@ -211,10 +204,6 @@ autocmd! User GoyoLeave Limelight!
 " Configure Ruby Indentation
 let g:ruby_indent_block_style = 'do'
 
-" Use horizontal split for vimux
-let g:VimuxOrientation = "h"
-let g:VimuxHeight=50
-
 " Seeing Is Believing Configuration
 augroup seeingIsBelievingSettings
   autocmd!
@@ -223,14 +212,12 @@ augroup seeingIsBelievingSettings
   autocmd FileType ruby xmap <buffer> <leader>r <Plug>(seeing-is-believing-mark-and-run)
 augroup END
 
-" Enable lazy redrawing for improved performance.
-set lazyredraw
-
 " Enable filetype detection.
 filetype plugin indent on
 
-" Syntax and Colors.
-set t_Co=256
+" Syntax and Colors
 syntax enable
-set background=dark
-color grb256
+let g:gruvbox_contrast_dark = 'soft'
+set background=dark    " Setting dark mode
+autocmd vimenter * colorscheme gruvbox
+autocmd vimenter * highlight Normal ctermbg=NONE
