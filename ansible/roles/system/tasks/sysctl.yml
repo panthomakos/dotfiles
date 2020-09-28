@@ -1,5 +1,0 @@
----
-- lineinfile:
-    path: /usr/lib/sysctl.d/50-default.conf
-    regexp: '^fs.inotify.max_user_watchers ='
-    line: 'fs.inotify.max_user_watches = 524288'

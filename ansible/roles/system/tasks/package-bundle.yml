@@ -1,8 +1,0 @@
----
-- name: Check {{ pkg }}
-  command: /usr/bin/pacman -Qs {{ pkg }}
-  register: check
-  ignore_errors: True
-- name: Install {{ pkg }}
-  pacman: name={{ pkg }} state=present
-  when: check.rc != 0

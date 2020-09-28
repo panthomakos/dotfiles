@@ -1,2 +1,0 @@
----
-- copy: src=xhc.rules dest=/etc/udev/rules.d/90-xhc_sleep.rules

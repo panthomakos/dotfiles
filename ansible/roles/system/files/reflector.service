@@ -1,8 +1,0 @@
-[Unit]
-Description=Pacman Mirrorlist Update
-Requires=network-online.target
-After=network-online.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/reflector --country 'United States' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist

@@ -116,6 +116,7 @@ alias git.update="git submodule foreach git pull"
 
 alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets\""
 alias vim.update="vim +PlugUpdate! +CocUpdateSync +q"
+alias asdf.install="cat $HOME/.tool-versions | awk '{print $1}' | xargs -L1 asdf plugin-add"
 
 # Update brew packages and vim plugins
 alias sys.update="brew update && brew upgrade && asdf plugin update --all && git.update && vim.update"

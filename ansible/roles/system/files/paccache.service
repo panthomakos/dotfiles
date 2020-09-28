@@ -1,6 +1,0 @@
-[Unit]
-Description=Pacman Cache Cleaner
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/paccache -ruk0

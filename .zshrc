@@ -54,6 +54,7 @@ set -o vi
 setopt complete_aliases
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 fpath=(~/.zsh/.completion $fpath)
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit
 
@@ -67,5 +68,4 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
 
 # ASDF
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+. $(brew --prefix asdf)/asdf.sh

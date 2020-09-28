@@ -1,7 +1,0 @@
----
-- copy: src=iptables.rules dest=/etc/iptables/iptables.rules
-  register: file
-- service: name=iptables enabled=yes state=started
-- name: Refresh iptables Rules
-  shell: /usr/bin/iptables-restore < /etc/iptables/iptables.rules
-  when: file is changed

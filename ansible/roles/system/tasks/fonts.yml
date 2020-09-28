@@ -1,4 +1,0 @@
----
-- pacman: name=terminus-font state=present
-- name: Configure Console Fonts
-  copy: src=vconsole.conf dest=/etc/vconsole.conf

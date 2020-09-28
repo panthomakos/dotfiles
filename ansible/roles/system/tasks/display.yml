@@ -1,5 +1,0 @@
----
-- name: Configure Qt5 HiDPI Scaling
-  copy: src=qt-hidpi.sh dest=/etc/profile.d/qt-hidpi.sh mode=0755
-- name: Configure Backlight Permissions
-  copy: src=backlight.rules dest=/etc/udev/rules.d/90-backlight.rules
