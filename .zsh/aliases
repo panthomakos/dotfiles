@@ -114,7 +114,7 @@ alias home="cd $HOME"
 # Update all submodules
 alias git.update="git submodule foreach git pull"
 
-alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets\""
+alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets coc-tsserver\""
 alias vim.update="vim +PlugUpdate! +CocUpdateSync +q"
 alias asdf.install="cat $HOME/.tool-versions | awk '{print $1}' | xargs -L1 asdf plugin-add"
 

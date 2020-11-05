@@ -191,6 +191,9 @@ augroup pencil
   autocmd FileType text         call pencil#init()
 augroup END
 
+" Disable code folding
+set nofoldenable
+
 " vim-markdown Configuration
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1

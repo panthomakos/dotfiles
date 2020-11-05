@@ -16,6 +16,7 @@
 	s = status -sb
 	splat = log --oneline --decorate
 	yank = pull --rebase
+	up = pull
 	l = log --graph --abbrev-commit --date=relative --pretty=format:\"%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset\"
 	r = !git --no-pager l -20
 	ra = !git r --all
@@ -41,7 +42,7 @@
 	can = commit --amend --no-edit
 	cpy = !git rev-parse HEAD | tr -d '\n' | xclip -selection c
 [core]
-	editor = vim
+	editor = nvim
 	whitespace = trailing-space
 	excludesfile = ~/.global.gitignore
 	quotepath = false
