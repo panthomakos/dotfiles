@@ -13,6 +13,6 @@ endfunction
 map <D-5> :call <SID>StripTrailingWhitespaces()<CR>
 
 if has("autocmd")
-  autocmd BufWritePre *.js,*.rb,*.thor,*.rake,*.haml,*.scala :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.js,*.rb,*.thor,*.ts,*.rake,*.haml,*.scala :call <SID>StripTrailingWhitespaces()
   autocmd BufWritePre *.hs :call <SID>StripTrailingWhitespaces()
 endif
