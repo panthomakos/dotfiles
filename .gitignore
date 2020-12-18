@@ -69,6 +69,7 @@ examples.desktop
 .irb_history
 .ivy2/
 .java/
+.jssc/
 .keepassx/
 .keybase/
 keyboard/arduino/
