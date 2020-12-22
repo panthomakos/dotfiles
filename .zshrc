@@ -45,7 +45,7 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(~/bin/git-cwd-info.rb)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} $(~/bin/git:rprompt)%{$reset_color%}'
 
 # Vi Command Line Mode
 set -o vi
@@ -68,4 +68,7 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
 
 # ASDF
-. $(brew --prefix asdf)/asdf.sh
+#   `brew --prefix [PKG]` is slow to compute when a package is provided. This increases
+#   time to source this file by over one second. The remainder of the path is hard-coded
+#   here instead and can be recomputed if the ASDF install path ever changes.
+. $(brew --prefix)/opt/asdf/asdf.sh

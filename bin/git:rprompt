@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e
+
+path=`git rev-parse --git-dir 2>/dev/null`
+
+# If we are not in a git repo, print nothing.
+if [ -z "$path" ]; then
+				exit 0
+fi
+
+# If we are in the HOME git repo, only display this prompt if
+# we are at the root directory.
+if [ "$path" == "${HOME}/.git" ] ; then
+				exit 0
+fi
+
+branch=`cat ${path}/HEAD`
+branch=${branch#ref: refs/heads/}
+
+commit=`git rev-parse --short HEAD 2>/dev/null`
+
+echo -en " %{\033[34m%}${branch}%{\033[90m%}@%{\033[33m%}${commit}%{\033[0m%}"
+
+# Print a label if we are in the middle of a bisect, merge, or rebase.
+if [ -f "${path}/BISECT_LOG" ]; then
+  echo -en "+bisect"
+elif [ -f "${path}/MERGE_HEAD" ]; then
+  echo -en "+merge"
+elif [ -d "${path}/rebase-apply" ] || [ -d "${path}/rebase-merge" ]; then
+  echo -en "+rebase"
+fi
+
+# Print an "✗" if there are unstaged files.
+if [[ $(git ls-files -m) ]]; then
+  echo -en " %{\033[90m%}✗%{\033[0m%}"
+fi
