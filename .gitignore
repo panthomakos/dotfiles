@@ -23,6 +23,8 @@ Arduino/
 !.config/mimeapps.list
 !.config/nvim/
 !.config/systemd/
+!.config/kitty/
+.config/kitty/*.py
 .csv
 .cups/
 .dbshell

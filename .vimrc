@@ -42,7 +42,7 @@ Plug 'bling/vim-airline'
 
 Plug 'GEverding/vim-hocon'
 
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'knubie/vim-kitty-navigator', {'do': 'cp ./*.py ~/.config/kitty/'}
 
 Plug 'tpope/vim-vinegar' " Additions to the built-in netrw directory browser.
 call plug#end()
@@ -50,6 +50,10 @@ call plug#end()
 set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
+
+" Properly set the window title.
+set title
+let &titlestring='nvim'
 
 " The arrow keys suck. Don't let them do anything.
 noremap  <up> <nop>
