@@ -2,8 +2,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export CDPATH=$HOME/src
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 # Secret Environment Variables and Configs
 source ~/Dropbox/secret.env
 

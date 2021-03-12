@@ -9,7 +9,6 @@ Plug 'morhetz/gruvbox'
 " Vim Polyglot should load after language specific plugins.
 Plug 'sheerun/vim-polyglot'
 
-Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
@@ -80,16 +79,6 @@ set clipboard=unnamed,unnamedplus
 "   * automatically inserted indentation (indent)
 "   * the start of insert mode (start)
 set backspace=2
-
-" In horizontal split modes, make the current window big but leave others for context.
-set winheight=5
-set winminheight=5
-autocmd WinEnter * wincmd _
-
-" In vertical split modes, make the current window big but leave others for context.
-set winwidth=84
-set winminwidth=84
-autocmd WinEnter * wincmd |
 
 set hlsearch " Highlight searches.
 set relativenumber " Relative line numbering...
