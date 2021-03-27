@@ -1,8 +1,0 @@
-[Unit]
-Description=Pulse Audio Server
-
-[Service]
-Type=simple
-Environment=DISPLAY=:0
-ExecStart=/usr/bin/pulseaudio
-ExecStop=/usr/bin/pulseaudio --kill
