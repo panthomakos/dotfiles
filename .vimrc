@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'jparise/vim-graphql'
 Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-test/vim-test'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
