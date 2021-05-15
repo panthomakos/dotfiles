@@ -7,3 +7,15 @@ snippet trun "Basic Test Run" b
 t.Run("$1", func(t *testing.T) {
 })
 endsnippet
+
+snippet it "Basic Ginko Example" b
+It("$1", func() {
+$2
+})
+endsnippet
+
+snippet cont "Basic Ginko Context" b
+Context("$1", func() {
+$2
+})
+endsnippet

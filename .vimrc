@@ -21,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-repeat'
 Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
+Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
@@ -187,6 +188,10 @@ augroup END
 
 " Disable code folding
 set nofoldenable
+
+" SplitJoin
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
 
 " vim-markdown Configuration
 let g:vim_markdown_folding_disabled=1
