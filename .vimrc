@@ -144,7 +144,7 @@ map gfv <C-w>L
 map gfs <C-w>f
 
 " FZF Configuration
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 map <leader>f :GFiles<CR>
 map <leader>b :Buffers<CR>
 map <leader>cf :BCommits<CR>

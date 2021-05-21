@@ -1,5 +1,5 @@
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export CDPATH=$HOME/src
+export PATH=/opt/homebrew/bin:$PATH
+export CDPATH=$HOME/src # https://linux.101hacks.com/cd-command/cdpath/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
 export EDITOR=nvim

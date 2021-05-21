@@ -147,6 +147,8 @@ sync.log
 .xsession-errors.*
 .yarnrc
 .yay
+.zcompcache/
 .zcompdump
 .zoom
 .zsh_history
+.zsh_sessions/

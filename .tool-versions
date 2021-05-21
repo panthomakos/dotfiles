@@ -1,6 +1,6 @@
-golang 1.15.5
+golang 1.16.4
 nodejs 12.18.3
-ruby 2.7.1
-python 3.9.0
+ruby 3.0.1
+python 3.9.5
 protoc 3.15.6
 yarn 1.22.10
