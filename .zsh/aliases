@@ -3,9 +3,6 @@
 # Quick Source ZSHRC
 alias src="source $HOME/.zshrc"
 
-# Bundler Development
-alias dbundle="ruby -I /home/pan/Projects/bundler/lib /home/pan/Projects/bundler/bin/bundle"
-
 # Encrypt a file for myself.
 alias gpge="gpg -e -r 'Pan Thomakos'"
 # Decrypt a file.
@@ -15,34 +12,8 @@ alias gpglp="gpg --list-packets <"
 # Check an ENCFILE.
 alias gpgss="gpg -o /dev/null --show-session-key <"
 
-# Image Sort and Delete
-alias imgsort="feh --recursive --action \"rm '%f'\" *.{png,jpg,jpeg}"
-
-# Image List Viewer
-alias ils="geeqie"
-
-# Format a disk with LUKS.
-alias luksf="sudo cryptsetup -c aes-xts-plain64 -s 512 -h sha512 luksFormat"
-# Open a LUKS encrypted device.
-alias lukso="sudo cryptsetup luksOpen"
-# Close a LUKS encrypted device.
-alias luksc="sudo cryptsetup luksClose"
-# Dump cryptographic info for a LUKS encrypted device.
-alias luksd="sudo cryptsetup luksDump"
-# Change a LUKS key. (luksk /dev/sdX -S <slot>)
-alias luksk="sudo cryptsetup luksChangeKey"
-
-# Run the Ranger File Browser
-alias ra="ranger"
-
-# Run kdenlive
-alias kdl="QT_AUTO_SCREEN_SCALE_FACTOR=0 kdenlive"
-
 # Get Numerical MOD value of file (mod <file>)
 alias mod="stat --format '%a'"
-
-# Parse and display with JQ
-alias jqd="jq '.'"
 
 # Fingerprint an SSH key.
 alias fingerprint="ssh-keygen -lf"
@@ -74,40 +45,6 @@ alias known="vim ~/.ssh/known_hosts"
 
 # Easily edit secret environment variables and configs
 alias esec="vim ~/Dropbox/secret.env"
-
-# Memcache server start and stop.
-alias mem.start="sudo systemctl start memcached"
-alias mem.stop="sudo systemctl stop memcached"
-
-# Redis server start and stop.
-alias redis.start="sudo systemctl start redis"
-alias redis.stop="sudo systemctl stop redis"
-
-# MySql server start and stop.
-alias mysql.start="sudo systemctl start mysqld.service"
-alias mysql.stop="sudo systemctl stop mysqld.service"
-
-# ZooKeeper start and stop.
-alias zk.start="zkServer start"
-alias zk.stop="zkServer stop"
-
-alias print.start="sudo systemctl start org.cups.cupsd.service avahi-daemon"
-alias print.stop="sudo systemctl stop org.cups.cupsd.service avahi-daemon"
-alias print.manage="google-chrome-stable http://localhost:631"
-
-# Convenience aliases for running Ruby specs.
-alias specs="find spec/**/*_spec.rb"
-alias rspecnr="specs | xargs grep -sL 'spec_helper' | xargs bundle exec rspec -c"
-alias rspecr="specs | xargs grep -sl 'spec_helper' | xargs bundle exec rspec -c"
-
-# Screen convenience commands.
-alias sr="screen -r"
-alias sl="screen -ls"
-
-# SBT console for a specific project w/ term properly set.
-function sbtc {
-  TERM=xterm-color sbt "project ${1}" console
-}
 
 alias home="cd $HOME"
 
@@ -146,9 +83,4 @@ alias drmi='docker rmi $(docker images | grep "^<none>" | awk "{print \$3}")'
 # Docker Compose Exec by docker-compose name instead of auto-generated name.
 function dce {
   docker exec -it $(docker ps --format '{{.ID}} {{.Names}}' | grep $1 | awk '{print $1}') ${@:2}
-}
-
-# Merge PDF files
-function pdfmerge {
-  gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=$1 ${@:2}
 }
