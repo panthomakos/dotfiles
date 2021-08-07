@@ -115,6 +115,7 @@ Public/
 .rubinius_last_error
 .rvm
 .s3cfg
+.saml2aws
 .sbt/
 .scala_history
 .scalac/
@@ -130,6 +131,7 @@ sync.log
 .sync
 .tectonicus
 .thumbnails/
+tmp/
 .Trash
 .tuneclone.data
 .vim/bundle/
