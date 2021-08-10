@@ -71,4 +71,4 @@ source $HOME/.zsh/ctrl-z
 #   `brew --prefix [PKG]` is slow to compute when a package is provided. This increases
 #   time to source this file by over one second. The remainder of the path is hard-coded
 #   here instead and can be recomputed if the ASDF install path ever changes.
-. $(brew --prefix)/opt/asdf/asdf.sh
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
