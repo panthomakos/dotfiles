@@ -5,6 +5,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-test/vim-test'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'morhetz/gruvbox'
 
 " Vim Polyglot should load after language specific plugins.
