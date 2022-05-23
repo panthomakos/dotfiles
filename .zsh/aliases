@@ -42,6 +42,8 @@ alias ber='bundle exec rspec --color'
 alias r="bundle exec ruby -Ilib"
 alias k="be rake"
 alias known="vim ~/.ssh/known_hosts"
+alias redis.server='redis-server --save "" --appendonly no'
+alias redis.client="REDISCLI_HISTFILE=/dev/null redis-cli"
 
 # Easily edit secret environment variables and configs
 alias esec="vim ~/Dropbox/secret.env"

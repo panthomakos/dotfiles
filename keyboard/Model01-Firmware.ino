@@ -34,7 +34,7 @@
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
-#include "Kaleidoscope-LEDEffect-BootGreeting.h"
+/* #include "Kaleidoscope-LEDEffect-BootGreeting.h" */
 
 // Support for LED modes that set all LEDs to a single color
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
@@ -42,17 +42,13 @@
 // Support for LED modes that pulse the keyboard's LED in a rainbow pattern
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 
-// Support for Keyboardio's internal keyboard testing mode
-#include "Kaleidoscope-Model01-TestMode.h"
+#include "Kaleidoscope-HardwareTestMode.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
 
 // Support for magic combos (key chords that trigger an action)
 #include "Kaleidoscope-MagicCombo.h"
-
-// Support for USB quirks, like changing the key state report protocol
-#include "Kaleidoscope-USB-Quirks.h"
 
 // Support for different keys when held vs tapped
 #include <Kaleidoscope-SpaceCadet.h>
@@ -70,9 +66,7 @@
   * a macro key is pressed.
   */
 
-enum { MACRO_VERSION_INFO,
-       MACRO_ANY
-     };
+enum { MACRO_VERSION_INFO };
 
 
 
@@ -137,14 +131,14 @@ KEYMAPS(
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Menu,
+   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Spacebar,
    Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
    ShiftToLayer(FUNCTION),
 
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         ___,
+   ___,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         ___,
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_Enter,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   ___,   Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    Key_RightShift, Key_RightAlt, Key_Spacebar, Key_RightControl,
    ShiftToLayer(FUNCTION)),
 
@@ -152,7 +146,7 @@ KEYMAPS(
   (___,      Key_F1,           Key_F2,      Key_F3,          Key_F4,           Key_F5,                   Key_CapsLock,
    Key_Tab,  ___,              Key_mouseUp, Key_LeftBracket, Key_RightBracket, Consumer_VolumeIncrement, Key_mouseWarpNE,
    Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR,      Key_mouseBtnL,    Consumer_VolumeDecrement,
-   Key_End,  Key_PrintScreen,  Key_Insert,  ___,             Key_mouseBtnM,    Consumer_Mute,            Key_mouseWarpSE,
+   Key_End,  Key_PrintScreen,  Key_Insert,  ___,             Key_mouseBtnM,    Consumer_Mute,            Key_LeftAlt,
    ___, Key_Delete, ___, ___,
    ___,
 
@@ -179,27 +173,6 @@ static void versionInfoMacro(uint8_t keyState) {
   }
 }
 
-/** anyKeyMacro is used to provide the functionality of the 'Any' key.
- *
- * When the 'any key' macro is toggled on, a random alphanumeric key is
- * selected. While the key is held, the function generates a synthetic
- * keypress event repeating that randomly selected key.
- *
- */
-
-static void anyKeyMacro(uint8_t keyState) {
-  static Key lastKey;
-  bool toggledOn = false;
-  if (keyToggledOn(keyState)) {
-    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
-    toggledOn = true;
-  }
-
-  if (keyIsPressed(keyState))
-    kaleidoscope::hid::pressKey(lastKey, toggledOn);
-}
-
-
 /** macroAction dispatches keymap events that are tied to a macro
     to that macro. It takes two uint8_t parameters.
 
@@ -217,10 +190,6 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
   case MACRO_VERSION_INFO:
     versionInfoMacro(keyState);
-    break;
-
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
     break;
   }
   return MACRO_NONE;
@@ -273,21 +242,22 @@ enum {
   COMBO_TOGGLE_NKRO_MODE
 };
 
-/** A tiny wrapper, to be used by MagicCombo.
- * This simply toggles the keyboard protocol via USBQuirks, and wraps it within
- * a function with an unused argument, to match what MagicCombo expects.
+/**
+ *  This enters the hardware test mode
  */
-static void toggleKeyboardProtocol(uint8_t combo_index) {
-  USBQuirks.toggleKeyboardProtocol();
+static void enterHardwareTestMode(uint8_t combo_index) {
+  HardwareTestMode.runTests();
 }
+
 
 /** Magic combo list, a list of key combo and action pairs the firmware should
  * recognise.
  */
-USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
-                  // Left Fn + Esc + Shift
-                  .keys = { R3C6, R2C6, R3C7 }
-                 });
+USE_MAGIC_COMBOS({
+  .action = enterHardwareTestMode,
+  // Left Fn + Prog + LED
+  .keys = { R3C6, R0C0, R0C6 }
+});
 
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
@@ -314,11 +284,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The boot greeting effect pulses the LED button for 10 seconds after the
   // keyboard is first connected
-  BootGreetingEffect,
+  /* BootGreetingEffect, */
 
   // The hardware test mode, which can be invoked by tapping Prog, LED and the
   // left Fn button at the same time.
-  TestMode,
+  HardwareTestMode,
 
   // LEDControl provides support for other LED modes
   LEDControl,
@@ -343,13 +313,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
-  MagicCombo,
-
-  // The USBQuirks plugin lets you do some things with USB that we aren't
-  // comfortable - or able - to do automatically, but can be useful
-  // nevertheless. Such as toggling the key report protocol between Boot (used
-  // by BIOSes) and Report (NKRO).
-  USBQuirks
+  MagicCombo
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.

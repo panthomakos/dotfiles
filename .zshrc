@@ -23,6 +23,8 @@ function bam() {
 # Local BIN
 export PATH=$PATH:$HOME/bin
 
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
 # Prompt
 autoload -U colors
 colors
