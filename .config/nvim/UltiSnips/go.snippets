@@ -19,3 +19,20 @@ Context("$1", func() {
 $2
 })
 endsnippet
+
+snippet ginko "Import Ginko and Gomega" b
+import . "github.com/onsi/ginkgo/v2"
+import . "github.com/onsi/gomega"
+endsnippet
+
+snippet desc "Ginko Describe" b
+var _ = Describe("$1", func() {
+})
+endsnippet
+
+snippet suite "Ginkgo Suite Funcion" b
+func Test$1(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "$1 Suite")
+}
+endsnippet
