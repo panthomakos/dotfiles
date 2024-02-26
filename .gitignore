@@ -1,6 +1,7 @@
 abs/
 Applications/
 Arduino/
+.arduinoIDE/
 .asdf/
 .aws/
 .boom
@@ -105,6 +106,7 @@ playbook.retry
 .pry_history
 .psql_history
 Public/
+.python_history
 .rails-plugin-sources
 *.rbc
 .rbx/
