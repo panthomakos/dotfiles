@@ -60,6 +60,7 @@ examples.desktop
 .gnupg/*
 !.gnupg/gpg.conf
 !.gnupg/gpg-agent.conf
+Google Drive
 .gpg/
 .gpg-agent-info
 .grip
