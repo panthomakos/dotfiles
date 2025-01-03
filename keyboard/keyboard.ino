@@ -92,7 +92,7 @@ KEYMAPS(
    Key_Tab,         ___,            Key_7,        Key_8,            Key_9,      Consumer_VolumeIncrement, Key_mouseWarpNE,
    Key_Home,        Key_mouseL,     Key_4,        Key_5,            Key_6,      Consumer_VolumeDecrement,
    Key_End,         Key_0,          Key_1,        Key_2,            Key_3,      Consumer_Mute,            Key_LeftAlt,
-   ___,             Key_Delete,     ___,          ___,
+   ___,             Key_Delete,     Key_Spacebar, ___,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,            Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
@@ -268,8 +268,8 @@ void setup() {
 
   static kaleidoscope::plugin::SpaceCadet::KeyBinding spacecadetmap[] = {
     {Key_LeftControl, Key_Escape, 250}
-    /* , {Key_LeftShift, Key_LeftParen, 250} */
-    /* , {Key_RightShift, Key_RightParen, 250} */
+    , {Key_LeftShift, Key_LeftParen, 250}
+    , {Key_RightShift, Key_RightParen, 250}
     /* , {Key_LeftGui, Key_LeftBracket, 250} */
     /* , {Key_RightAlt, Key_RightBracket, 250} */
     /* , {Key_LeftAlt, LSHIFT(Key_Minus), 250} // underscore */
