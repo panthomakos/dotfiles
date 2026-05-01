@@ -58,6 +58,13 @@ zstyle ':completion:*' completer _expand _complete _ignored _correct _approximat
 fpath=(~/.zsh/.completion $fpath)
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit
+
+# ASDF
+# Homebrew's asdf 0.19.x no longer ships `libexec/asdf.sh`. Keep the shims on
+# PATH directly and expose Homebrew's zsh completion directory to compinit.
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fpath=("$(brew --prefix asdf)/share/zsh/site-functions" $fpath)
+
 compinit
 
 # If AWS command line tools are enabled, source the CLI completer.
@@ -68,9 +75,3 @@ fi
 source $HOME/.zsh/gpg
 source $HOME/.zsh/aliases
 source $HOME/.zsh/ctrl-z
-
-# ASDF
-#   `brew --prefix [PKG]` is slow to compute when a package is provided. This increases
-#   time to source this file by over one second. The remainder of the path is hard-coded
-#   here instead and can be recomputed if the ASDF install path ever changes.
-. $(brew --prefix)/opt/asdf/libexec/asdf.sh

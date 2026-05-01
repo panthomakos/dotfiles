@@ -1,0 +1,50 @@
+#OPTIONS=role:wiz,race:elf,align:cha,gender:fem
+OPTIONS=role:val,race:dwarf,align:law
+OPTIONS=showexp,showscore,time,color
+OPTIONS=autodig,fruit:slime mold,boulder:0
+
+OPTIONS=msg_window:reversed
+
+OPTIONS=windowtype:curses,guicolor,perm_invent
+#OPTIONS=guicolor,perm_invent
+
+OPTIONS=lit_corridor
+OPTIONS=!sparkle
+
+OPTIONS=hilite_pet
+
+OPTIONS=disclose:yi +a +v +g +c
+
+OPTIONS=autopickup, pickup_types=$?!/="
+
+## Use the dark gray color.
+OPTIONS=use_darkgray
+
+## Hilight stairs under items with red background.
+## Hilight piles of objects with blue background.
+OPTIONS=hilite_pile
+OPTIONS=hilite_status:characteristics/up/green
+OPTIONS=hilite_status:characteristics/down/yellow
+OPTIONS=hilite_status:hunger/always/yellow
+OPTIONS=hilite_status:condition/all/orange
+OPTIONS=hitpointbar
+OPTIONS=statushilites=5
+
+## Colored menus. Regular expressions allowed.
+OPTIONS=menucolors
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" holy "=green
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" unholy "=red
+MENUCOLOR=" cursed .* (being worn)"=orange&underline
+
+## Sort items by name. One of "none", "loot", or "full"
+OPTIONS=sortloot:full
+
+## If off, you never load bones files.
+OPTIONS=!bones
+
+BINDINGS=cf:force,A:adjust
+# meta-a : adjust
+# meta-f : force
+# meta-l : loot

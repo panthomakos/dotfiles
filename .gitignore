@@ -18,7 +18,10 @@ Arduino/
 .cabal
 .cache
 .cargo/
+.claude/
+.claude.json
 .claws.yml
+.codex/
 .compiz/
 .config/*
 !.config/mimeapps.list

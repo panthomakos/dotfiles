@@ -1,5 +1,9 @@
 # vim: filetype=zsh:
 
+# Agentic Coding
+alias cc="claude --dangerously-skip-permissions"
+alias co="codex --yolo"
+
 # Quick Source ZSHRC
 alias src="source $HOME/.zshrc"
 
@@ -53,9 +57,13 @@ alias home="cd $HOME"
 # Update all submodules
 alias git.update="git submodule foreach git pull"
 
-alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets coc-tsserver coc-flow coc-prettier\""
+alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets coc-tsserver coc-flow coc-prettier coc-pyright\""
 alias vim.update="vim +PlugUpdate! +CocUpdateSync +q"
 alias asdf.install="cat $HOME/.tool-versions | awk '{print $1}' | xargs -L1 asdf plugin-add"
+
+# Brewfile
+alias brew.install="brew bundle --file=~/Brewfile"
+alias brew.save="brew bundle dump --file=~/Brewfile --force"
 
 # Update brew packages and vim plugins
 alias sys.update="brew update && brew upgrade && asdf plugin update --all && git.update && vim.update"
