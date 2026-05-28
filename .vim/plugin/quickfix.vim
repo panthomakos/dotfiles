@@ -42,3 +42,5 @@ endfunction
 
 nmap <silent> <leader>L :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>E :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <silent> <M-n> :cnext<CR>
+nnoremap <silent> <M-p> :cprevious<CR>

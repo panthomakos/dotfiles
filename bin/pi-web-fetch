@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""Small web-fetch CLI for pi. Fetches a URL and emits readable text + metadata as JSON."""
+import argparse
+import html
+import json
+import re
+import sys
+import urllib.request
+import urllib.parse
+
+UA = "Mozilla/5.0 pi-web-tools/1.0"
+
+
+def strip_tags(s: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(s))).strip()
+
+
+def html_to_text(src: str) -> str:
+    src = re.sub(r"<!--[\s\S]*?-->", " ", src)
+    src = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>|<noscript[\s\S]*?</noscript>|<svg[\s\S]*?</svg>", " ", src, flags=re.I)
+    src = re.sub(r"<nav[\s\S]*?</nav>|<footer[\s\S]*?</footer>|<header[\s\S]*?</header>", " ", src, flags=re.I)
+    src = re.sub(r"<(h[1-6]|p|li|blockquote|pre|tr|div|section|article|br)\b[^>]*>", "\n", src, flags=re.I)
+    src = re.sub(r"</((h[1-6])|p|li|blockquote|pre|tr|div|section|article)>", "\n", src, flags=re.I)
+    text = html.unescape(re.sub(r"<[^>]+>", " ", src))
+    lines = [re.sub(r"[ \t\f\v]+", " ", line).strip() for line in text.splitlines()]
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(line for line in lines if line)).strip()
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description="Fetch a URL and emit readable text as JSON")
+    p.add_argument("url")
+    p.add_argument("--max-chars", type=int, default=50000)
+    args = p.parse_args()
+
+    parsed = urllib.parse.urlparse(args.url)
+    if parsed.scheme not in ("http", "https"):
+        print(json.dumps({"error": "Only http(s) URLs are supported", "url": args.url}), file=sys.stderr)
+        return 2
+
+    max_chars = max(1000, min(200000, args.max_chars))
+    try:
+        req = urllib.request.Request(args.url, headers={
+            "User-Agent": UA,
+            "Accept": "text/html,application/xhtml+xml,text/plain,application/json;q=0.9,*/*;q=0.5",
+        })
+        with urllib.request.urlopen(req, timeout=30) as r:
+            raw = r.read().decode("utf-8", "ignore")
+            final_url = r.geturl()
+            content_type = r.headers.get("content-type", "")
+        title_match = re.search(r"<title[^>]*>([\s\S]*?)</title>", raw, re.I)
+        title = strip_tags(title_match.group(1)) if title_match else None
+        text = html_to_text(raw) if "html" in content_type.lower() or "<html" in raw[:1000].lower() else raw.strip()
+        out = text[:max_chars]
+        print(json.dumps({
+            "url": args.url,
+            "finalUrl": final_url,
+            "title": title,
+            "contentType": content_type,
+            "charsReturned": len(out),
+            "charsExtracted": len(text),
+            "truncated": len(text) > max_chars,
+            "text": out,
+        }, indent=2))
+        return 0
+    except Exception as e:
+        print(json.dumps({"url": args.url, "error": str(e)}), file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

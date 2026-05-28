@@ -1,4 +1,5 @@
 abs/
+.agent-browser/
 Applications/
 Arduino/
 .arduinoIDE/
@@ -12,6 +13,7 @@ Arduino/
 .bashrc
 .bash_history
 .bash_logout
+bin/protoc-gen-go
 .bash_profile
 .bash_profile.macports-saved_2010-08-02_at_11:09:27
 .bundler/
@@ -46,6 +48,7 @@ Dropbox
 .DS_Store
 .dvdcss
 .ecryptfs
+.embedded-postgres-go/
 .elinks/
 .elm/
 .erlang.cookie
@@ -99,6 +102,7 @@ Music/
 .netrwhist
 .node_modules/
 .npm/
+.ollama/
 .openambit/
 .passenger/
 *.pid
@@ -106,6 +110,20 @@ Pictures/
 .pki/
 playbook.retry
 .pow
+.pi/agent/*
+!.pi/agent/extensions/
+!.pi/agent/extensions/**/
+!.pi/agent/extensions/**/*.ts
+!.pi/agent/extensions/**/*.js
+!.pi/agent/extensions/**/*.json
+!.pi/agent/extensions/**/*.md
+.pi/agent/auth.json
+.pi/agent/settings.json
+.pi/agent/models.json
+.pi/agent/sessions/
+.pi/agent/logs/
+.pi/agent/bin/
+.pi/**/*.log
 .profile
 .pry_history
 .psql_history
@@ -160,3 +178,7 @@ tmp/
 .zoom
 .zsh_history
 .zsh_sessions/
+
+.pi/queue.json
+
+installer.log
