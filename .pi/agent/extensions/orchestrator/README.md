@@ -9,8 +9,9 @@ Async, Pi-native subagent orchestration with a dynamic below-editor status widge
 - `subagent_continue` — start a follow-up run in the same cwd/worktree with prior output + guidance.
 - `subagent_stop` — terminate a running child process.
 
-## Command
+## Commands
 
+- `/sequence [plan-file] [extra instructions]` — create a fresh coordinator session from a markdown/text plan file (for example `/sequence document.md`) or, when no file is provided, from the latest assistant plan; it prepares a prompt containing the plan plus sequence instructions for you to review/submit, then run subagents one at a time while carrying forward only a concise handoff summary between them.
 - `/subagents` — show current status and refresh the widget.
 
 ## Worktree example

@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Small web-fetch CLI for pi. Fetches a URL and emits readable text + metadata as JSON."""
+"""Small web-fetch CLI for pi. Fetches a URL and emits readable text/image metadata as JSON."""
 import argparse
+import hashlib
 import html
 import json
+import mimetypes
+import os
+from pathlib import Path
 import re
 import sys
+import tempfile
 import urllib.request
 import urllib.parse
 
@@ -26,10 +31,33 @@ def html_to_text(src: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", "\n".join(line for line in lines if line)).strip()
 
 
+def safe_image_suffix(url: str, content_type: str) -> str:
+    suffix = Path(urllib.parse.urlparse(url).path).suffix.lower()
+    if suffix and re.fullmatch(r"\.[a-z0-9]{1,8}", suffix):
+        return suffix
+    guessed = mimetypes.guess_extension(content_type.split(";", 1)[0].strip().lower())
+    return guessed or ".img"
+
+
+def save_binary(payload: bytes, url: str, content_type: str, output: str | None) -> str:
+    if output:
+        path = Path(output).expanduser()
+        if path.is_dir():
+            path = path / ("pi-web-fetch" + safe_image_suffix(url, content_type))
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+        return str(path)
+    fd, path = tempfile.mkstemp(prefix="pi-web-fetch-", suffix=safe_image_suffix(url, content_type))
+    with os.fdopen(fd, "wb") as f:
+        f.write(payload)
+    return path
+
+
 def main() -> int:
-    p = argparse.ArgumentParser(description="Fetch a URL and emit readable text as JSON")
+    p = argparse.ArgumentParser(description="Fetch a URL and emit readable text or saved image metadata as JSON")
     p.add_argument("url")
     p.add_argument("--max-chars", type=int, default=50000)
+    p.add_argument("--output", help="Path to write image/binary responses. Defaults to a temp file.")
     args = p.parse_args()
 
     parsed = urllib.parse.urlparse(args.url)
@@ -41,19 +69,41 @@ def main() -> int:
     try:
         req = urllib.request.Request(args.url, headers={
             "User-Agent": UA,
-            "Accept": "text/html,application/xhtml+xml,text/plain,application/json;q=0.9,*/*;q=0.5",
+            "Accept": "text/html,application/xhtml+xml,text/plain,application/json,image/avif,image/webp,image/png,image/jpeg,image/gif,*/*;q=0.5",
         })
         with urllib.request.urlopen(req, timeout=30) as r:
-            raw = r.read().decode("utf-8", "ignore")
+            payload = r.read()
             final_url = r.geturl()
             content_type = r.headers.get("content-type", "")
+        media_type = content_type.split(";", 1)[0].strip().lower()
+        is_image = media_type.startswith("image/")
+        is_text = media_type.startswith("text/") or media_type in ("application/json", "application/xml", "application/xhtml+xml", "application/javascript")
+
+        if is_image or not is_text:
+            local_path = save_binary(payload, final_url, content_type, args.output)
+            kind = "image" if is_image else "binary"
+            text = f"Fetched {kind} from {final_url}\nSaved to: {local_path}\nContent-Type: {content_type or 'unknown'}\nBytes: {len(payload)}"
+            print(json.dumps({
+                "url": args.url,
+                "finalUrl": final_url,
+                "kind": kind,
+                "contentType": content_type,
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+                "localPath": local_path,
+                "text": text,
+            }, indent=2))
+            return 0
+
+        raw = payload.decode("utf-8", "ignore")
         title_match = re.search(r"<title[^>]*>([\s\S]*?)</title>", raw, re.I)
         title = strip_tags(title_match.group(1)) if title_match else None
-        text = html_to_text(raw) if "html" in content_type.lower() or "<html" in raw[:1000].lower() else raw.strip()
+        text = html_to_text(raw) if "html" in media_type or "<html" in raw[:1000].lower() else raw.strip()
         out = text[:max_chars]
         print(json.dumps({
             "url": args.url,
             "finalUrl": final_url,
+            "kind": "text",
             "title": title,
             "contentType": content_type,
             "charsReturned": len(out),

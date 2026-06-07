@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""Small web-search CLI for pi.
+
+Default behavior is Google-first curl/urllib scraping with fallback to DuckDuckGo
+HTML when Google returns an unparseable JS/CAPTCHA page. Output is JSON.
+"""
+import argparse
+import html
+import json
+import re
+import sys
+import urllib.parse
+import urllib.request
+from typing import Any
+
+UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36 pi-web-tools/1.0"
+
+
+def fetch(url: str, timeout: int = 20) -> str:
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "ignore")
+
+
+def strip_tags(s: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(s))).strip()
+
+
+def normalize_google_url(href: str) -> str | None:
+    href = html.unescape(href)
+    if href.startswith("/url?"):
+        href = "https://www.google.com" + href
+    try:
+        u = urllib.parse.urlparse(href)
+    except Exception:
+        return None
+    qs = urllib.parse.parse_qs(u.query)
+    if u.netloc.endswith("google.com") and u.path == "/url" and qs.get("q"):
+        return qs["q"][0]
+    if u.scheme in ("http", "https") and "google." not in u.netloc and "gstatic." not in u.netloc:
+        return urllib.parse.urlunparse(u)
+    return None
+
+
+def google_search(query: str, limit: int) -> tuple[list[dict[str, Any]], str | None]:
+    url = "https://www.google.com/search?" + urllib.parse.urlencode({
+        "q": query,
+        "num": str(limit),
+        "hl": "en",
+        "filter": "0",
+        "pws": "0",
+    })
+    page = fetch(url)
+    low = page.lower()
+    if "/sorry/" in low or "unusual traffic" in low or "captcha" in low:
+        return [], "Google returned a CAPTCHA/unusual-traffic page"
+
+    results: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    # Older/simple Google markup.
+    for m in re.finditer(r'<a[^>]+href="([^"]+)"[^>]*>\s*(?:<br>)?\s*<h3[^>]*>(.*?)</h3>(.*?)</a>', page, re.I | re.S):
+        out_url = normalize_google_url(m.group(1))
+        title = strip_tags(m.group(2))
+        if out_url and title and out_url not in seen:
+            seen.add(out_url)
+            results.append({"title": title, "url": out_url, "snippet": "", "source": "google-curl"})
+            if len(results) >= limit:
+                return results, None
+
+    # /url?q= links if present.
+    for m in re.finditer(r'href="(/url\?q=[^"]+)"[^>]*>(.*?)</a>', page, re.I | re.S):
+        out_url = normalize_google_url(m.group(1))
+        title = strip_tags(m.group(2))
+        if out_url and title and len(title) > 3 and out_url not in seen:
+            seen.add(out_url)
+            results.append({"title": title, "url": out_url, "snippet": "", "source": "google-curl"})
+            if len(results) >= limit:
+                return results, None
+
+    if not results:
+        return [], "Google returned a page, but no result links were parseable (often JS-only markup)"
+    return results[:limit], None
+
+
+def normalize_ddg_url(href: str) -> str:
+    href = html.unescape(href)
+    if href.startswith("//"):
+        href = "https:" + href
+    try:
+        u = urllib.parse.urlparse(href)
+        qs = urllib.parse.parse_qs(u.query)
+        if qs.get("uddg"):
+            return qs["uddg"][0]
+    except Exception:
+        pass
+    return href
+
+
+def ddg_search(query: str, limit: int) -> tuple[list[dict[str, Any]], str | None]:
+    url = "https://html.duckduckgo.com/html/?" + urllib.parse.urlencode({"q": query})
+    page = fetch(url)
+    results: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    blocks = re.findall(r'<div[^>]+class="[^"]*result[^"]*"[\s\S]*?(?=<div[^>]+class="[^"]*result[^"]*"|</body>|$)', page, re.I)
+    for block in blocks:
+        link = re.search(r'<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)</a>', block, re.I)
+        if not link:
+            continue
+        snip = re.search(r'<a[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)</a>', block, re.I) or re.search(r'<div[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)</div>', block, re.I)
+        out_url = normalize_ddg_url(link.group(1))
+        title = strip_tags(link.group(2))
+        if title and out_url and out_url not in seen:
+            seen.add(out_url)
+            results.append({
+                "title": title,
+                "url": out_url,
+                "snippet": strip_tags(snip.group(1)) if snip else "",
+                "source": "duckduckgo-html",
+            })
+            if len(results) >= limit:
+                break
+    if not results:
+        return [], "DuckDuckGo HTML returned no parseable results"
+    return results, None
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description="Search the web and emit JSON results")
+    p.add_argument("query")
+    p.add_argument("--limit", type=int, default=5)
+    p.add_argument("--provider", choices=["auto", "google", "ddg"], default="auto",
+                   help="auto = Google first, fallback to DuckDuckGo HTML")
+    args = p.parse_args()
+    limit = max(1, min(10, args.limit))
+
+    warnings: list[str] = []
+    provider_used = args.provider
+
+    try:
+        if args.provider in ("auto", "google"):
+            results, warning = google_search(args.query, limit)
+            if results:
+                print(json.dumps({"query": args.query, "provider": "google-curl", "results": results, "warnings": warnings}, indent=2))
+                return 0
+            if warning:
+                warnings.append(warning)
+            if args.provider == "google":
+                print(json.dumps({"query": args.query, "provider": "google-curl", "results": [], "warnings": warnings}, indent=2))
+                return 2
+
+        results, warning = ddg_search(args.query, limit)
+        provider_used = "duckduckgo-html"
+        if warning:
+            warnings.append(warning)
+        print(json.dumps({"query": args.query, "provider": provider_used, "results": results, "warnings": warnings}, indent=2))
+        return 0 if results else 2
+    except Exception as e:
+        print(json.dumps({"query": args.query, "provider": provider_used, "results": [], "error": str(e), "warnings": warnings}, indent=2), file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

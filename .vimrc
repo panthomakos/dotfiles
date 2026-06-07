@@ -1,10 +1,16 @@
 call plug#begin()
 Plug 'jparise/vim-graphql'
 Plug 'derekwyatt/vim-scala'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'vim-test/vim-test'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Native Neovim LSP tooling. Mason keeps language servers declared and
+" installed from this config instead of scattered global npm/go/gem installs.
+Plug 'neovim/nvim-lspconfig'
+Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
 
 Plug 'morhetz/gruvbox'
 
@@ -48,6 +54,83 @@ Plug 'knubie/vim-kitty-navigator', {'do': 'cp ./*.py ~/.config/kitty/'}
 Plug 'tpope/vim-vinegar' " Additions to the built-in netrw directory browser.
 call plug#end()
 
+lua << EOF
+local blink_ok, blink = pcall(require, "blink.cmp")
+if blink_ok then
+  blink.setup({
+    keymap = {
+      preset = "super-tab",
+      -- Kitty owns <C-n>/<C-p> for tab navigation. Use <C-j>/<C-k> for
+      -- completion menu movement instead; in normal mode these remain kitty
+      -- navigator pane movement mappings.
+      ["<C-j>"] = { "select_next", "fallback_to_mappings" },
+      ["<C-k>"] = { "select_prev", "fallback_to_mappings" },
+      ["<C-n>"] = false,
+      ["<C-p>"] = false,
+    },
+    completion = {
+      documentation = { auto_show = false },
+    },
+    sources = {
+      default = { "lsp", "path", "buffer" },
+    },
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+    },
+  })
+end
+
+local mason_ok, mason = pcall(require, "mason")
+if mason_ok then
+  mason.setup()
+end
+
+local mason_lsp_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if mason_lsp_ok then
+  mason_lspconfig.setup({
+    ensure_installed = {
+      "gopls",
+      "pyright",
+      "ts_ls",
+    },
+    automatic_enable = true,
+  })
+end
+
+local tools_ok, mason_tool_installer = pcall(require, "mason-tool-installer")
+if tools_ok then
+  mason_tool_installer.setup({
+    ensure_installed = {
+      "prettier",
+    },
+  })
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(event)
+    local opts = { buffer = event.buf, silent = true }
+
+    vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set({ "n", "x" }, "<leader>a", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>qf", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "]g", vim.diagnostic.goto_next, opts)
+  end,
+})
+
+vim.api.nvim_create_user_command("Format", function()
+  vim.lsp.buf.format({ async = true })
+end, {})
+EOF
+
 set shell=/bin/sh
 set nocompatible
 runtime macros/matchit.vim
@@ -89,6 +172,8 @@ set hlsearch " Highlight searches.
 set relativenumber " Relative line numbering...
 set number " with the current line number being absolute.
 set cursorline " Highlight the current line.
+set signcolumn=yes
+set completeopt=menuone,noselect,popup
 set ignorecase " Make searches case insensitive.
 set smartcase " Make searches case-sensitive if they contain upper-case.
 set formatprg=par " Use par as the format program.
@@ -122,6 +207,10 @@ nmap <silent> <leader>sp :set spell!<CR>
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 " Source vimrc.
 nnoremap <leader>sv :source $MYVIMRC<CR>
+" Copy the current file path and line number.
+nnoremap <leader>yl :let @+=expand('%') . ':' . line('.')<CR>
+" Copy the current file path and selected line range.
+xnoremap <leader>yl :<C-U>let @+=expand('%') . ':' . min([line("'<"), line("'>")]) . '-' . max([line("'<"), line("'>")])<CR>
 
 " Paste that doesn't replace the default register.
 vnoremap <leader>p "_dP

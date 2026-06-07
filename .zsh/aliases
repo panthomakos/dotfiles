@@ -49,16 +49,12 @@ alias known="vim ~/.ssh/known_hosts"
 alias redis.server='redis-server --save "" --appendonly no'
 alias redis.client="REDISCLI_HISTFILE=/dev/null redis-cli"
 
-# Easily edit secret environment variables and configs
-alias esec="vim ~/Dropbox/secret.env"
-
 alias home="cd $HOME"
 
 # Update all submodules
 alias git.update="git submodule foreach git pull"
 
-alias coc.install="vim +\"CocInstall -sync coc-go coc-snippets coc-tsserver coc-flow coc-prettier coc-pyright\""
-alias vim.update="vim +PlugUpdate! +CocUpdateSync +q"
+alias vim.update="nvim +PlugUpdate! +MasonToolsUpdateSync +q"
 alias asdf.install="cat $HOME/.tool-versions | awk '{print $1}' | xargs -L1 asdf plugin-add"
 
 # Brewfile

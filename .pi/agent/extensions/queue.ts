@@ -160,51 +160,52 @@ function getLastAssistantText(ctx: AnyCommandContext): string | undefined {
 	return undefined;
 }
 
-function listMarker(line: string): { indent: number; content: string } | undefined {
-	const match = line.match(/^(\s*)(?:\d+[.)]|[-*+•])\s+(.+)$/);
-	if (!match) return undefined;
-	return { indent: match[1].length, content: match[2].trim() };
+function extractJsonArray(text: string): unknown {
+	const trimmed = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/i, "").trim();
+	try {
+		return JSON.parse(trimmed);
+	} catch {
+		const start = trimmed.indexOf("[");
+		const end = trimmed.lastIndexOf("]");
+		if (start >= 0 && end > start) return JSON.parse(trimmed.slice(start, end + 1));
+		throw new Error("No JSON array found");
+	}
 }
 
-function headingMarker(line: string): string | undefined {
-	const match = line.match(/^#{2,4}\s+(.+)$/);
-	return match?.[1]?.trim();
-}
+async function generateSplitItems(text: string, ctx: AnyCommandContext): Promise<string[]> {
+	if (!ctx.model) throw new Error("No model selected");
+	const auth = await ctx.modelRegistry.getApiKeyAndHeaders(ctx.model);
+	if (!auth.ok || !auth.apiKey) throw new Error("No API key available for selected model");
 
-function splitTopLevelItems(text: string): string[] {
-	const lines = text.replace(/\r\n/g, "\n").split("\n");
-	const markerLines = lines
-		.map((line, index) => ({ line, index, marker: listMarker(line) }))
-		.filter((x): x is { line: string; index: number; marker: { indent: number; content: string } } => x.marker !== undefined);
-
-	if (markerLines.length >= 2) {
-		const minIndent = Math.min(...markerLines.map((x) => x.marker.indent));
-		const top = markerLines.filter((x) => x.marker.indent === minIndent);
-		const items: string[] = [];
-		for (let i = 0; i < top.length; i++) {
-			const start = top[i].index;
-			const end = i + 1 < top.length ? top[i + 1].index : lines.length;
-			const block = lines.slice(start, end);
-			block[0] = top[i].marker.content;
-			const item = block.join("\n").trim();
-			if (item) items.push(item);
-		}
-		return items;
-	}
-
-	const headings = lines
-		.map((line, index) => ({ index, title: headingMarker(line) }))
-		.filter((x): x is { index: number; title: string } => x.title !== undefined);
-	if (headings.length >= 2) {
-		return headings
-			.map((h, i) => {
-				const end = i + 1 < headings.length ? headings[i + 1].index : lines.length;
-				return [h.title, ...lines.slice(h.index + 1, end)].join("\n").trim();
-			})
-			.filter(Boolean);
-	}
-
-	return [];
+	const message: Message = {
+		role: "user",
+		content: [{
+			type: "text",
+			text: `Split this into the fewest larger independent queue items. Prefer core actionable findings/tasks over metadata bullets; include secondary findings only if actionable. Return only a JSON array of strings, each string containing the full task context.\n\n${text}`,
+		}],
+		timestamp: Date.now(),
+	};
+	const response = await complete(
+		ctx.model,
+		{ systemPrompt: "You split text into coarse actionable queue items. Output only valid JSON.", messages: [message] },
+		{ apiKey: auth.apiKey, headers: auth.headers, signal: ctx.signal },
+	);
+	const raw = response.content
+		.filter((c): c is { type: "text"; text: string } => c.type === "text")
+		.map((c) => c.text)
+		.join("\n");
+	const parsed = extractJsonArray(raw);
+	if (!Array.isArray(parsed)) throw new Error("Split response was not a JSON array");
+	return parsed
+		.map((item) => {
+			if (typeof item === "string") return item.trim();
+			if (item && typeof item === "object") {
+				const value = (item as any).prompt ?? (item as any).task ?? (item as any).text;
+				return typeof value === "string" ? value.trim() : "";
+			}
+			return "";
+		})
+		.filter((item) => item.length > 0);
 }
 
 function formatItem(item: QueueItem): string {
@@ -558,16 +559,24 @@ export default function queueExtension(pi: ExtensionAPI) {
 	});
 
 	pi.registerCommand("split", {
-		description: "Split the last assistant top-level list into queue items",
+		description: "Ask the model to split the last assistant message into coarse queue items",
 		handler: async (_args, ctx) => {
 			const text = getLastAssistantText(ctx);
 			if (!text) {
 				ctx.ui.notify("No assistant message found to split", "warning");
 				return;
 			}
-			const items = splitTopLevelItems(text);
+
+			let items: string[];
+			try {
+				ctx.ui.notify("Proposing queue split...", "info");
+				items = await generateSplitItems(text, ctx);
+			} catch (err: any) {
+				ctx.ui.notify(`Could not generate split: ${err?.message || err}`, "error");
+				return;
+			}
 			if (items.length === 0) {
-				ctx.ui.notify("Could not find a top-level numbered/bulleted list or headings to split", "warning");
+				ctx.ui.notify("Model did not propose any queue items", "warning");
 				return;
 			}
 

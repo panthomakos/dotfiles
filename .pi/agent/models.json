@@ -1,0 +1,28 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://localhost:11434/v1",
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false
+      },
+      "models": [
+        {
+          "id": "qwen2.5-coder:latest",
+          "name": "Qwen 2.5 Coder (Ollama, latest)"
+        },
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen 2.5 Coder 7B (Ollama)"
+        },
+        {
+          "id": "qwen3.6:latest",
+          "name": "Qwen 3.6 (Ollama, latest)",
+          "reasoning": true
+        }
+      ]
+    }
+  }
+}

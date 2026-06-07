@@ -35,6 +35,12 @@ type Run = {
 	pid?: number;
 	proc?: ChildProcess;
 	transcript: string[];
+	contextTokens?: number;
+	contextWindow?: number;
+	totalInputTokens: number;
+	totalOutputTokens: number;
+	totalCacheReadTokens: number;
+	totalCacheWriteTokens: number;
 };
 
 const runs = new Map<string, Run>();
@@ -58,6 +64,30 @@ function truncate(s: string, n: number): string {
 	return one.length <= n ? one : `${one.slice(0, Math.max(0, n - 1))}…`;
 }
 
+function fmtTokens(n: number | null | undefined): string {
+	if (n == null || !Number.isFinite(n)) return "?";
+	if (n < 1000) return String(Math.round(n));
+	if (n < 1_000_000) return `${(n / 1000).toFixed(n < 10_000 ? 1 : 0)}k`;
+	return `${(n / 1_000_000).toFixed(1)}m`;
+}
+
+function fmtContext(r: Run): string {
+	const pct = r.contextTokens != null && r.contextWindow ? `${Math.round((r.contextTokens / r.contextWindow) * 100)}%` : "?%";
+	return `ctx ${pct} ${fmtTokens(r.contextTokens)}/${fmtTokens(r.contextWindow)} ↑${fmtTokens(r.totalInputTokens)} ↓${fmtTokens(r.totalOutputTokens)}`;
+}
+
+function calculateContextTokens(usage: any): number | undefined {
+	if (!usage) return undefined;
+	const total = usage.totalTokens ?? usage.total_tokens;
+	if (Number.isFinite(total)) return total;
+	const input = usage.input ?? usage.inputTokens ?? usage.prompt_tokens ?? 0;
+	const output = usage.output ?? usage.outputTokens ?? usage.completion_tokens ?? 0;
+	const cacheRead = usage.cacheRead ?? usage.cache_read ?? usage.cached_tokens ?? 0;
+	const cacheWrite = usage.cacheWrite ?? usage.cache_write ?? 0;
+	const sum = input + output + cacheRead + cacheWrite;
+	return Number.isFinite(sum) && sum > 0 ? sum : undefined;
+}
+
 function statusIcon(status: Status): string {
 	return ({ queued: "◌", starting: "…", running: "▶", waiting: "?", done: "✓", failed: "✗", stopped: "■" } as const)[status];
 }
@@ -68,7 +98,7 @@ function isActiveStatus(status: Status): boolean {
 
 function renderRunRow(r: Run): string {
 	const activity = r.lastTool ? r.lastTool : r.lastText ? truncate(r.lastText, 24) : r.worktree?.path ? path.basename(r.worktree.path) : "";
-	return `${statusIcon(r.status)} ${elapsed(r.startedAt)} ${r.name.padEnd(18).slice(0, 18)} ${r.status.padEnd(8)} ${truncate(activity, 34)}`;
+	return `${statusIcon(r.status)} ${elapsed(r.startedAt)} ${r.name.padEnd(16).slice(0, 16)} ${r.status.padEnd(8)} ${fmtContext(r)} ${truncate(activity, 24)}`;
 }
 
 function renderLines(): string[] {
@@ -141,6 +171,108 @@ function finalAssistantTextFromMessage(message: any): string {
 	return texts.join("\n").trim();
 }
 
+function messageText(message: any): string {
+	if (typeof message?.content === "string") return message.content;
+	if (Array.isArray(message?.content)) {
+		return message.content
+			.filter((c: any) => c?.type === "text")
+			.map((c: any) => c.text || "")
+			.join("\n")
+			.trim();
+	}
+	return "";
+}
+
+function getLastAssistantText(ctx: any): string | undefined {
+	const branch = ctx.sessionManager.getBranch();
+	for (let i = branch.length - 1; i >= 0; i--) {
+		const entry = branch[i];
+		if (entry?.type !== "message" || entry.message?.role !== "assistant") continue;
+		const text = messageText(entry.message).trim();
+		if (text) return text;
+	}
+	return undefined;
+}
+
+function parseCommandArgs(input: string): string[] {
+	const args: string[] = [];
+	let current = "";
+	let quote: "'" | '"' | undefined;
+	let escaping = false;
+	for (const ch of input) {
+		if (escaping) {
+			current += ch;
+			escaping = false;
+			continue;
+		}
+		if (ch === "\\" && quote !== "'") {
+			escaping = true;
+			continue;
+		}
+		if ((ch === "'" || ch === '"') && (!quote || quote === ch)) {
+			quote = quote ? undefined : ch;
+			continue;
+		}
+		if (/\s/.test(ch) && !quote) {
+			if (current) args.push(current);
+			current = "";
+			continue;
+		}
+		current += ch;
+	}
+	if (escaping) current += "\\";
+	if (current) args.push(current);
+	return args;
+}
+
+function expandHome(filePath: string): string {
+	return filePath === "~" ? os.homedir() : filePath.startsWith("~/") ? path.join(os.homedir(), filePath.slice(2)) : filePath;
+}
+
+async function resolveSequencePlan(args: string, ctx: any): Promise<{ plan?: string; extra: string; source: "file" | "assistant" }> {
+	const trimmed = args.trim();
+	const parsed = parseCommandArgs(trimmed);
+	if (parsed.length > 0) {
+		const candidate = path.resolve(ctx.cwd, expandHome(parsed[0]));
+		try {
+			const stat = await fs.promises.stat(candidate);
+			if (stat.isFile()) {
+				return { plan: (await fs.promises.readFile(candidate, "utf8")).trim(), extra: parsed.slice(1).join(" "), source: "file" };
+			}
+		} catch {}
+	}
+
+	const plan = getLastAssistantText(ctx);
+	return { plan, extra: trimmed, source: "assistant" };
+}
+
+function buildSequencePrompt(plan: string, extraInstructions: string): string {
+	return `Act as a sequential subagent coordinator for the plan document below.
+
+Plan:
+${plan}
+
+Goal:
+- Complete the entire plan by delegating small, cleanly scoped subtasks to Pi subagents one at a time.
+- Keep this coordinator thread compact: maintain only the full plan plus a short running handoff summary from completed subtasks.
+
+Coordinator rules:
+1. First, read the full plan above and derive an ordered task list. Do not rewrite the whole plan back to me unless needed.
+2. Run at most ONE subagent at a time. Spawn exactly the next subagent, then stop your turn and wait for the orchestrator completion message before continuing.
+3. Each subagent task prompt must include:
+   - the full plan,
+   - the concise accumulated handoff summary from prior subagents,
+   - the specific subtask it alone should perform,
+   - clear completion/reporting expectations.
+4. After each subagent completes, compress its report into a very small handoff summary: outcome, important files changed/read, tests/checks, blockers, and next implications.
+5. Pass only that concise handoff summary plus the full plan to the next subagent. Do not paste full transcripts.
+6. If a subagent reports NEEDS_INPUT or a blocker requiring user judgment, ask me before continuing.
+7. Continue until every plan item is complete, then provide a final concise summary with changed files, checks run, remaining risks, and follow-up.
+
+Use the subagent_spawn tool for each subtask. Prefer descriptive short subagent names. Unless the plan explicitly requires parallelism, do not run tasks in parallel.
+${extraInstructions ? `\nAdditional user instructions for this sequence:\n${extraInstructions}` : ""}`;
+}
+
 function maybeNotifyMain(run: Run) {
 	const body = run.status === "waiting"
 		? `Subagent ${run.name} needs direction.\n\n${run.finalOutput || run.lastText || ""}`
@@ -181,6 +313,23 @@ function runGit(cwd: string, args: string[]): { ok: boolean; stdout: string; std
 	return { ok: r.status === 0, stdout: r.stdout || "", stderr: r.stderr || "" };
 }
 
+function contextWindowForModel(modelId?: string): number | undefined {
+	const currentModel = currentCtx?.model as any;
+	if (!modelId || currentModel?.id === modelId) return currentModel?.contextWindow;
+	try {
+		const modelsPath = path.join(os.homedir(), ".pi", "agent", "models.json");
+		const parsed = JSON.parse(fs.readFileSync(modelsPath, "utf8"));
+		for (const provider of Object.values(parsed.providers || {}) as any[]) {
+			for (const model of provider?.models || []) {
+				if (model?.id === modelId && Number.isFinite(model.contextWindow)) return model.contextWindow;
+			}
+			const override = provider?.modelOverrides?.[modelId];
+			if (override && Number.isFinite(override.contextWindow)) return override.contextWindow;
+		}
+	} catch {}
+	return undefined;
+}
+
 function ensureWorktree(defaultCwd: string, spec: WorktreeSpec | undefined, name: string): { cwd: string; worktree?: Run["worktree"] } {
 	if (!spec) return { cwd: defaultCwd };
 	const root = runGit(defaultCwd, ["rev-parse", "--show-toplevel"]);
@@ -208,6 +357,7 @@ function startRun(pi: ExtensionAPI, run: Run, agent: AgentConfig | undefined, mo
 			const args = ["--mode", "json", "-p", "--no-session"];
 			const chosenModel = model || agent?.model;
 			const chosenTools = tools || agent?.tools?.join(",");
+			run.contextWindow = run.contextWindow || contextWindowForModel(chosenModel);
 			const promptParts = [
 				agent?.systemPrompt || "",
 				systemPrompt || "",
@@ -281,9 +431,11 @@ function processJsonLine(run: Run, line: string) {
 	let event: any;
 	try { event = JSON.parse(line); } catch { return; }
 	run.lastEventAt = Date.now();
+	if (event.type === "model_select" && event.model?.contextWindow) run.contextWindow = event.model.contextWindow;
 	if (event.type === "tool_execution_start") run.lastTool = event.toolName;
 	if (event.type === "tool_execution_end") run.lastTool = undefined;
 	if (event.type === "message_end") {
+		updateUsage(run, event.message?.usage);
 		const text = finalAssistantTextFromMessage(event.message);
 		if (text) {
 			run.lastText = text;
@@ -295,6 +447,17 @@ function processJsonLine(run: Run, line: string) {
 	updateWidget();
 }
 
+function updateUsage(run: Run, usage: any) {
+	if (!usage) return;
+	run.totalInputTokens += usage.input ?? usage.inputTokens ?? usage.prompt_tokens ?? 0;
+	run.totalOutputTokens += usage.output ?? usage.outputTokens ?? usage.completion_tokens ?? 0;
+	run.totalCacheReadTokens += usage.cacheRead ?? usage.cache_read ?? usage.cached_tokens ?? 0;
+	run.totalCacheWriteTokens += usage.cacheWrite ?? usage.cache_write ?? 0;
+	const contextTokens = calculateContextTokens(usage);
+	if (contextTokens != null) run.contextTokens = contextTokens;
+	if (!run.contextWindow && Number.isFinite(usage.contextWindow)) run.contextWindow = usage.contextWindow;
+}
+
 function cleanupTmp(tmp: { dir: string; file: string }) {
 	try { fs.unlinkSync(tmp.file); } catch {}
 	try { fs.rmdirSync(tmp.dir); } catch {}
@@ -304,6 +467,9 @@ function publicRun(r: Run) {
 	return {
 		id: r.id, name: r.name, agent: r.agent, task: r.task, cwd: r.cwd, worktree: r.worktree,
 		status: r.status, startedAt: r.startedAt, endedAt: r.endedAt, lastTool: r.lastTool,
+		contextTokens: r.contextTokens, contextWindow: r.contextWindow,
+		totalInputTokens: r.totalInputTokens, totalOutputTokens: r.totalOutputTokens,
+		totalCacheReadTokens: r.totalCacheReadTokens, totalCacheWriteTokens: r.totalCacheWriteTokens,
 		lastText: r.lastText, finalOutput: r.finalOutput, error: r.error, pid: r.pid,
 	};
 }
@@ -351,7 +517,12 @@ export default function orchestrator(pi: ExtensionAPI) {
 			}
 			const wt = ensureWorktree(ctx.cwd, params.worktree, params.name);
 			const cwd = params.worktree ? wt.cwd : path.resolve(ctx.cwd, params.cwd || ".");
-			const run: Run = { id: shortId(), name: params.name, agent: params.agent, task: params.task, cwd, worktree: wt.worktree, status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [] };
+			const run: Run = {
+				id: shortId(), name: params.name, agent: params.agent, task: params.task, cwd, worktree: wt.worktree,
+				status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [],
+				contextWindow: contextWindowForModel(params.model || agent?.model),
+				totalInputTokens: 0, totalOutputTokens: 0, totalCacheReadTokens: 0, totalCacheWriteTokens: 0,
+			};
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, params.model, params.tools, params.systemPrompt);
@@ -391,7 +562,12 @@ export default function orchestrator(pi: ExtensionAPI) {
 				previous.finalOutput ? `Prior output:\n${previous.finalOutput}` : undefined,
 				`Coordinator guidance:\n${params.message}`,
 			].filter(Boolean).join("\n\n---\n\n");
-			const run: Run = { id: shortId(), name: params.name || `${previous.name} follow-up`, agent: previous.agent, task, cwd: previous.cwd, worktree: previous.worktree, status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [] };
+			const run: Run = {
+				id: shortId(), name: params.name || `${previous.name} follow-up`, agent: previous.agent, task,
+				cwd: previous.cwd, worktree: previous.worktree, status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [],
+				contextWindow: previous.contextWindow,
+				totalInputTokens: 0, totalOutputTokens: 0, totalCacheReadTokens: 0, totalCacheWriteTokens: 0,
+			};
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, undefined, undefined, undefined);
@@ -410,6 +586,36 @@ export default function orchestrator(pi: ExtensionAPI) {
 			stopRun(run);
 			updateWidget();
 			return { content: [{ type: "text", text: `Stopped ${run.name} (${run.id}).` }], details: publicRun(run) };
+		},
+	});
+
+	pi.registerCommand("sequence", {
+		description: "Start a fresh coordinator session from a plan file or the last assistant plan",
+		handler: async (args, ctx) => {
+			currentCtx = ctx;
+			await ctx.waitForIdle();
+			// Capture the plan before creating the new session; after session replacement,
+			// the old branch/session objects are stale and the last assistant response is gone.
+			const { plan, extra, source } = await resolveSequencePlan(args, ctx);
+			if (!plan) {
+				ctx.ui.notify(args.trim() ? "No plan file found and no assistant plan found to sequence" : "No assistant plan found to sequence", "warning");
+				return;
+			}
+			const sequencePrompt = buildSequencePrompt(plan, extra);
+
+			const parentSession = ctx.sessionManager.getSessionFile();
+			const result = await ctx.newSession({
+				parentSession,
+				setup: async (sm) => {
+					sm.appendSessionInfo("Sequence coordinator");
+				},
+				withSession: async (sequenceCtx) => {
+					currentCtx = sequenceCtx;
+					sequenceCtx.ui.setEditorText(sequencePrompt);
+					sequenceCtx.ui.notify(`Started fresh sequential coordinator session from ${source === "file" ? "plan file" : "last assistant plan"}. Review/submit the prepared prompt when ready.`, "info");
+				},
+			});
+			if (result.cancelled) ctx.ui.notify("Sequence session creation cancelled", "warning");
 		},
 	});
 
