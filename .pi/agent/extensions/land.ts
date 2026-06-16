@@ -4,8 +4,9 @@ const LAND_PROMPT = `Land the current work cleanly.
 
 Goals:
 - Inspect the repository state and understand all uncommitted changes.
-- Clean up implementation code: remove dead/debug code, tighten names, simplify where reasonable, and keep changes focused.
-- Clean up documentation: update docs that should change, remove stale notes/TODOs introduced by this work, and keep documentation concise and accurate.
+- Read relevant project instructions and domain/decision docs when present, such as AGENTS.md, CONTEXT.md, CONTEXT-MAP.md, and docs/adr/ records that apply to the changed area.
+- Clean up implementation code: remove dead/debug code, tighten names, simplify where reasonable, use the project's established domain language, and keep changes focused.
+- Clean up documentation: update docs that should change, remove stale notes/TODOs introduced by this work, and keep documentation concise and accurate. Update CONTEXT.md or ADRs only when the work changed domain vocabulary or introduced/revised a durable architectural decision; do not create documentation churn.
 - Run the full relevant test/quality suite for this repository. Discover the right commands from package/config/docs if needed. Include lint/typecheck/build/tests when applicable.
 - Fix failures or regressions you find, then rerun the affected checks until clean.
 - Review the final diff carefully.

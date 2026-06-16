@@ -4,6 +4,7 @@ import * as os from "node:os";
 import * as path from "node:path";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { withFileMutationQueue } from "@earendil-works/pi-coding-agent";
+import { Key, matchesKey, truncateToWidth, wrapTextWithAnsi } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 import { discoverAgents, type AgentConfig, type AgentScope } from "./agents.ts";
 
@@ -33,6 +34,7 @@ type Run = {
 	finalOutput?: string;
 	error?: string;
 	pid?: number;
+	taskBrief: string;
 	proc?: ChildProcess;
 	transcript: string[];
 	contextTokens?: number;
@@ -62,6 +64,18 @@ function elapsed(ms: number): string {
 function truncate(s: string, n: number): string {
 	const one = s.replace(/\s+/g, " ").trim();
 	return one.length <= n ? one : `${one.slice(0, Math.max(0, n - 1))}…`;
+}
+
+function taskBrief(task: string, max = 220): string {
+	const cleaned = task
+		.replace(/```[\s\S]*?```/g, " ")
+		.replace(/[#>*_`\-[\]]+/g, " ")
+		.replace(/\s+/g, " ")
+		.trim();
+	if (!cleaned) return "No task summary provided.";
+	const sentences = cleaned.match(/[^.!?]+[.!?]+(?:\s|$)/g);
+	const brief = sentences?.slice(0, 2).join(" ").trim() || cleaned;
+	return truncate(brief, max);
 }
 
 function fmtTokens(n: number | null | undefined): string {
@@ -97,7 +111,7 @@ function isActiveStatus(status: Status): boolean {
 }
 
 function renderRunRow(r: Run): string {
-	const activity = r.lastTool ? r.lastTool : r.lastText ? truncate(r.lastText, 24) : r.worktree?.path ? path.basename(r.worktree.path) : "";
+	const activity = r.lastTool ? r.lastTool : r.lastText ? truncate(r.lastText, 24) : truncate(r.taskBrief, 24);
 	return `${statusIcon(r.status)} ${elapsed(r.startedAt)} ${r.name.padEnd(16).slice(0, 16)} ${r.status.padEnd(8)} ${fmtContext(r)} ${truncate(activity, 24)}`;
 }
 
@@ -119,6 +133,11 @@ function renderAllLines(): string[] {
 
 function findRun(idOrName: string): Run | undefined {
 	return runs.get(idOrName) || Array.from(runs.values()).find((r) => r.name === idOrName);
+}
+
+function defaultWatchRun(): Run | undefined {
+	const all = Array.from(runs.values());
+	return all.find((r) => isActiveStatus(r.status)) || all[0];
 }
 
 function stopRun(run: Run): void {
@@ -229,7 +248,7 @@ function expandHome(filePath: string): string {
 	return filePath === "~" ? os.homedir() : filePath.startsWith("~/") ? path.join(os.homedir(), filePath.slice(2)) : filePath;
 }
 
-async function resolveSequencePlan(args: string, ctx: any): Promise<{ plan?: string; extra: string; source: "file" | "assistant" }> {
+async function resolveOrchestrationPlan(args: string, ctx: any): Promise<{ plan?: string; extra: string; source: "file" | "assistant" }> {
 	const trimmed = args.trim();
 	const parsed = parseCommandArgs(trimmed);
 	if (parsed.length > 0) {
@@ -246,31 +265,23 @@ async function resolveSequencePlan(args: string, ctx: any): Promise<{ plan?: str
 	return { plan, extra: trimmed, source: "assistant" };
 }
 
-function buildSequencePrompt(plan: string, extraInstructions: string): string {
-	return `Act as a sequential subagent coordinator for the plan document below.
+function stripFrontmatter(raw: string): string {
+	return raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "").trim();
+}
 
-Plan:
+function readOrchestrateTemplate(): string {
+	const templatePath = path.join(os.homedir(), ".pi", "agent", "prompts", "orchestrate.md");
+	return stripFrontmatter(fs.readFileSync(templatePath, "utf8"));
+}
+
+function buildOrchestratePrompt(plan: string, extraInstructions: string): string {
+	const template = readOrchestrateTemplate();
+	return `${template}
+
+## Plan to orchestrate
+
 ${plan}
-
-Goal:
-- Complete the entire plan by delegating small, cleanly scoped subtasks to Pi subagents one at a time.
-- Keep this coordinator thread compact: maintain only the full plan plus a short running handoff summary from completed subtasks.
-
-Coordinator rules:
-1. First, read the full plan above and derive an ordered task list. Do not rewrite the whole plan back to me unless needed.
-2. Run at most ONE subagent at a time. Spawn exactly the next subagent, then stop your turn and wait for the orchestrator completion message before continuing.
-3. Each subagent task prompt must include:
-   - the full plan,
-   - the concise accumulated handoff summary from prior subagents,
-   - the specific subtask it alone should perform,
-   - clear completion/reporting expectations.
-4. After each subagent completes, compress its report into a very small handoff summary: outcome, important files changed/read, tests/checks, blockers, and next implications.
-5. Pass only that concise handoff summary plus the full plan to the next subagent. Do not paste full transcripts.
-6. If a subagent reports NEEDS_INPUT or a blocker requiring user judgment, ask me before continuing.
-7. Continue until every plan item is complete, then provide a final concise summary with changed files, checks run, remaining risks, and follow-up.
-
-Use the subagent_spawn tool for each subtask. Prefer descriptive short subagent names. Unless the plan explicitly requires parallelism, do not run tasks in parallel.
-${extraInstructions ? `\nAdditional user instructions for this sequence:\n${extraInstructions}` : ""}`;
+${extraInstructions ? `\n## Additional user instructions\n\n${extraInstructions}` : ""}`;
 }
 
 function maybeNotifyMain(run: Run) {
@@ -348,21 +359,25 @@ function ensureWorktree(defaultCwd: string, spec: WorktreeSpec | undefined, name
 	return { cwd: wtPath, worktree: { ...spec, path: wtPath, branch: branchSafe, created: true } };
 }
 
-function startRun(pi: ExtensionAPI, run: Run, agent: AgentConfig | undefined, model?: string, tools?: string, systemPrompt?: string) {
+function isProviderAuthFailure(text: string | undefined): boolean {
+	return /no api key found|api key.*missing|not authenticated|unauthenticated|authentication failed|login required|provider.*auth/i.test(text || "");
+}
+
+function startRun(pi: ExtensionAPI, run: Run, agent: AgentConfig | undefined, model?: string, tools?: string, systemPrompt?: string, retryWithoutModel = false) {
 	void (async () => {
 		let tmp: { dir: string; file: string } | undefined;
 		try {
 			run.status = "starting";
 			updateWidget();
 			const args = ["--mode", "json", "-p", "--no-session"];
-			const chosenModel = model || agent?.model;
+			const chosenModel = retryWithoutModel ? undefined : model || agent?.model;
 			const chosenTools = tools || agent?.tools?.join(",");
 			run.contextWindow = run.contextWindow || contextWindowForModel(chosenModel);
 			const promptParts = [
 				agent?.systemPrompt || "",
 				systemPrompt || "",
 				"You are an autonomous subagent coordinated by a parent Pi session.",
-				"Work only on your assigned task and cwd/worktree. Report concise progress in normal assistant text.",
+				"Work only on your assigned task and cwd/worktree. Start with a 1-2 sentence summary of what you are doing. Keep reports concise.",
 				"If blocked and you need direction from the parent, end your response with a line starting exactly: NEEDS_INPUT: followed by the question.",
 				"When complete, summarize changed files, tests run, and any merge notes.",
 			].filter(Boolean).join("\n\n");
@@ -400,6 +415,14 @@ function startRun(pi: ExtensionAPI, run: Run, agent: AgentConfig | undefined, mo
 					} else {
 						run.status = "failed";
 						run.error = run.error || `Subagent exited with code ${code}`;
+						if (!retryWithoutModel && chosenModel && isProviderAuthFailure(run.error)) {
+							run.status = "queued";
+							run.error = `Model override ${chosenModel} failed due to provider/auth configuration; retrying once without a model override.\n${run.error}`;
+							updateWidget();
+							if (tmp) cleanupTmp(tmp);
+							startRun(pi, run, agent, undefined, tools, systemPrompt, true);
+							return;
+						}
 					}
 				}
 				updateWidget();
@@ -465,7 +488,7 @@ function cleanupTmp(tmp: { dir: string; file: string }) {
 
 function publicRun(r: Run) {
 	return {
-		id: r.id, name: r.name, agent: r.agent, task: r.task, cwd: r.cwd, worktree: r.worktree,
+		id: r.id, name: r.name, agent: r.agent, task: r.task, taskBrief: r.taskBrief, cwd: r.cwd, worktree: r.worktree,
 		status: r.status, startedAt: r.startedAt, endedAt: r.endedAt, lastTool: r.lastTool,
 		contextTokens: r.contextTokens, contextWindow: r.contextWindow,
 		totalInputTokens: r.totalInputTokens, totalOutputTokens: r.totalOutputTokens,
@@ -504,7 +527,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 			agentScope: Type.Optional(Type.Union([Type.Literal("user"), Type.Literal("project"), Type.Literal("both")], { default: "user" })),
 			cwd: Type.Optional(Type.String({ description: "Working directory. Ignored if worktree is provided." })),
 			worktree: Type.Optional(WorktreeSchema),
-			model: Type.Optional(Type.String({ description: "Model override." })),
+			model: Type.Optional(Type.String({ description: "Model override. Omit unless the user explicitly requested this model or you have verified the provider/model is configured; omitting uses Pi's configured/default model." })),
 			tools: Type.Optional(Type.String({ description: "Comma-separated Pi tools override." })),
 			systemPrompt: Type.Optional(Type.String({ description: "Additional child system prompt." })),
 		}),
@@ -518,7 +541,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 			const wt = ensureWorktree(ctx.cwd, params.worktree, params.name);
 			const cwd = params.worktree ? wt.cwd : path.resolve(ctx.cwd, params.cwd || ".");
 			const run: Run = {
-				id: shortId(), name: params.name, agent: params.agent, task: params.task, cwd, worktree: wt.worktree,
+				id: shortId(), name: params.name, agent: params.agent, task: params.task, taskBrief: taskBrief(params.task), cwd, worktree: wt.worktree,
 				status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [],
 				contextWindow: contextWindowForModel(params.model || agent?.model),
 				totalInputTokens: 0, totalOutputTokens: 0, totalCacheReadTokens: 0, totalCacheWriteTokens: 0,
@@ -526,7 +549,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, params.model, params.tools, params.systemPrompt);
-			return { content: [{ type: "text", text: `Started subagent ${run.name} (${run.id}) in ${cwd}${run.worktree ? ` on branch ${run.worktree.branch}` : ""}. Watch the status widget or run /subagents.` }], details: publicRun(run) };
+			return { content: [{ type: "text", text: `Started subagent ${run.name} (${run.id}) in ${cwd}${run.worktree ? ` on branch ${run.worktree.branch}` : ""}.\nTask: ${run.taskBrief}` }], details: publicRun(run) };
 		},
 	});
 
@@ -563,7 +586,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 				`Coordinator guidance:\n${params.message}`,
 			].filter(Boolean).join("\n\n---\n\n");
 			const run: Run = {
-				id: shortId(), name: params.name || `${previous.name} follow-up`, agent: previous.agent, task,
+				id: shortId(), name: params.name || `${previous.name} follow-up`, agent: previous.agent, task, taskBrief: taskBrief(params.message),
 				cwd: previous.cwd, worktree: previous.worktree, status: "queued", startedAt: Date.now(), lastEventAt: Date.now(), transcript: [],
 				contextWindow: previous.contextWindow,
 				totalInputTokens: 0, totalOutputTokens: 0, totalCacheReadTokens: 0, totalCacheWriteTokens: 0,
@@ -571,51 +594,37 @@ export default function orchestrator(pi: ExtensionAPI) {
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, undefined, undefined, undefined);
-			return { content: [{ type: "text", text: `Started follow-up ${run.name} (${run.id}) in ${run.cwd}.` }], details: publicRun(run) };
+			return { content: [{ type: "text", text: `Started follow-up ${run.name} (${run.id}) in ${run.cwd}.\nTask: ${run.taskBrief}` }], details: publicRun(run) };
 		},
 	});
 
-	pi.registerTool({
-		name: "subagent_stop",
-		label: "Stop subagent",
-		description: "Stop a running subagent process by id or exact name.",
-		parameters: Type.Object({ idOrName: Type.String() }),
-		async execute(_id, params) {
-			const run = findRun(params.idOrName);
-			if (!run) return { content: [{ type: "text", text: `No subagent found: ${params.idOrName}` }], isError: true };
-			stopRun(run);
-			updateWidget();
-			return { content: [{ type: "text", text: `Stopped ${run.name} (${run.id}).` }], details: publicRun(run) };
-		},
-	});
-
-	pi.registerCommand("sequence", {
-		description: "Start a fresh coordinator session from a plan file or the last assistant plan",
+	pi.registerCommand("orchestrate", {
+		description: "Start a fresh coordinator session using the /orchestrate workflow prompt from a plan file or the last assistant plan",
 		handler: async (args, ctx) => {
 			currentCtx = ctx;
 			await ctx.waitForIdle();
 			// Capture the plan before creating the new session; after session replacement,
 			// the old branch/session objects are stale and the last assistant response is gone.
-			const { plan, extra, source } = await resolveSequencePlan(args, ctx);
+			const { plan, extra, source } = await resolveOrchestrationPlan(args, ctx);
 			if (!plan) {
-				ctx.ui.notify(args.trim() ? "No plan file found and no assistant plan found to sequence" : "No assistant plan found to sequence", "warning");
+				ctx.ui.notify(args.trim() ? "No plan file found and no assistant plan found to orchestrate" : "No assistant plan found to orchestrate", "warning");
 				return;
 			}
-			const sequencePrompt = buildSequencePrompt(plan, extra);
+			const orchestratePrompt = buildOrchestratePrompt(plan, extra);
 
 			const parentSession = ctx.sessionManager.getSessionFile();
 			const result = await ctx.newSession({
 				parentSession,
 				setup: async (sm) => {
-					sm.appendSessionInfo("Sequence coordinator");
+					sm.appendSessionInfo("Orchestration coordinator");
 				},
-				withSession: async (sequenceCtx) => {
-					currentCtx = sequenceCtx;
-					sequenceCtx.ui.setEditorText(sequencePrompt);
-					sequenceCtx.ui.notify(`Started fresh sequential coordinator session from ${source === "file" ? "plan file" : "last assistant plan"}. Review/submit the prepared prompt when ready.`, "info");
+				withSession: async (orchestrateCtx) => {
+					currentCtx = orchestrateCtx;
+					orchestrateCtx.ui.setEditorText(orchestratePrompt);
+					orchestrateCtx.ui.notify(`Started fresh orchestration coordinator session from ${source === "file" ? "plan file" : "last assistant plan"}. Review/submit the prepared prompt when ready.`, "info");
 				},
 			});
-			if (result.cancelled) ctx.ui.notify("Sequence session creation cancelled", "warning");
+			if (result.cancelled) ctx.ui.notify("Orchestration session creation cancelled", "warning");
 		},
 	});
 
@@ -629,8 +638,66 @@ export default function orchestrator(pi: ExtensionAPI) {
 		},
 	});
 
+	pi.registerCommand("watch", {
+		description: "Watch a subagent in a small overlay (/watch [id-or-exact-name])",
+		handler: async (args, ctx) => {
+			currentCtx = ctx;
+			const query = args.trim();
+			let run = query ? findRun(query) : defaultWatchRun();
+			if (!run) {
+				ctx.ui.notify(query ? `No subagent found: ${query}` : "No subagents to watch", "warning");
+				return;
+			}
+
+			let interval: ReturnType<typeof setInterval> | undefined;
+			try {
+				await ctx.ui.custom((_tui, theme, _keybindings, done) => {
+					interval = setInterval(() => _tui.requestRender(), 1000);
+					interval.unref?.();
+					return {
+						render(width: number): string[] {
+							// Re-resolve by id so the overlay follows live mutations to the Run object.
+							run = runs.get(run!.id) || run;
+							const w = Math.max(20, width);
+							const title = ` Watch: ${run!.name} (${run!.id}) `;
+							const border = theme.fg("accent", "─".repeat(Math.max(0, w - 2)));
+							const lines: string[] = [
+								theme.fg("accent", `┌${border}┐`),
+								truncateToWidth(theme.fg("accent", title), w),
+								truncateToWidth(`${statusIcon(run!.status)} status: ${run!.status}  elapsed: ${elapsed(run!.startedAt)}  pid: ${run!.pid ?? "?"}`, w),
+								truncateToWidth(`cwd: ${run!.cwd}`, w),
+							];
+							if (run!.worktree?.branch) lines.push(truncateToWidth(`branch: ${run!.worktree.branch}`, w));
+							lines.push(truncateToWidth(fmtContext(run!), w));
+							if (run!.lastTool) lines.push(truncateToWidth(`tool: ${run!.lastTool}`, w));
+							if (run!.error) {
+								lines.push(theme.fg("error", "error:"));
+								lines.push(...wrapTextWithAnsi(run!.error, w).slice(-4).map((line) => truncateToWidth(line, w)));
+							}
+							const text = run!.finalOutput || run!.lastText || "Waiting for subagent output…";
+							lines.push(theme.fg("accent", "output:"));
+							lines.push(...wrapTextWithAnsi(text, w).slice(-18).map((line) => truncateToWidth(line, w)));
+							lines.push(theme.fg("dim", "q/esc close • /subagents details • subagent_continue to guide"));
+							lines.push(theme.fg("accent", `└${border}┘`));
+							return lines;
+						},
+						handleInput(data: string): void {
+							if (matchesKey(data, Key.escape) || data === "q") done(undefined);
+						},
+						invalidate(): void {},
+					};
+				}, {
+					overlay: true,
+					overlayOptions: { width: "60%", minWidth: 60, maxHeight: "80%", anchor: "right-center", margin: 1 },
+				});
+			} finally {
+				if (interval) clearInterval(interval);
+			}
+		},
+	});
+
 	pi.registerCommand("subagent-stop", {
-		description: "Stop a running subagent by id or exact name",
+		description: "Break-glass: stop a running subagent by id or exact name",
 		handler: async (args, ctx) => {
 			currentCtx = ctx;
 			const idOrName = args.trim();

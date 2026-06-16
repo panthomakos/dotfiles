@@ -4,8 +4,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export BROWSER=chromium
 export EDITOR=nvim
 export VISUAL=nvim
-# Secret Environment Variables and Configs
-source ~/Dropbox/secret.env
 
 # Ruby GC Tuning
 export RUBY_HEAP_MIN_SLOTS=2000000 # <= 2.0.0

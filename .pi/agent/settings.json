@@ -3,5 +3,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
-  "showHardwareCursor": true
+  "showHardwareCursor": true,
+  "theme": "aurora-noir",
+  "quietStartup": true
 }

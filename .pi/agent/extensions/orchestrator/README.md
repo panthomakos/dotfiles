@@ -4,15 +4,16 @@ Async, Pi-native subagent orchestration with a dynamic below-editor status widge
 
 ## Tools
 
-- `subagent_spawn` — start an async subagent and return immediately.
+- `subagent_spawn` — start an async subagent and return immediately with a brief task summary.
 - `subagents_list` — return JSON status for all known subagents.
 - `subagent_continue` — start a follow-up run in the same cwd/worktree with prior output + guidance.
-- `subagent_stop` — terminate a running child process.
+- `/subagent-stop` — break-glass command to terminate a child process.
 
 ## Commands
 
-- `/sequence [plan-file] [extra instructions]` — create a fresh coordinator session from a markdown/text plan file (for example `/sequence document.md`) or, when no file is provided, from the latest assistant plan; it prepares a prompt containing the plan plus sequence instructions for you to review/submit, then run subagents one at a time while carrying forward only a concise handoff summary between them.
+- `/orchestrate [plan-file] [extra instructions]` — create a fresh coordinator session from a markdown/text plan file (for example `/orchestrate document.md`) or, when no file is provided, from the latest assistant plan; it prepares the `/orchestrate` workflow prompt plus the plan for you to review/submit. The prompt/skill own the workflow instructions; this command is the fresh-session launcher.
 - `/subagents` — show current status and refresh the widget.
+- `/watch [id-or-exact-name]` — open a small live overlay for a subagent. With no argument, watches the first active subagent, or the first known subagent if none are active.
 
 ## Worktree example
 

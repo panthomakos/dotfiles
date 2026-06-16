@@ -1,14 +1,14 @@
 ---
 description: Compact the current conversation into a handoff document for another agent to pick up.
-argument-hint: "What will the next session be used for?"
+argument-hint: "[scope/focus for the next session]"
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it to `/tmp/pi-handoff.md`, overwriting any existing file. Do not save it in the current workspace.
+Use the handoff skill for the content standard.
 
-Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work.
 
-Do not duplicate content already captured in other artifacts (PRDs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
+Save the handoff to a conflict-resistant temporary filename. If this prompt includes an exact handoff path in additional invocation instructions, use that path. Otherwise, generate one yourself, for example by running `mktemp /tmp/pi-handoff-XXXXXX`. Do not use a fixed path like `/tmp/pi-handoff.md`, and do not save it in the current workspace.
 
-Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
+If the user passed arguments (`$ARGUMENTS`), treat them as the desired scope/focus for the next session. Tailor the handoff to that part of the overall session: include only relevant context, decisions, files, caveats, and next steps, while preserving essential dependencies from the broader session.
 
-If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
+When finished, briefly report the saved path.
