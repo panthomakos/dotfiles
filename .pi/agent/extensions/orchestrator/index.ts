@@ -286,10 +286,10 @@ ${extraInstructions ? `\n## Additional user instructions\n\n${extraInstructions}
 
 function maybeNotifyMain(run: Run) {
 	const body = run.status === "waiting"
-		? `Subagent ${run.name} needs direction.\n\n${run.finalOutput || run.lastText || ""}`
+		? `Subagent ${run.name} (${run.id}) needs direction.\n\n${run.finalOutput || run.lastText || ""}`
 		: run.status === "done"
-			? `Subagent ${run.name} completed.\n\n${run.finalOutput || "(no output)"}`
-			: `Subagent ${run.name} ${run.status}.\n\n${run.error || run.finalOutput || ""}`;
+			? `Subagent ${run.name} (${run.id}) completed.\n\n${run.finalOutput || "(no output)"}`
+			: `Subagent ${run.name} (${run.id}) ${run.status}.\n\n${run.error || run.finalOutput || ""}`;
 	try {
 		currentCtx?.ui?.notify?.(`${run.name}: ${run.status}`, run.status === "failed" ? "error" : "info");
 	} catch {}
@@ -497,6 +497,16 @@ function publicRun(r: Run) {
 	};
 }
 
+function publicRunStatus(r: Run) {
+	return {
+		id: r.id, name: r.name, status: r.status, cwd: r.cwd, worktree: r.worktree,
+		startedAt: r.startedAt, endedAt: r.endedAt, lastTool: r.lastTool,
+		lastEventAt: r.lastEventAt, taskBrief: r.taskBrief,
+		contextTokens: r.contextTokens, contextWindow: r.contextWindow,
+		error: r.error ? truncate(r.error, 500) : undefined,
+	};
+}
+
 const WorktreeSchema = Type.Object({
 	path: Type.Optional(Type.String({ description: "Worktree path. Defaults to ../<repo>-<branch>." })),
 	branch: Type.Optional(Type.String({ description: "Branch name to create/use. Defaults to agent/<name>-<timestamp>." })),
@@ -519,7 +529,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 	pi.registerTool({
 		name: "subagent_spawn",
 		label: "Spawn subagent",
-		description: "Start an async Pi subagent coordinated by the main session. Supports optional git worktree creation.",
+		description: "Start an async Pi subagent. Results arrive as follow-up messages. Supports optional git worktrees.",
 		parameters: Type.Object({
 			name: Type.String({ description: "Short display name for the subagent." }),
 			task: Type.String({ description: "Full task prompt. Include all context the isolated child needs." }),
@@ -549,17 +559,17 @@ export default function orchestrator(pi: ExtensionAPI) {
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, params.model, params.tools, params.systemPrompt);
-			return { content: [{ type: "text", text: `Started subagent ${run.name} (${run.id}) in ${cwd}${run.worktree ? ` on branch ${run.worktree.branch}` : ""}.\nTask: ${run.taskBrief}` }], details: publicRun(run) };
+			return { content: [{ type: "text", text: `Started subagent ${run.name} (${run.id}) in ${cwd}${run.worktree ? ` on branch ${run.worktree.branch}` : ""}.\nTask: ${run.taskBrief}\nResults will arrive as a follow-up message.` }], details: publicRunStatus(run) };
 		},
 	});
 
 	pi.registerTool({
 		name: "subagents_list",
 		label: "List subagents",
-		description: "List async orchestrator subagents and their current status.",
+		description: "Compact subagent status snapshot for explicit status requests or recovery.",
 		parameters: Type.Object({}),
 		async execute() {
-			const data = Array.from(runs.values()).map(publicRun);
+			const data = Array.from(runs.values()).map(publicRunStatus);
 			return { content: [{ type: "text", text: data.length ? JSON.stringify(data, null, 2) : "No subagents." }], details: data };
 		},
 	});
@@ -567,7 +577,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 	pi.registerTool({
 		name: "subagent_continue",
 		label: "Continue subagent",
-		description: "Continue a waiting/completed subagent by starting a follow-up run in the same cwd/worktree with prior output and guidance.",
+		description: "Continue a waiting/completed subagent in the same cwd/worktree.",
 		parameters: Type.Object({
 			idOrName: Type.String(),
 			message: Type.String({ description: "Guidance or follow-up task from the coordinator/user." }),
@@ -594,7 +604,7 @@ export default function orchestrator(pi: ExtensionAPI) {
 			runs.set(run.id, run);
 			updateWidget();
 			startRun(pi, run, agent, undefined, undefined, undefined);
-			return { content: [{ type: "text", text: `Started follow-up ${run.name} (${run.id}) in ${run.cwd}.\nTask: ${run.taskBrief}` }], details: publicRun(run) };
+			return { content: [{ type: "text", text: `Started follow-up ${run.name} (${run.id}) in ${run.cwd}.\nTask: ${run.taskBrief}\nResults will arrive as a follow-up message.` }], details: publicRunStatus(run) };
 		},
 	});
 

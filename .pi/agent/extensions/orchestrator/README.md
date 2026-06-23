@@ -4,8 +4,8 @@ Async, Pi-native subagent orchestration with a dynamic below-editor status widge
 
 ## Tools
 
-- `subagent_spawn` — start an async subagent and return immediately with a brief task summary.
-- `subagents_list` — return JSON status for all known subagents.
+- `subagent_spawn` — start an async subagent; results arrive as follow-up messages.
+- `subagents_list` — compact status snapshot for explicit status requests or recovery.
 - `subagent_continue` — start a follow-up run in the same cwd/worktree with prior output + guidance.
 - `/subagent-stop` — break-glass command to terminate a child process.
 
@@ -31,7 +31,7 @@ Async, Pi-native subagent orchestration with a dynamic below-editor status widge
 }
 ```
 
-The widget appears below the editor and updates while children run.
+The widget appears below the editor and updates while children run. The parent session is notified when children complete, fail, or need input.
 
 ## Agent definitions
 
